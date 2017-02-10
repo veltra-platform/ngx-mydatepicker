@@ -1,0 +1,218 @@
+import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged } from "./interfaces/index";
+import { NgxMyDatePicker } from "./ngx-my-date-picker.component";
+import { UtilService } from "./services/ngx-my-date-picker.util.service";
+
+const NGX_DP_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NgxMyDatePickerDirective),
+    multi: true
+};
+
+@Directive({
+    selector: "[ngx-mydatepicker]",
+    exportAs: "ngx-mydatepicker",
+    providers: [UtilService, NGX_DP_VALUE_ACCESSOR]
+})
+export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor {
+    @Input() options: IMyOptions;
+    @Input() defaultMonth: string;
+
+    @Output() dateChanged: EventEmitter<IMyDateModel> = new EventEmitter<IMyDateModel>();
+    @Output() inputFieldChanged: EventEmitter<IMyInputFieldChanged> = new EventEmitter<IMyInputFieldChanged>();
+    @Output() calendarViewChanged: EventEmitter<IMyCalendarViewChanged> = new EventEmitter<IMyCalendarViewChanged>();
+    @Output() calendarClosed: EventEmitter<number> = new EventEmitter<number>();
+
+    private cRef: ComponentRef<NgxMyDatePicker> = null;
+
+    private MIN_YEAR: number = 1000;
+    private MAX_YEAR: number = 9999;
+    private inputText: string = "";
+
+    // Default options
+    private opts: IMyOptions = {
+        dayLabels: <IMyDayLabels> {su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat"},
+        monthLabels: <IMyMonthLabels> {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"},
+        dateFormat: <string> "yyyy-mm-dd",
+        showTodayBtn: <boolean> true,
+        todayBtnTxt: <string> "Today",
+        firstDayOfWeek: <string> "mo",
+        sunHighlight: <boolean> true,
+        markCurrentDay: <boolean> true,
+        disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
+        disableSince: <IMyDate> {year: 0, month: 0, day: 0},
+        disableDays: <Array<IMyDate>> [],
+        enableDays: <Array<IMyDate>> [],
+        disableDateRange: <IMyDateRange> {begin: <IMyDate> {year: 0, month: 0, day: 0}, end: <IMyDate> {year: 0, month: 0, day: 0}},
+        disableWeekends: <boolean> false,
+        alignSelectorRight: <boolean> false,
+        openSelectorTopOfInput: <boolean> false,
+        minYear: <number> this.MIN_YEAR,
+        maxYear: <number> this.MAX_YEAR,
+        showSelectorArrow: <boolean> true,
+        ariaLabelPrevMonth: <string> "Previous Month",
+        ariaLabelNextMonth: <string> "Next Month",
+        ariaLabelPrevYear: <string> "Previous Year",
+        ariaLabelNextYear: <string> "Next Year",
+    };
+
+    onChangeCb: (_: any) => void = () => { };
+    onTouchedCb: () => void = () => { };
+
+    constructor(private utilService: UtilService, private vcRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private renderer: Renderer, private elem: ElementRef) {}
+
+    @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
+        if (evt.keyCode === 27) {
+            this.closeSelector(2);
+        }
+        else {
+            let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRange, this.opts.monthLabels, this.opts.enableDays);
+            if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
+                let dateModel: IMyDateModel = this.utilService.getDateModel(date, this.opts.dateFormat, this.opts.monthLabels);
+                this.emitDateChanged(dateModel);
+                this.updateModel(dateModel);
+                this.emitInputFieldChanged(dateModel.formatted, true);
+                this.closeSelector(2);
+            }
+            else {
+                if (this.inputText !== this.elem.nativeElement.value) {
+                    this.inputText = this.elem.nativeElement.value;
+                    if (this.inputText === "") {
+                        this.clearDate();
+                    }
+                    else {
+                        this.onChangeCb("");
+                        this.emitInputFieldChanged(this.elem.nativeElement.value, false);
+                    }
+                }
+            }
+        }
+    }
+
+    @HostListener("document:click", ["$event"]) onClick(evt: MouseEvent) {
+        if (evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target)) {
+            this.closeSelector(3);
+        }
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.hasOwnProperty("options")) {
+            this.options = changes["options"].currentValue;
+            this.parseOptions();
+        }
+
+        if (changes.hasOwnProperty("defaultMonth")) {
+            this.defaultMonth = changes["defaultMonth"].currentValue;
+        }
+    }
+
+    public writeValue(value: Object): void {
+        if (value && value["date"]) {
+            let formatted: string = this.utilService.formatDate(value["date"], this.opts.dateFormat, this.opts.monthLabels);
+            this.setInputValue(formatted);
+            this.emitInputFieldChanged(formatted, true);
+        }
+        else if (value === "") {
+            this.setInputValue("");
+            this.emitInputFieldChanged("", false);
+        }
+    }
+
+    public registerOnChange(fn: any): void {
+        this.onChangeCb = fn;
+    }
+
+    public registerOnTouched(fn: any): void {
+        this.onTouchedCb = fn;
+    }
+
+    public openCalendar() {
+        if (this.cRef === null) {
+            let cf = this.cfr.resolveComponentFactory(NgxMyDatePicker);
+            this.cRef = this.vcRef.createComponent(cf);
+            this.cRef.instance.initialize(
+                this.opts,
+                this.defaultMonth,
+                this.elem.nativeElement.value,
+                this.elem.nativeElement.offsetWidth,
+                this.elem.nativeElement.offsetHeight,
+                (dm: IMyDateModel) => {
+                    this.emitDateChanged(dm);
+                    this.updateModel(dm);
+                    this.closeSelector(1);
+            },  (cvc: IMyCalendarViewChanged) => {
+                    this.emitCalendarChanged(cvc);
+            });
+        }
+    }
+
+    public closeCalendar() {
+        this.closeSelector(2);
+    }
+
+    public toggleCalendar() {
+        if (this.cRef === null) {
+            this.openCalendar();
+        }
+        else {
+            this.closeSelector(2);
+        }
+    }
+
+    public clearDate() {
+        this.emitDateChanged({date: {year: 0, month: 0, day: 0}, jsdate: null, formatted: "", epoc: 0});
+        this.emitInputFieldChanged("", false);
+        this.onChangeCb("");
+        this.setInputValue("");
+        this.closeSelector(2);
+    }
+
+    private parseOptions(): void {
+        if (this.options !== undefined) {
+            Object.keys(this.options).forEach((k) => {
+                (<IMyOptions>this.opts)[k] = this.options[k];
+            });
+        }
+        if (this.opts.minYear < this.MIN_YEAR) {
+            this.opts.minYear = this.MIN_YEAR;
+        }
+        if (this.opts.maxYear > this.MAX_YEAR) {
+            this.opts.maxYear = this.MAX_YEAR;
+        }
+    }
+
+    private closeSelector(reason: number) {
+        if (this.cRef !== null) {
+            this.vcRef.remove(this.vcRef.indexOf(this.cRef.hostView));
+            this.cRef = null;
+            this.emitCalendarClosed(reason);
+        }
+    }
+
+    private updateModel(model: IMyDateModel) {
+        this.onChangeCb(model);
+        this.setInputValue(model.formatted);
+    }
+
+    private setInputValue(value: string) {
+        this.renderer.setElementProperty(this.elem.nativeElement, "value", value);
+    }
+
+    private emitDateChanged(dateModel: IMyDateModel) {
+        this.dateChanged.emit(dateModel);
+    }
+
+    private emitInputFieldChanged(value: string, valid: boolean) {
+        this.inputFieldChanged.emit({value: value, dateFormat: this.opts.dateFormat, valid: valid});
+    }
+
+    private emitCalendarChanged(cvc: IMyCalendarViewChanged) {
+        this.calendarViewChanged.emit(cvc);
+    }
+
+    private emitCalendarClosed(reason: number) {
+        this.calendarClosed.emit(reason);
+    }
+}

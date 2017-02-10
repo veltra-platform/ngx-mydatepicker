@@ -1,0 +1,60 @@
+<style>
+    .table {
+        width: 100%;
+    }
+
+    .table .td {
+        width: 50%;
+        vertical-align: top;
+        border: none;
+    }
+
+    .title {
+        margin-bottom: 10px;
+    }
+
+    .button {
+        cursor: pointer;
+    }
+
+    .error {
+        width: 202px;
+        padding: 4px;
+        border: 1px solid #ebccd2;
+        color: #a94444;
+        background-color: #f2dede;
+        border-radius: 2px;
+        margin-top: 10px;
+    }
+    .btnGroup {
+        margin-top: 10px;
+    }
+</style>
+
+<table class="table">
+    <tr>
+        <td class="td">
+
+            <form [formGroup]="myForm" (ngSubmit)="onSubmitReactiveForms()" novalidate>
+                <div class="input-group">
+                    <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="reactiveFormsDate" formControlName="myDate"
+                           [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
+
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>
+                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+
+                <div class="btnGroup">
+                    <button class="button" type="submit" [disabled]="myForm.controls.myDate.errors">Submit</button>
+                    <button class="button" type="button" (click)="setDate()">Set Today</button>
+                    <button class="button" type="button" (click)="resetDate()">Reset Today</button>
+                    <button class="button" type="button" (click)="clearDate()">Set Empty</button>
+                    <p class="error" *ngIf="myForm.controls.myDate.errors">Date is required!</p>
+                </div>
+            </form>
+
+        </td>
+    </tr>
+</table>
