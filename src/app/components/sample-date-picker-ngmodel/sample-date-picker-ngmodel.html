@@ -1,0 +1,62 @@
+<div>
+    <ul>
+        <li>
+            <label>
+                <span>Show today button:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onShowTodayButton($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Open selector top of input field:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onOpenSelectorTopOfInput($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Align selector right:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onAlignSelectorRight($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Show selector arrow:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onShowSelectorArrow($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
+
+        <li>
+            <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>
+            <button style="cursor: pointer" type="button" (click)="dp.openCalendar();$event.stopPropagation()">Open</button>
+            <button style="cursor: pointer" type="button" (click)="dp.closeCalendar();$event.stopPropagation()">Close</button>
+        </li>
+    </ul>
+
+    <table style="width: 100%">
+        <tr>
+            <td style="vertical-align: top; width: 220px">
+                <form>
+                    <div class="input-group">
+
+                        <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
+                                [(ngModel)]="model" [options]="myDatePickerOptions" [defaultMonth]="defMonth" #dp="ngx-mydatepicker"
+                                (dateChanged)="onDateChanged($event)" (calendarViewChanged)="onCalendarViewChanged($event)"
+                                (calendarClosed)="onCalendarClosed($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
+
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+
+                    </div>
+                </form>
+            </td>
+            <td style="vertical-align: top;padding-left: 20px">
+                <div style="padding:4px;border-radius:4px;float:right" [ngStyle]="{border: border}">
+                    {{selectedTextNormal}}
+                </div>
+            </td>
+    </table>
+
+</div>
+
