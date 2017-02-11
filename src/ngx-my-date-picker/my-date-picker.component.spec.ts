@@ -2,12 +2,12 @@
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
-import {NgxMyDatePicker} from './ngx-my-date-picker.component';
-import {FocusDirective} from './directives/ngx-my-date-picker.focus.directive';
+import {DebugElement, Component, ViewChild} from '@angular/core';
+import {NgxMyDatePickerModule} from './ngx-my-date-picker.module';
+import {NgxMyDatePickerDirective} from './ngx-my-date-picker.input';
 
-let comp: NgxMyDatePicker;
-let fixture: ComponentFixture<NgxMyDatePicker>;
+let comp: NgxMyDatepickerTestComponent;
+let fixture: ComponentFixture<NgxMyDatepickerTestComponent>;
 let de: DebugElement;
 let el: HTMLElement;
 
@@ -20,34 +20,72 @@ function getDateString(date:any):string {
     return date.getFullYear() + '-' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
 }
 
-function getElement(id:string):DebugElement {
-    return de.query(By.css(id));
+function getElement(id:string):any {
+    return fixture.nativeElement.querySelector(id);
 }
 
-function getElements(id:string):Array<DebugElement> {
-    return de.queryAll(By.css(id));
+function getElements(id:string):Array<any> {
+    return fixture.nativeElement.querySelectorAll(id);
 }
 
-describe('NgxMyDatePicker', () => {
+@Component({
+    template: '<input class="myDateInput" id="myDateInput" ngx-mydatepicker #dp="ngx-mydatepicker" name="mydate"/>'
+})
+class NgxMyDatepickerTestComponent {
+
+    @ViewChild('dp') vcDp: NgxMyDatePickerDirective;
+
+    openCalendar(): void {
+        this.vcDp.openCalendar();
+    }
+
+    closeCalendar(): void {
+        this.vcDp.closeCalendar();
+    }
+
+    toggleCalendar(): void {
+        this.vcDp.toggleCalendar();
+    }
+
+    clearDate(): void {
+        this.vcDp.clearDate();
+    }
+}
+
+describe('ngx-mydatepicker', () => {
+
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [NgxMyDatePicker, FocusDirective],
+            declarations: [NgxMyDatepickerTestComponent],
+            imports: [NgxMyDatePickerModule]
         });
-
-        fixture = TestBed.createComponent(NgxMyDatePicker);
-
+        fixture = TestBed.createComponent(NgxMyDatepickerTestComponent);
         comp = fixture.componentInstance;
-
-        de = fixture.debugElement.query(By.css('.mydp'));
+        de = fixture.debugElement.query(By.css('.myDateInput'));
         el = de.nativeElement;
     });
 
-    it('test', () => {
+    it('test open/close/toggle calendar functions', () => {
+        comp.openCalendar();
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
 
+        comp.closeCalendar();
+        fixture.detectChanges();
+        selector = getElement('.selector');
+        expect(selector).toBe(null);
+
+        comp.toggleCalendar();
+        fixture.detectChanges();
+        selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+
+        comp.toggleCalendar();
+        fixture.detectChanges();
+        selector = getElement('.selector');
+        expect(selector).toBe(null);
     });
-
-
-
 });
 
 
