@@ -19,7 +19,8 @@ export class SampleDatePickerNgModel implements OnInit {
         alignSelectorRight: false,
         openSelectorTopOfInput: false,
         minYear: 1900,
-        showSelectorArrow: true
+        showSelectorArrow: true,
+        disableDays:[]
     };
     private selectedDateNormal:string = '';
 
@@ -61,6 +62,13 @@ export class SampleDatePickerNgModel implements OnInit {
         this.myDatePickerOptions = copy;
     }
 
+    onDisableToday(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        copy.disableDays = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
     getCopyOfOptions(): IMyOptions {
         return JSON.parse(JSON.stringify(this.myDatePickerOptions));
     }
@@ -88,8 +96,8 @@ export class SampleDatePickerNgModel implements OnInit {
         console.log('onInputFieldChanged(): Value: ', event.value, ' - dateFormat: ', event.dateFormat, ' - valid: ', event.valid);
     }
 
-    onCalendarClosed(event: number): void {
-        console.log('onCalendarClosed(): Value: ', event);
+    onCalendarToggle(event: number): void {
+        console.log('onCalendarToggle(): Reason: ', event);
     }
 
     onCalendarViewChanged(event: IMyCalendarViewChanged): void {
