@@ -9,7 +9,7 @@
 Angular attribute directive date picker. There is similar date picker [here](https://github.com/kekeh/mydatepicker), but difference between these
 two is that with ngx-mydatepicker you can define the style of input box, calendar and clear buttons.
 
-Online demo is [here](http://kekeh.github.io/ngx-mydatepicker)
+Online demo of bootstrap styled input box is [here](http://kekeh.github.io/ngx-mydatepicker)
 
 ## Installation
 
@@ -54,7 +54,58 @@ To install this component to an external project, follow the procedure:
 
 Use one of the following two options.
 
-### 1. Reactive forms
+### 1. ngModel binding
+
+In this option the ngModel binding is used. [Here](https://github.com/kekeh/ngx-mydatepicker/tree/master/examples/sample-date-picker-ngmodel)
+is an example application. It shows how to use the __ngModel__.
+
+To use ngModel define the application class as follows:
+
+```ts
+import {IMyOptions, IMyDateModel} from 'ngx-mydatepicker';
+// other imports here...
+
+export class MyTestApp {
+
+    private myOptions: IMyOptions = {
+        // other options...
+        dateFormat: 'dd.mm.yyyy',
+    };
+
+    // Initialized to specific date (09.10.2018)
+    private model: Object = { date: { year: 2018, month: 10, day: 9 } };
+
+    constructor() { }
+
+    // optional date changed callback
+    onDateChanged(event: IMyDateModel): void {
+        // date selected
+    }
+}
+```
+
+Add the following snippet inside your template:
+
+```html
+<!-- input box styling is bootstrap 3.3.7 -->
+<form>
+    <div class="input-group">
+        <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
+               [(ngModel)]="model" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"/>
+
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
+    </div>
+</form>
+```
+
+### 2. Reactive forms
 
 In this option the value accessor of reactive forms is used. [Here](https://github.com/kekeh/ngx-mydatepicker/tree/master/examples/sample-date-picker-reactive-forms)
 is an example application. It shows how to use the __formControlName__.
@@ -131,57 +182,6 @@ Add the following snippet inside your template:
 </form>
 ```
 
-### 2. ngModel binding
-
-In this option the ngModel binding is used. [Here](https://github.com/kekeh/ngx-mydatepicker/tree/master/examples/sample-date-picker-ngmodel)
-is an example application. It shows how to use the __ngModel__.
-
-To use ngModel define the application class as follows:
-
-```ts
-import {IMyOptions, IMyDateModel} from 'ngx-mydatepicker';
-// other imports here...
-
-export class MyTestApp {
-
-    private myOptions: IMyOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-    };
-
-    // Initialized to specific date (09.10.2018)
-    private model: Object = { date: { year: 2018, month: 10, day: 9 } };
-
-    constructor() { }
-
-    // optional date changed callback
-    onDateChanged(event: IMyDateModel): void {
-        // date selected
-    }
-}
-```
-
-Add the following snippet inside your template:
-
-```html
-<!-- input box styling is bootstrap 3.3.7 -->
-<form>
-    <div class="input-group">
-        <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
-               [(ngModel)]="model" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"/>
-
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()">
-                <i class="glyphicon glyphicon-remove"></i>
-            </button>
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()">
-                <i class="glyphicon glyphicon-calendar"></i>
-            </button>
-        </span>
-    </div>
-</form>
-```
-
 ## Attributes
 
 ### options attribute
@@ -198,6 +198,7 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 | __firstDayOfWeek__   | mo | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
 | __sunHighlight__   | true | Sunday red colored on calendar. |
 | __markCurrentDay__   | true | Is current day (today) marked on calendar. |
+| __editableMonthAndYear__   | true | Is month and year labels editable or not. |
 | __minYear__   | 1000 | Minimum allowed year in calendar. Cannot be less than 1000. |
 | __maxYear__   | 9999 | Maximum allowed year in calendar. Cannot be more than 9999. |
 | __disableUntil__   | no default value | Disable dates backward starting from the given date. For example: {year: 2016, month: 6, day: 26} |
@@ -323,14 +324,18 @@ Clears the date from the input box and model. For example:
   }
   ```
 
-### calendarClosed callback
-  * called when the calendar closes
-    * event: number from 1 to 3 indicating the reason of the close (1=date selected, 2=closed by button click, 3=closed by outside click (document click)
+### calendarToggle callback
+  * called when the calendar is opened or closed
+    * event: number from 1 to 4 indicating the reason of the event
+      * 1 = calendar opened
+      * 2 = calendar closed by date select
+      * 3 = calendar closed by calendar button
+      * 4 = calendar closed by outside click (document click)
 
-  * Example of the input field changed callback:
+  * Example of the calendar toggle callback:
   ```js
-    onCalendarClosed(event: number): void {
-        console.log('onCalendarClosed(): Value: ', event);
+    onCalendarToggle(event: number): void {
+        console.log('onCalendarClosed(): Reason: ', event);
     }
   ```
 

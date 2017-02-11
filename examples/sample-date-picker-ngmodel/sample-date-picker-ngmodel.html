@@ -24,6 +24,24 @@
                 <input style="cursor: pointer" type="checkbox" (change)="onShowSelectorArrow($event.currentTarget.checked)" [checked]="true">
             </label>
         </li>
+        <li>
+            <label>
+                <span>Editable month and year:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onEditableMonthAndYear($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Disable today:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onDisableToday($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Disable weekends:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onDisableWeekends($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
 
         <li>
             <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>
@@ -41,7 +59,7 @@
                         <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
                                 [(ngModel)]="model" [options]="myDatePickerOptions" [defaultMonth]="defMonth" #dp="ngx-mydatepicker"
                                 (dateChanged)="onDateChanged($event)" (calendarViewChanged)="onCalendarViewChanged($event)"
-                                (calendarClosed)="onCalendarClosed($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
+                                (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
 
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>

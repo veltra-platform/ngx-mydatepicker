@@ -23,7 +23,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     @Output() dateChanged: EventEmitter<IMyDateModel> = new EventEmitter<IMyDateModel>();
     @Output() inputFieldChanged: EventEmitter<IMyInputFieldChanged> = new EventEmitter<IMyInputFieldChanged>();
     @Output() calendarViewChanged: EventEmitter<IMyCalendarViewChanged> = new EventEmitter<IMyCalendarViewChanged>();
-    @Output() calendarClosed: EventEmitter<number> = new EventEmitter<number>();
+    @Output() calendarToggle: EventEmitter<number> = new EventEmitter<number>();
 
     private cRef: ComponentRef<NgxMyDatePicker> = null;
 
@@ -41,6 +41,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         firstDayOfWeek: <string> "mo",
         sunHighlight: <boolean> true,
         markCurrentDay: <boolean> true,
+        editableMonthAndYear: <boolean> true,
         disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
         disableSince: <IMyDate> {year: 0, month: 0, day: 0},
         disableDays: <Array<IMyDate>> [],
@@ -65,7 +66,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
         if (evt.keyCode === 27) {
-            this.closeSelector(2);
+            this.closeSelector(3);
         }
         else {
             let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRange, this.opts.monthLabels, this.opts.enableDays);
@@ -93,7 +94,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     @HostListener("document:click", ["$event"]) onClick(evt: MouseEvent) {
         if (evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target)) {
-            this.closeSelector(3);
+            this.closeSelector(4);
         }
     }
 
@@ -141,15 +142,16 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 (dm: IMyDateModel) => {
                     this.emitDateChanged(dm);
                     this.updateModel(dm);
-                    this.closeSelector(1);
+                    this.closeSelector(2);
             },  (cvc: IMyCalendarViewChanged) => {
                     this.emitCalendarChanged(cvc);
             });
+            this.emitCalendarToggle(1);
         }
     }
 
     public closeCalendar() {
-        this.closeSelector(2);
+        this.closeSelector(3);
     }
 
     public toggleCalendar() {
@@ -157,7 +159,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             this.openCalendar();
         }
         else {
-            this.closeSelector(2);
+            this.closeSelector(3);
         }
     }
 
@@ -166,7 +168,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.emitInputFieldChanged("", false);
         this.onChangeCb("");
         this.setInputValue("");
-        this.closeSelector(2);
+        this.closeSelector(3);
     }
 
     private parseOptions(): void {
@@ -187,7 +189,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         if (this.cRef !== null) {
             this.vcRef.remove(this.vcRef.indexOf(this.cRef.hostView));
             this.cRef = null;
-            this.emitCalendarClosed(reason);
+            this.emitCalendarToggle(reason);
         }
     }
 
@@ -212,7 +214,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.calendarViewChanged.emit(cvc);
     }
 
-    private emitCalendarClosed(reason: number) {
-        this.calendarClosed.emit(reason);
+    private emitCalendarToggle(reason: number) {
+        this.calendarToggle.emit(reason);
     }
 }

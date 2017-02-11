@@ -12,6 +12,7 @@ export interface IMyOptions {
     firstDayOfWeek?: string;
     sunHighlight?: boolean;
     markCurrentDay?: boolean;
+    editableMonthAndYear?: boolean;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
     disableDays?: Array<IMyDate>;

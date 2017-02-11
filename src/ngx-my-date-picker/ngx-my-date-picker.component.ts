@@ -44,7 +44,7 @@ export class NgxMyDatePicker {
 
     constructor(public elem: ElementRef, private renderer: Renderer, private utilService: UtilService) {
         renderer.listen(elem.nativeElement, "click", (evt: MouseEvent) => {
-            if (evt.target) {
+            if (this.opts.editableMonthAndYear && evt.target) {
                 this.resetMonthYearEdit();
             }
         });
@@ -92,12 +92,16 @@ export class NgxMyDatePicker {
 
     editMonthClicked(event: any): void {
         event.stopPropagation();
-        this.editMonth = true;
+        if (this.opts.editableMonthAndYear) {
+            this.editMonth = true;
+        }
     }
 
     editYearClicked(event: any): void {
         event.stopPropagation();
-        this.editYear = true;
+        if (this.opts.editableMonthAndYear) {
+            this.editYear = true;
+        }
     }
 
     userMonthInput(event: any): void {
