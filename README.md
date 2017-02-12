@@ -350,6 +350,9 @@ Clears the date from the input box and model. For example:
 * Build the __npmdist__ folder and execute __tslint__:
   1. __gulp all__
 
+* Execute unit tests and coverage (output is generated to the __test-output__ folder):
+  1. __npm test__
+
 * Run sample application:
   1. __npm start__
   2. Open __http://localhost:5000__ to browser

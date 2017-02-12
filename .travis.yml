@@ -9,4 +9,5 @@ install:
 - npm install
 script:
 - gulp all
+- npm test
 sudo: required
