@@ -100,12 +100,25 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.hasOwnProperty("options")) {
-            this.options = changes["options"].currentValue;
-            this.parseOptions();
+            this.parseOptions(changes["options"].currentValue);
         }
 
         if (changes.hasOwnProperty("defaultMonth")) {
             this.defaultMonth = changes["defaultMonth"].currentValue;
+        }
+    }
+
+    public parseOptions(opts: IMyOptions): void {
+        if (opts !== undefined) {
+            Object.keys(opts).forEach((k) => {
+                (<IMyOptions>this.opts)[k] = opts[k];
+            });
+        }
+        if (this.opts.minYear < this.MIN_YEAR) {
+            this.opts.minYear = this.MIN_YEAR;
+        }
+        if (this.opts.maxYear > this.MAX_YEAR) {
+            this.opts.maxYear = this.MAX_YEAR;
         }
     }
 
@@ -169,20 +182,6 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.onChangeCb("");
         this.setInputValue("");
         this.closeSelector(3);
-    }
-
-    private parseOptions(): void {
-        if (this.options !== undefined) {
-            Object.keys(this.options).forEach((k) => {
-                (<IMyOptions>this.opts)[k] = this.options[k];
-            });
-        }
-        if (this.opts.minYear < this.MIN_YEAR) {
-            this.opts.minYear = this.MIN_YEAR;
-        }
-        if (this.opts.maxYear > this.MAX_YEAR) {
-            this.opts.maxYear = this.MAX_YEAR;
-        }
     }
 
     private closeSelector(reason: number) {
