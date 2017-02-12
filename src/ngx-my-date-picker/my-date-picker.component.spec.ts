@@ -5,7 +5,7 @@ import {By} from '@angular/platform-browser';
 import {DebugElement, Component, ViewChild} from '@angular/core';
 import {NgxMyDatePickerModule} from './ngx-my-date-picker.module';
 import {NgxMyDatePickerDirective} from './ngx-my-date-picker.input';
-import {IMyOptions, IMyDayLabels, IMyMonthLabels} from "../../npmdist/dist/interfaces/index";
+import {IMyOptions} from "./interfaces/my-options.interface";
 
 let comp: NgxMyDatepickerTestComponent;
 let fixture: ComponentFixture<NgxMyDatepickerTestComponent>;
