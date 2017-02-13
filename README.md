@@ -208,7 +208,7 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 | __disableDateRange__   | no default value  | Disable a date range from begin to end. For example: {begin: {year: 2016, month: 11, day: 14}, end: {year: 2016, month: 11, day: 20} |
 | __disableWeekends__   | false | Disable weekends (Saturday and Sunday). |
 | __alignSelectorRight__   | false | Align selector right. |
-| __openSelectorTopOfInput__   | false | Open selector top of input field. The selector arrow cannot be shown if this option is true. Can be used if __inline = false__. |
+| __openSelectorTopOfInput__   | false | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
 | __ariaLabelPrevMonth__   | Previous Month | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | Aria label text of previous year button. |
