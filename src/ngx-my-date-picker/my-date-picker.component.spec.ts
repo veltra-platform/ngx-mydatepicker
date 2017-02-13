@@ -930,7 +930,56 @@ describe('ngx-mydatepicker', () => {
         expect(selection.value).toBe('2017-01-14');
     });
 
+    it('options - disableDateRange', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            disableDateRange: {
+                begin: {year: 2017, month: 1, day: 10},
+                end: {year: 2017, month: 1, day: 20}
+            }
+        };
 
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(11);
+    });
+
+    it('options - disableWeekends', () => {
+        comp.setDefaultMonth('2016/10');
+        let opts: IMyOptions = {
+            firstDayOfWeek: 'mo',
+            disableWeekends: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(12);
+
+        let firstDisabled = disabled[0];
+        expect(firstDisabled.textContent.trim()).toBe('1');
+
+        let secondDisabled = disabled[1];
+        expect(secondDisabled.textContent.trim()).toBe('2');
+
+
+        let thirdDisabled = disabled[2];
+        expect(thirdDisabled.textContent.trim()).toBe('8');
+
+        let fourthDisabled = disabled[3];
+        expect(fourthDisabled.textContent.trim()).toBe('9');
+
+
+        let lastDisabled = disabled[disabled.length - 1];
+        expect(lastDisabled.textContent.trim()).toBe('6');
+    });
 });
 
 
