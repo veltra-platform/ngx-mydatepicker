@@ -1090,6 +1090,37 @@ describe('ngx-mydatepicker', () => {
         expect(nextyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextYear);
     });
 
+    it('defaultMonth attribute', () => {
+        comp.setDefaultMonth('2016/02');
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let monthlabel = getElement(MONTHLABEL);
+        expect(monthlabel).not.toBe(null);
+        expect(monthlabel.textContent.trim()).toBe('Feb');
+
+        fixture.detectChanges();
+        let yearlabel = getElement(YEARLABEL);
+        expect(yearlabel).not.toBe(null);
+        expect(yearlabel.textContent.trim()).toBe('2016');
+
+        comp.closeCalendar();
+
+
+        comp.setDefaultMonth('2018/08');
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        monthlabel = getElement(MONTHLABEL);
+        expect(monthlabel).not.toBe(null);
+        expect(monthlabel.textContent.trim()).toBe('Aug');
+
+        fixture.detectChanges();
+        yearlabel = getElement(YEARLABEL);
+        expect(yearlabel).not.toBe(null);
+        expect(yearlabel.textContent.trim()).toBe('2018');
+    });
+
 });
 
 
