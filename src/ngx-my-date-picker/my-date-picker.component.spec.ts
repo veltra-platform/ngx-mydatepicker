@@ -811,6 +811,99 @@ describe('ngx-mydatepicker', () => {
         expect(yearlabel.textContent).toBe('2020');
     });
 
+    it('options - disableUntil', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            disableUntil: {year: 2017, month: 1, day: 26}
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(32);
+
+        fixture.detectChanges();
+        let prevmonth = getElement(PREVMONTH);
+        expect(prevmonth).not.toBe(null);
+
+        prevmonth.click();
+
+        fixture.detectChanges();
+        disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(42);
+    });
+
+    it('options - disableSince', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            disableSince: {year: 2017, month: 1, day: 12}
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(25);
+
+        fixture.detectChanges();
+        let nextmonth = getElement(NEXTMONTH);
+        expect(nextmonth).not.toBe(null);
+
+        nextmonth.click();
+
+        fixture.detectChanges();
+        disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(42);
+    });
+
+    it('options - disableDays', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            disableDays: [{year: 2017, month: 1, day: 12}, {year: 2017, month: 1, day: 14}]
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(2);
+
+        fixture.detectChanges();
+        let daycell = getElements('.daycell');
+        expect(daycell).not.toBe(null);
+        expect(daycell.length).toBe(42);
+
+        daycell[17].click();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+
+        fixture.detectChanges();
+        let selection = getElement('.myDateInput');
+        expect(selection.value).toBe('');
+
+        daycell[18].click();
+
+        fixture.detectChanges();
+        selector = getElement('.selector');
+        expect(selector).toBe(null);
+
+        fixture.detectChanges();
+        selection = getElement('.myDateInput');
+        expect(selection.value).toBe('2017-01-13');
+    });
+
+
 });
 
 
