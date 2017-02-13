@@ -371,6 +371,24 @@ describe('ngx-mydatepicker', () => {
         expect(yearinput).toBe(null);
     });
 
+    it('edit date in input box', () => {
+        let opts: IMyOptions = {
+            dateFormat: 'dd mmm yyyy'
+        };
+
+        comp.parseOptions(opts);
+
+        fixture.detectChanges();
+        let selection = getElement('.myDateInput');
+
+        selection.value = '12 feb 2017';
+        selection.dispatchEvent(new Event('keyup'));
+
+        fixture.detectChanges();
+        selection = getElement('.myDateInput');
+        expect(selection.value).toBe('12 Feb 2017');
+    });
+
     it('test calendar year 2016 month one by one - next month button', () => {
         comp.setDefaultMonth('2016/01');
 
@@ -980,6 +998,98 @@ describe('ngx-mydatepicker', () => {
         let lastDisabled = disabled[disabled.length - 1];
         expect(lastDisabled.textContent.trim()).toBe('6');
     });
+
+    it('options - alignSelectorRight', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            alignSelectorRight: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+        expect(selector.attributes['style'].textContent).not.toContain('left: 0px');
+    });
+
+    it('options - openSelectorTopOfInput', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            openSelectorTopOfInput: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+        expect(selector.attributes['style'].textContent).not.toContain('bottom: initial');
+    });
+
+    it('options - ariaLabelPrevMonth', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            ariaLabelPrevMonth: 'aria-label prev month'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let prevmonth = getElement(PREVMONTH);
+        expect(prevmonth).not.toBe(null);
+        expect(prevmonth.attributes['aria-label'].textContent).toBe(opts.ariaLabelPrevMonth);
+    });
+
+    it('options - ariaLabelNextMonth', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            ariaLabelNextMonth: 'aria-label next month'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let nextmonth = getElement(NEXTMONTH);
+        expect(nextmonth).not.toBe(null);
+        expect(nextmonth.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextMonth);
+    });
+
+
+    it('options - ariaLabelPrevYear', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            ariaLabelPrevYear: 'aria-label prev year'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let prevyear = getElement(PREVYEAR);
+        expect(prevyear).not.toBe(null);
+        expect(prevyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelPrevYear);
+    });
+
+    it('options - ariaLabelNextYear', () => {
+        comp.setDefaultMonth('2017/02');
+        let opts: IMyOptions = {
+            ariaLabelNextYear: 'aria-label next year'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let nextyear = getElement(NEXTYEAR);
+        expect(nextyear).not.toBe(null);
+        expect(nextyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextYear);
+    });
+
 });
 
 
