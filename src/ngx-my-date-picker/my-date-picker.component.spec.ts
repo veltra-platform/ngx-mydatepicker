@@ -906,8 +906,8 @@ describe('ngx-mydatepicker', () => {
     it('options - enableDays', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            disableUntil: {year: 2017, month: 2, day: 12},
-            enableDays: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 16}]
+            disableUntil: {year: 2017, month: 1, day: 31},
+            enableDays: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}]
         };
 
         comp.parseOptions(opts);
@@ -916,14 +916,14 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let disabled = getElements('.disabled');
         expect(disabled).not.toBe(null);
-        expect(disabled.length).toBe(39);
+        expect(disabled.length).toBe(35);
 
         fixture.detectChanges();
         let daycell = getElements('.daycell');
         expect(daycell).not.toBe(null);
         expect(daycell.length).toBe(42);
 
-        daycell[15].click();
+        daycell[19].click();
 
         fixture.detectChanges();
         let selection = getElement('.myDateInput');
