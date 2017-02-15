@@ -42,6 +42,12 @@
                 <input style="cursor: pointer" type="checkbox" (change)="onDisableWeekends($event.currentTarget.checked)" [checked]="false">
             </label>
         </li>
+        <li>
+            <label>
+                <span>Disable header buttons:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onDisableHeaderButtons($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
 
         <li>
             <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>

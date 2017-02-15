@@ -19,9 +19,13 @@ export class SampleDatePickerNgModel implements OnInit {
         alignSelectorRight: false,
         openSelectorTopOfInput: false,
         minYear: 1900,
+        maxYear: 2200,
         showSelectorArrow: true,
         editableMonthAndYear: true,
-        disableDays:[]
+        disableDays:[],
+        disableHeaderButtons: true,
+        disableUntil: {year: 2014, month: 11, day: 10},
+        disableSince: {year: 2019, month: 3, day: 10}
     };
     private selectedDateNormal:string = '';
 
@@ -79,6 +83,12 @@ export class SampleDatePickerNgModel implements OnInit {
     onDisableWeekends(checked: boolean): void {
         let copy = this.getCopyOfOptions();
         copy.disableWeekends = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onDisableHeaderButtons(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.disableHeaderButtons = checked;
         this.myDatePickerOptions = copy;
     }
 

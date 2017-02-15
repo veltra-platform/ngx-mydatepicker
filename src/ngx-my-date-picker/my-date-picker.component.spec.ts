@@ -773,6 +773,99 @@ describe('ngx-mydatepicker', () => {
         expect(yearinput).toBe(null);
     });
 
+    it('options - disableHeaderButtons', () => {
+        comp.setDefaultMonth('2016/05');
+
+        let opts: IMyOptions = {
+            disableHeaderButtons: true,
+            disableUntil: {year: 2016, month: 4, day: 10}
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('May');
+
+        fixture.detectChanges();
+        let prevmonth = getElement(PREVMONTH);
+        expect(prevmonth).not.toBe(null);
+        prevmonth.click();
+
+        fixture.detectChanges();
+        montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('Apr');
+
+        fixture.detectChanges();
+        let headerbtndisabled = getElements('.headerbtndisabled');
+        expect(headerbtndisabled).not.toBe(null);
+        expect(headerbtndisabled.length).toBe(2);
+
+        prevmonth.click();
+
+        fixture.detectChanges();
+        montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('Apr');
+
+        fixture.detectChanges();
+        let prevyear = getElement(PREVYEAR);
+        expect(prevyear).not.toBe(null);
+        prevyear.click();
+
+        fixture.detectChanges();
+        let yearlabel = getElement('.headeryeartxt .headerlabelbtn');
+        expect(yearlabel).not.toBe(null);
+        expect(yearlabel.textContent).toBe('2016');
+
+        comp.closeCalendar();
+
+
+        opts.disableSince = {year: 2016, month: 7, day: 10};
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('May');
+
+        fixture.detectChanges();
+        let nextmonth = getElement(NEXTMONTH);
+        expect(nextmonth).not.toBe(null);
+        nextmonth.click();
+
+        fixture.detectChanges();
+        montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('Jun');
+
+        fixture.detectChanges();
+        headerbtndisabled = getElements('.headerbtndisabled');
+        expect(headerbtndisabled).not.toBe(null);
+        expect(headerbtndisabled.length).toBe(2);
+
+        prevmonth.click();
+
+        fixture.detectChanges();
+        montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        expect(montlabel.textContent).toBe('Jun');
+
+        fixture.detectChanges();
+        let nextyear = getElement(NEXTYEAR);
+        expect(nextyear).not.toBe(null);
+        nextyear.click();
+
+        fixture.detectChanges();
+        yearlabel = getElement('.headeryeartxt .headerlabelbtn');
+        expect(yearlabel).not.toBe(null);
+        expect(yearlabel.textContent).toBe('2016');
+    });
+
     it('options - minYear', () => {
         comp.setDefaultMonth('2011/12');
         let opts: IMyOptions = {
@@ -832,7 +925,8 @@ describe('ngx-mydatepicker', () => {
     it('options - disableUntil', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            disableUntil: {year: 2017, month: 1, day: 26}
+            disableUntil: {year: 2017, month: 1, day: 26},
+            disableHeaderButtons: false
         };
 
         comp.parseOptions(opts);
@@ -858,7 +952,8 @@ describe('ngx-mydatepicker', () => {
     it('options - disableSince', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            disableSince: {year: 2017, month: 1, day: 12}
+            disableSince: {year: 2017, month: 1, day: 12},
+            disableHeaderButtons: false
         };
 
         comp.parseOptions(opts);

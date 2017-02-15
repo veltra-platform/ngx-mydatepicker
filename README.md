@@ -207,6 +207,7 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 | __enableDays__   | no default value  | Enable given dates one by one if the date is disabled. For example if you disable the date range and want to enable some dates in range. Array of enabled days. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
 | __disableDateRange__   | no default value  | Disable a date range from begin to end. For example: {begin: {year: 2016, month: 11, day: 14}, end: {year: 2016, month: 11, day: 20} |
 | __disableWeekends__   | false | Disable weekends (Saturday and Sunday). |
+| __disableHeaderButtons__   | true | Prevent to change the calendar view with header buttons if previous or next month are fully disabled by disableUntil or disableSince. |
 | __alignSelectorRight__   | false | Align selector right. |
 | __openSelectorTopOfInput__   | false | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
 | __ariaLabelPrevMonth__   | Previous Month | Aria label text of previous month button. |

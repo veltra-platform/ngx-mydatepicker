@@ -38,6 +38,11 @@ export class NgxMyDatePicker {
     inputHeight: number = 0;
     selectorWidth: number = 0;
 
+    prevMonthDisabled: boolean = false;
+    nextMonthDisabled: boolean = false;
+    prevYearDisabled: boolean = false;
+    nextYearDisabled: boolean = false;
+
     PREV_MONTH: number = 1;
     CURR_MONTH: number = 2;
     NEXT_MONTH: number = 3;
@@ -197,18 +202,12 @@ export class NgxMyDatePicker {
 
     prevYear(): void {
         // Previous year from calendar
-        if (this.visibleMonth.year - 1 < this.opts.minYear) {
-            return;
-        }
         this.visibleMonth.year--;
         this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
     }
 
     nextYear(): void {
         // Next year from calendar
-        if (this.visibleMonth.year + 1 > this.opts.maxYear) {
-            return;
-        }
         this.visibleMonth.year++;
         this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
     }
@@ -346,7 +345,27 @@ export class NgxMyDatePicker {
             }
             this.dates.push(week);
         }
+
+        this.setHeaderBtnDisabledState(m, y);
+
         // Notify parent
         this.calendarViewChanged({year: y, month: m, first: {number: 1, weekday: this.getWeekday({year: y, month: m, day: 1})}, last: {number: dInThisM, weekday: this.getWeekday({year: y, month: m, day: dInThisM})}});
+    }
+
+    setHeaderBtnDisabledState(m: number, y: number): void {
+        let dpm: boolean = false;
+        let dpy: boolean = false;
+        let dnm: boolean = false;
+        let dny: boolean = false;
+        if (this.opts.disableHeaderButtons) {
+            dpm = this.utilService.isMonthDisabledByDisableUntil({year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y)}, this.opts.disableUntil);
+            dpy = this.utilService.isMonthDisabledByDisableUntil({year: y - 1, month: m, day: this.daysInMonth(m, y - 1)}, this.opts.disableUntil);
+            dnm = this.utilService.isMonthDisabledByDisableSince({year: m === 12 ? y + 1 : y, month: m === 12 ? 1 : m + 1, day: 1}, this.opts.disableSince);
+            dny = this.utilService.isMonthDisabledByDisableSince({year: y + 1, month: m, day: 1}, this.opts.disableSince);
+        }
+        this.prevMonthDisabled = m === 1 && y === this.opts.minYear || dpm;
+        this.prevYearDisabled = y - 1 < this.opts.minYear || dpy;
+        this.nextMonthDisabled = m === 12 && y === this.opts.maxYear || dnm;
+        this.nextYearDisabled = y + 1 > this.opts.maxYear || dny;
     }
 }

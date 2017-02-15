@@ -13,6 +13,7 @@ export interface IMyOptions {
     sunHighlight?: boolean;
     markCurrentDay?: boolean;
     editableMonthAndYear?: boolean;
+    disableHeaderButtons?: boolean;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
     disableDays?: Array<IMyDate>;

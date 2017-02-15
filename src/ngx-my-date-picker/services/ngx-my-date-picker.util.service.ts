@@ -133,6 +133,14 @@ export class UtilService {
         return false;
     }
 
+    isMonthDisabledByDisableUntil(date: IMyDate, disableUntil: IMyDate): boolean {
+        return this.isInitializedDate(disableUntil) && this.getTimeInMilliseconds(date) <= this.getTimeInMilliseconds(disableUntil);
+    }
+
+    isMonthDisabledByDisableSince(date: IMyDate, disableSince: IMyDate): boolean {
+        return this.isInitializedDate(disableSince) && this.getTimeInMilliseconds(date) >= this.getTimeInMilliseconds(disableSince);
+    }
+
     getDateModel(date: IMyDate, dateFormat: string, monthLabels: IMyMonthLabels): IMyDateModel {
         return {date: date, jsdate: this.getDate(date), formatted: this.formatDate(date, dateFormat, monthLabels), epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0)};
     }

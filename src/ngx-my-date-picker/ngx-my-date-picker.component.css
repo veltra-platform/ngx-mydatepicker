@@ -90,12 +90,18 @@
     display: none;
 }
 
-.ngxmdp .headertodaybtnenabled {
+.ngxmdp .headertodaybtnenabled,
+.ngxmdp .headerbtnenabled {
     cursor: pointer;
 }
 
-.ngxmdp .headertodaybtndisabled {
+.ngxmdp .headertodaybtndisabled,
+.ngxmdp .headerbtndisabled {
     cursor: not-allowed;
+}
+
+.ngxmdp .headerbtndisabled {
+    opacity: 0.4;
 }
 
 .ngxmdp .headertodaybtn {
@@ -329,7 +335,6 @@
     background-color: #8BDAF4;
 }
 
-.ngxmdp .headerbtn,
 .ngxmdp .monthlabel,
 .ngxmdp .yearlabel {
     cursor: pointer;
@@ -345,7 +350,7 @@
     border-radius: 2px;
 }
 
-.ngxmdp .headerbtn:hover,
+.ngxmdp .headerbtnenabled:hover,
 .ngxmdp .monthlabel:hover,
 .ngxmdp .yearlabel:hover {
     color: #8BDAF4;
