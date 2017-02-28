@@ -20,7 +20,8 @@ export class SampleDatePickerNgModel implements OnInit {
         openSelectorTopOfInput: false,
         minYear: 1900,
         showSelectorArrow: true,
-        disableDays:[]
+        disableDays:[],
+        showWeekNumbers: false
     };
     private selectedDateNormal:string = '';
 
@@ -66,6 +67,12 @@ export class SampleDatePickerNgModel implements OnInit {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
         copy.disableDays = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onShowWeekNumbers(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.showWeekNumbers = checked;
         this.myDatePickerOptions = copy;
     }
 
