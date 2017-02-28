@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewEncapsulation, Renderer } from "@angular/core";
-import { IMyDate, IMyMonth, IMyWeek, IMyOptions } from "./interfaces/index";
+import { IMyDate, IMyMonth, IMyCalendarDay, IMyWeek, IMyOptions } from "./interfaces/index";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 
 // webpack1_
@@ -22,7 +22,7 @@ export class NgxMyDatePicker {
     selectedMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
     selectedDate: IMyDate = {year: 0, month: 0, day: 0};
     weekDays: Array<string> = [];
-    dates: Array<Object> = [];
+    dates: Array<IMyWeek> = [];
     disableTodayBtn: boolean = false;
     dayIdx: number = 0;
     weekDayOpts: Array<string> = ["su", "mo", "tu", "we", "th", "fr", "sa"];
@@ -311,7 +311,7 @@ export class NgxMyDatePicker {
         let dayNbr: number = 1;
         let cmo: number = this.PREV_MONTH;
         for (let i = 1; i < 7; i++) {
-            let week: IMyWeek[] = [];
+            let week: Array<IMyCalendarDay> = [];
             if (i === 1) {
                 // First week
                 let pm = dInPrevM - monthStart + 1;
@@ -343,7 +343,8 @@ export class NgxMyDatePicker {
                     dayNbr++;
                 }
             }
-            this.dates.push(week);
+            let weekNbr: number = this.opts.showWeekNumbers  && this.opts.firstDayOfWeek === "mo" ? this.utilService.getWeekNumber(week[0].dateObj) : 0;
+            this.dates.push({week: week, weekNbr: weekNbr});
         }
 
         this.setHeaderBtnDisabledState(m, y);

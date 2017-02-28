@@ -173,6 +173,11 @@
     white-space: nowrap;
 }
 
+.ngxmdp .weekdaytitleweeknbr {
+    width: 20px;
+    border-right: 1px solid #BBB;
+}
+
 .ngxmdp .daycell {
     cursor: pointer;
     height: 30px;
@@ -185,6 +190,13 @@
 
 .ngxmdp .daycell div span {
     vertical-align: middle;
+}
+
+.ngxmdp .daycellweeknbr {
+    font-size: 10px;
+    border-right: 1px solid #CCC;
+    cursor: default;
+    color: #000;
 }
 
 .ngxmdp .prevmonth,

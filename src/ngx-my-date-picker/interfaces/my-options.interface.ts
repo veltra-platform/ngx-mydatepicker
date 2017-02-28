@@ -14,6 +14,7 @@ export interface IMyOptions {
     markCurrentDay?: boolean;
     editableMonthAndYear?: boolean;
     disableHeaderButtons?: boolean;
+    showWeekNumbers?: boolean;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
     disableDays?: Array<IMyDate>;

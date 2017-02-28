@@ -43,6 +43,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         markCurrentDay: <boolean> true,
         editableMonthAndYear: <boolean> true,
         disableHeaderButtons: <boolean> true,
+        showWeekNumbers: <boolean> false,
         disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
         disableSince: <IMyDate> {year: 0, month: 0, day: 0},
         disableDays: <Array<IMyDate>> [],

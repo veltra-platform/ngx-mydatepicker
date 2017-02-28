@@ -866,6 +866,61 @@ describe('ngx-mydatepicker', () => {
         expect(yearlabel.textContent).toBe('2016');
     });
 
+    it('options - showWeekNmbers', () => {
+        comp.setDefaultMonth('2017/01');
+
+        let opts: IMyOptions = {
+            showWeekNumbers: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let weekdaytitleweeknbr = getElement('.weekdaytitleweeknbr');
+        expect(weekdaytitleweeknbr).not.toBe(null);
+
+        fixture.detectChanges();
+        let daycellweeknbr = getElements('.daycellweeknbr');
+        expect(daycellweeknbr.length).toBe(6);
+
+        expect(daycellweeknbr[0].textContent.trim()).toBe('52');
+        expect(daycellweeknbr[1].textContent.trim()).toBe('1');
+        expect(daycellweeknbr[2].textContent.trim()).toBe('2');
+        expect(daycellweeknbr[3].textContent.trim()).toBe('3');
+        expect(daycellweeknbr[4].textContent.trim()).toBe('4');
+        expect(daycellweeknbr[5].textContent.trim()).toBe('5');
+
+        fixture.detectChanges();
+        let prevyear = getElement(PREVYEAR);
+        expect(prevyear).not.toBe(null);
+        prevyear.click();
+
+        fixture.detectChanges();
+        daycellweeknbr = getElements('.daycellweeknbr');
+        expect(daycellweeknbr.length).toBe(6);
+
+        expect(daycellweeknbr[0].textContent.trim()).toBe('53');
+        expect(daycellweeknbr[1].textContent.trim()).toBe('1');
+        expect(daycellweeknbr[2].textContent.trim()).toBe('2');
+        expect(daycellweeknbr[3].textContent.trim()).toBe('3');
+        expect(daycellweeknbr[4].textContent.trim()).toBe('4');
+        expect(daycellweeknbr[5].textContent.trim()).toBe('5');
+
+        prevyear.click();
+
+        fixture.detectChanges();
+        daycellweeknbr = getElements('.daycellweeknbr');
+        expect(daycellweeknbr.length).toBe(6);
+
+        expect(daycellweeknbr[0].textContent.trim()).toBe('1');
+        expect(daycellweeknbr[1].textContent.trim()).toBe('2');
+        expect(daycellweeknbr[2].textContent.trim()).toBe('3');
+        expect(daycellweeknbr[3].textContent.trim()).toBe('4');
+        expect(daycellweeknbr[4].textContent.trim()).toBe('5');
+        expect(daycellweeknbr[5].textContent.trim()).toBe('6');
+    });
+
     it('options - minYear', () => {
         comp.setDefaultMonth('2011/12');
         let opts: IMyOptions = {
