@@ -81,8 +81,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             }
             else {
                 if (this.inputText !== this.elem.nativeElement.value) {
-                    this.inputText = this.elem.nativeElement.value;
-                    if (this.inputText === "") {
+                    if (this.elem.nativeElement.value === "") {
                         this.clearDate();
                     }
                     else {
@@ -91,6 +90,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                     }
                 }
             }
+            this.inputText = this.elem.nativeElement.value;
         }
     }
 
