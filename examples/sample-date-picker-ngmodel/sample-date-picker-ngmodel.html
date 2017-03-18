@@ -56,9 +56,9 @@
         </li>
 
         <li>
-            <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>
-            <button style="cursor: pointer" type="button" (click)="dp.openCalendar();$event.stopPropagation()">Open</button>
-            <button style="cursor: pointer" type="button" (click)="dp.closeCalendar();$event.stopPropagation()">Close</button>
+            <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar()">Toggle</button>
+            <button style="cursor: pointer" type="button" (click)="dp.openCalendar()">Open</button>
+            <button style="cursor: pointer" type="button" (click)="dp.closeCalendar()">Close</button>
         </li>
     </ul>
 
@@ -74,8 +74,8 @@
                                 (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
 
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>
-                            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            <button type="button" class="btn btn-default" (click)="dp.clearDate()"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
 
                     </div>

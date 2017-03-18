@@ -30,6 +30,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     private MIN_YEAR: number = 1000;
     private MAX_YEAR: number = 9999;
     private inputText: string = "";
+    private preventClose: boolean = false;
 
     // Default options
     private opts: IMyOptions = {
@@ -95,7 +96,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     @HostListener("document:click", ["$event"]) onClick(evt: MouseEvent) {
-        if (evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target)) {
+        if (!this.preventClose && evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target)) {
             this.closeSelector(4);
         }
     }
@@ -145,6 +146,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     public openCalendar() {
+        this.preventClose = true;
         if (this.cRef === null) {
             let cf = this.cfr.resolveComponentFactory(NgxMyDatePicker);
             this.cRef = this.vcRef.createComponent(cf);
@@ -163,6 +165,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             });
             this.emitCalendarToggle(1);
         }
+        setTimeout(() => {
+            this.preventClose = false;
+        }, 15);
     }
 
     public closeCalendar() {

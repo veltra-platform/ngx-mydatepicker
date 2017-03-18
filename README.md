@@ -94,10 +94,10 @@ Add the following snippet inside your template:
                [(ngModel)]="model" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"/>
 
         <span class="input-group-btn">
-            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()">
+            <button type="button" class="btn btn-default" (click)="dp.clearDate()">
                 <i class="glyphicon glyphicon-remove"></i>
             </button>
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()">
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
                 <i class="glyphicon glyphicon-calendar"></i>
             </button>
         </span>
@@ -166,10 +166,10 @@ Add the following snippet inside your template:
                formControlName="myDate" [options]="myOptions" #dp="ngx-mydatepicker"/>
 
         <span class="input-group-btn">
-            <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()">
+            <button type="button" class="btn btn-default" (click)="dp.clearDate()">
                 <i class="glyphicon glyphicon-remove"></i>
             </button>
-            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()">
+            <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
                 <i class="glyphicon glyphicon-calendar"></i>
             </button>
         </span>
@@ -251,28 +251,28 @@ for example __(click)="dp.openCalendar()"__.
 
 Opens the calendar. For example:
 ```html
-<button type="button" (click)="dp.openCalendar();$event.stopPropagation()">Open</button>
+<button type="button" (click)="dp.openCalendar()">Open</button>
 ```
 
 ### closeCalendar function
 
 Closes the calendar. For example:
 ```html
-<button type="button" (click)="dp.closeCalendar();$event.stopPropagation()">Close</button>
+<button type="button" (click)="dp.closeCalendar()">Close</button>
 ```
 
 ### toggleCalendar function
 
 Closes the calendar if it is open and opens the calendar if it is closed. For example:
 ```html
-<button type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>
+<button type="button" (click)="dp.toggleCalendar()">Toggle</button>
 ```
 
 ### clearDate function
 
 Clears the date from the input box and model. For example:
 ```html
-<button type="button" (click)="dp.clearDate();$event.stopPropagation()">Clear</button>
+<button type="button" (click)="dp.clearDate()">Clear</button>
 ```
 
 ## Callbacks
