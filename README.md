@@ -9,7 +9,7 @@
 Angular attribute directive date picker. There is similar date picker [here](https://github.com/kekeh/mydatepicker), but difference between these
 two is that with ngx-mydatepicker you can define the style of input box, calendar and clear buttons.
 
-Online demo of bootstrap styled input box is [here](http://kekeh.github.io/ngx-mydatepicker)
+Online demo of bootstrap styled input box and glyphicons is [here](http://kekeh.github.io/ngx-mydatepicker)
 
 ## Installation
 
