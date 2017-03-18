@@ -205,6 +205,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     private setInputValue(value: string) {
+        this.inputText = value;
         this.renderer.setElementProperty(this.elem.nativeElement, "value", value);
     }
 
