@@ -47,9 +47,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         showWeekNumbers: <boolean> false,
         disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
         disableSince: <IMyDate> {year: 0, month: 0, day: 0},
-        disableDays: <Array<IMyDate>> [],
-        enableDays: <Array<IMyDate>> [],
-        disableDateRange: <IMyDateRange> {begin: <IMyDate> {year: 0, month: 0, day: 0}, end: <IMyDate> {year: 0, month: 0, day: 0}},
+        disableDates: <Array<IMyDate>> [],
+        enableDates: <Array<IMyDate>> [],
+        disableDateRanges: <Array<IMyDateRange>> [],
         disableWeekends: <boolean> false,
         alignSelectorRight: <boolean> false,
         openSelectorTopOfInput: <boolean> false,
@@ -72,7 +72,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             this.closeSelector(3);
         }
         else {
-            let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDays, this.opts.disableDateRange, this.opts.monthLabels, this.opts.enableDays);
+            let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
             if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
                 let dateModel: IMyDateModel = this.utilService.getDateModel(date, this.opts.dateFormat, this.opts.monthLabels);
                 this.emitDateChanged(dateModel);
@@ -167,7 +167,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
         setTimeout(() => {
             this.preventClose = false;
-        }, 15);
+        }, 20);
     }
 
     public closeCalendar() {

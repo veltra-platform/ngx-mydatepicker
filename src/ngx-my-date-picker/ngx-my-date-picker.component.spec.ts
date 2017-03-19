@@ -1031,10 +1031,10 @@ describe('ngx-mydatepicker', () => {
         expect(disabled.length).toBe(42);
     });
 
-    it('options - disableDays', () => {
+    it('options - disableDates', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            disableDays: [{year: 2017, month: 1, day: 12}, {year: 2017, month: 1, day: 14}]
+            disableDates: [{year: 2017, month: 1, day: 12}, {year: 2017, month: 1, day: 14}]
         };
 
         comp.parseOptions(opts);
@@ -1071,11 +1071,11 @@ describe('ngx-mydatepicker', () => {
         expect(selection.value).toBe('2017-01-13');
     });
 
-    it('options - enableDays', () => {
+    it('options - enableDates', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
             disableUntil: {year: 2017, month: 1, day: 31},
-            enableDays: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}]
+            enableDates: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}]
         };
 
         comp.parseOptions(opts);
@@ -1098,22 +1098,30 @@ describe('ngx-mydatepicker', () => {
         expect(selection.value).toBe('2017-01-14');
     });
 
-    it('options - disableDateRange', () => {
-        comp.setDefaultMonth('2017/01');
+    it('options - disableDateRanges', () => {
+        comp.setDefaultMonth('2016/10');
         let opts: IMyOptions = {
-            disableDateRange: {
-                begin: {year: 2017, month: 1, day: 10},
-                end: {year: 2017, month: 1, day: 20}
-            }
+            disableDateRanges: [
+                {begin: {year: 2016, month: 10, day: 5}, end: {year: 2016, month: 10, day: 7}},
+                {begin: {year: 2016, month: 10, day: 10}, end: {year: 2016, month: 10, day: 12}}
+            ]
         };
 
         comp.parseOptions(opts);
         comp.openCalendar();
 
         fixture.detectChanges();
-        let disabled = getElements('.disabled');
+        let disabled = getElements('tr .disabled');
         expect(disabled).not.toBe(null);
-        expect(disabled.length).toBe(11);
+        expect(disabled.length).toBe(6);
+
+        expect(disabled[0].textContent.trim()).toBe('5');
+        expect(disabled[1].textContent.trim()).toBe('6');
+        expect(disabled[2].textContent.trim()).toBe('7');
+
+        expect(disabled[3].textContent.trim()).toBe('10');
+        expect(disabled[4].textContent.trim()).toBe('11');
+        expect(disabled[5].textContent.trim()).toBe('12');
     });
 
     it('options - disableWeekends', () => {

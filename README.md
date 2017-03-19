@@ -188,33 +188,33 @@ Add the following snippet inside your template:
 
 Value of the __options__ attribute is a type of [IMyOptions](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-options.interface.ts). It can contain the following properties.
 
-| Option        | Default       | Description  |
-| :------------- | :------------- | :----- |
-| __dayLabels__     | {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'} | Day labels visible on the selector. |
-| __monthLabels__   | { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' } | Month labels visible on the selector. |
-| __dateFormat__    | yyyy-mm-dd      | Date format on the selection area and the callback. For example: dd.mm.yyyy, yyyy-mm-dd, dd mmm yyyy (mmm = Month as a text) |
-| __showTodayBtn__   | true      | Show 'Today' button on calendar. |
-| __todayBtnTxt__   | Today      | Today button text. Can be used if __showTodayBtn = true__. |
-| __firstDayOfWeek__   | mo | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
-| __sunHighlight__   | true | Sunday red colored on calendar. |
-| __markCurrentDay__   | true | Is current day (today) marked on calendar. |
-| __editableMonthAndYear__   | true | Is month and year labels editable or not. |
-| __minYear__   | 1000 | Minimum allowed year in calendar. Cannot be less than 1000. |
-| __maxYear__   | 9999 | Maximum allowed year in calendar. Cannot be more than 9999. |
-| __disableUntil__   | no default value | Disable dates backward starting from the given date. For example: {year: 2016, month: 6, day: 26} |
-| __disableSince__   | no default value | Disable dates forward starting from the given date. For example: {year: 2016, month: 7, day: 22} |
-| __disableDays__   | no default value  | Disable single dates one by one. Array of disabled dates. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15] |
-| __enableDays__   | no default value  | Enable given dates one by one if the date is disabled. For example if you disable the date range and want to enable some dates in range. Array of enabled days. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
-| __disableDateRange__   | no default value  | Disable a date range from begin to end. For example: {begin: {year: 2016, month: 11, day: 14}, end: {year: 2016, month: 11, day: 20} |
-| __disableWeekends__   | false | Disable weekends (Saturday and Sunday). |
-| __disableHeaderButtons__   | true | Prevent to change the calendar view with header buttons if previous or next month are fully disabled by disableUntil or disableSince. |
-| __showWeekNumbers__   | false | Are week numbers visible or not on calendar. Can be used if __firstDayOfWeek = mo__. |
-| __alignSelectorRight__   | false | Align selector right. |
-| __openSelectorTopOfInput__   | false | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
-| __ariaLabelPrevMonth__   | Previous Month | Aria label text of previous month button. |
-| __ariaLabelNextMonth__   | Next Month | Aria label text of next month button. |
-| __ariaLabelPrevYear__   | Previous Year | Aria label text of previous year button. |
-| __ariaLabelNextYear__   | Next Year | Aria label text of next year button. |
+| Option         | Default        | Type | Description |
+| :------------- | :------------- | :----| :---------- |
+| __dayLabels__     | {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'} | [IMyDayLabels](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-day-labels.interface.ts) | Day labels visible on the selector. |
+| __monthLabels__   | { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' } | [IMyMonthLabels](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-month-labels.interface.ts) | Month labels visible on the selector. |
+| __dateFormat__    | yyyy-mm-dd | string |  Date format on the selection area and the callback. For example: dd.mm.yyyy, yyyy-mm-dd, dd mmm yyyy (mmm = Month as a text) |
+| __showTodayBtn__   | true | boolean | Show 'Today' button on calendar. |
+| __todayBtnTxt__   | Today | string | Today button text. Can be used if __showTodayBtn = true__. |
+| __firstDayOfWeek__   | mo | string | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
+| __sunHighlight__   | true | boolean | Sunday red colored on calendar. |
+| __markCurrentDay__   | true | boolean | Is current day (today) marked on calendar. |
+| __editableMonthAndYear__   | true | boolean | Is month and year labels editable or not. |
+| __minYear__   | 1000 | number | Minimum allowed year in calendar. Cannot be less than 1000. |
+| __maxYear__   | 9999 | number | Maximum allowed year in calendar. Cannot be more than 9999. |
+| __disableUntil__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates backward starting from the given date. For example: {year: 2016, month: 6, day: 26} |
+| __disableSince__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates forward starting from the given date. For example: {year: 2016, month: 7, day: 22} |
+| __disableDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Disable single dates one by one. Array of disabled dates. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
+| __enableDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Enable given dates one by one if the date is disabled. For example if you disable the date range and want to enable some dates in range. Array of enabled days. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
+| __disableDateRanges__   | no default value | Array<[IMyDateRange](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date-range.interface.ts)> | Disable date ranges. For example: [{begin: {year: 2016, month: 11, day: 14}, end: {year: 2016, month: 11, day: 20}] |
+| __disableWeekends__   | false | boolean | Disable weekends (Saturday and Sunday). |
+| __disableHeaderButtons__   | true | boolean | Prevent to change the calendar view with header buttons if previous or next month are fully disabled by disableUntil or disableSince. |
+| __showWeekNumbers__   | false | boolean | Are week numbers visible or not on calendar. Can be used if __firstDayOfWeek = mo__. |
+| __alignSelectorRight__   | false | boolean | Align selector right. |
+| __openSelectorTopOfInput__   | false | boolean | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
+| __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
+| __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
+| __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |
+| __ariaLabelNextYear__   | Next Year | string | Aria label text of next year button. |
 
 * Example of the options data (not all properties listed):
 ```ts
