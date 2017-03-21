@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged} from 'ngx-mydatepicker';
+import {NgxMyDatePickerDirective} from 'ngx-mydatepicker';
 
 declare var require:any;
 const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
@@ -23,7 +24,8 @@ export class SampleDatePickerNgModel implements OnInit {
         disableDates:[],
         showWeekNumbers: false
     };
-    private selectedDateNormal:string = '';
+
+    @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
 
     private selectedTextNormal: string = '';
     private border: string = 'none';
@@ -36,7 +38,7 @@ export class SampleDatePickerNgModel implements OnInit {
     constructor() {}
 
     clearDate(): void {
-        this.selectedDateNormal = '';
+        this.ngxdp.clearDate();
     }
 
     onShowTodayButton(checked: boolean): void {
@@ -90,8 +92,6 @@ export class SampleDatePickerNgModel implements OnInit {
         if(event.formatted !== '') {
             this.selectedTextNormal = 'Formatted: ' + event.formatted + ' - epoc timestamp: ' + event.epoc;
             this.border = '1px solid #CCC';
-
-            this.selectedDateNormal = event.formatted;
         }
         else {
             this.selectedTextNormal = '';
