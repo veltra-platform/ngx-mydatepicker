@@ -54,6 +54,12 @@
                 <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)" [checked]="false">
             </label>
         </li>
+        <li>
+            <label>
+                <span>Disable input box:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onDisableInput($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
 
         <li>
             <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar()">Toggle</button>
@@ -72,7 +78,7 @@
                         <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
                                 [(ngModel)]="model" [options]="myDatePickerOptions" [defaultMonth]="defMonth" #dp="ngx-mydatepicker"
                                 (dateChanged)="onDateChanged($event)" (calendarViewChanged)="onCalendarViewChanged($event)"
-                                (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
+                                (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)" [attr.disabled]="disabled?'':null"/>
 
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" (click)="dp.clearDate()"><i class="glyphicon glyphicon-remove"></i></button>

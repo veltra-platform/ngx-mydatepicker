@@ -37,6 +37,8 @@ export class SampleDatePickerNgModel implements OnInit {
     private selectedTextNormal: string = '';
     private border: string = 'none';
 
+    private disabled: boolean = false;
+
     //private model: string = '';   // not initial date set
     private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
 
@@ -101,6 +103,10 @@ export class SampleDatePickerNgModel implements OnInit {
         let copy = this.getCopyOfOptions();
         copy.showWeekNumbers = checked;
         this.myDatePickerOptions = copy;
+    }
+
+    onDisableInput(checked: boolean) {
+        this.disabled = checked;
     }
 
     getCopyOfOptions(): IMyOptions {
