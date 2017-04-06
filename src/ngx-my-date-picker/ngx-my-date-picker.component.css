@@ -165,8 +165,8 @@
 
 .ngxmdp .weekdaytitle {
     background-color: #DDD;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: normal;
     vertical-align: middle;
     max-width: 36px;
     overflow: hidden;
@@ -220,7 +220,7 @@
 
 .ngxmdp .currmonth {
     background-color: #F6F6F6;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .ngxmdp .currday {
