@@ -601,7 +601,7 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        let headertodaybtn = getElement('.headertodaybtn');
+        let headertodaybtn = getElement('.headertodaybtn span:last-child');
         expect(headertodaybtn).not.toBe(null);
         expect(headertodaybtn.textContent).toBe('Today');
 
@@ -617,7 +617,7 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        headertodaybtn = getElement('.headertodaybtn');
+        headertodaybtn = getElement('.headertodaybtn span:last-child');
         expect(headertodaybtn).not.toBe(null);
         expect(headertodaybtn.textContent).toBe('text');
     });

@@ -67,6 +67,7 @@ gulp.task('ngc.compile.publish', shell.task([
 gulp.task('copy.build.to.npmdist.directory', function() {
     return gulp.src(
         [
+            '!./.tmpbuild/dist/*.spec.*',
             './.tmpbuild/dist/**/*.*'
         ]).pipe(gulp.dest('./npmdist/dist/'));
 });
@@ -83,6 +84,7 @@ gulp.task('copy.files.to.npmdist.root.dir', function() {
     return gulp.src(
         [
             './LICENSE',
+            './FONT-LICENSE',
             './package/README.md',
             './package/index.d.ts',
             './package/index.js'
@@ -95,7 +97,7 @@ gulp.task('edit.package.json.and.copy.to.npmdist.root.dir', function () {
             json.scripts = {};
             json.devDependencies = {};
             json.files = [
-                'index.d.ts', 'index.js', 'LICENSE', 'package.json', 'README.md', 'dist', 'bundles'
+                'index.d.ts', 'index.js', 'LICENSE', 'FONT-LICENSE', 'package.json', 'README.md', 'dist', 'bundles'
             ];
             return json;
         }))
