@@ -18,6 +18,11 @@ enum CalToggle {
     CloseByOutClick = 4
 }
 
+enum Year {
+    min = 1000,
+    max = 9999
+}
+
 @Directive({
     selector: "[ngx-mydatepicker]",
     exportAs: "ngx-mydatepicker",
@@ -33,9 +38,6 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     @Output() calendarToggle: EventEmitter<number> = new EventEmitter<number>();
 
     private cRef: ComponentRef<NgxMyDatePicker> = null;
-
-    private MIN_YEAR: number = 1000;
-    private MAX_YEAR: number = 9999;
     private inputText: string = "";
     private preventClose: boolean = false;
 
@@ -60,8 +62,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         disableWeekends: <boolean> false,
         alignSelectorRight: <boolean> false,
         openSelectorTopOfInput: <boolean> false,
-        minYear: <number> this.MIN_YEAR,
-        maxYear: <number> this.MAX_YEAR,
+        minYear: <number> Year.min,
+        maxYear: <number> Year.max,
         showSelectorArrow: <boolean> true,
         ariaLabelPrevMonth: <string> "Previous Month",
         ariaLabelNextMonth: <string> "Next Month",
@@ -124,11 +126,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 (<IMyOptions>this.opts)[k] = opts[k];
             });
         }
-        if (this.opts.minYear < this.MIN_YEAR) {
-            this.opts.minYear = this.MIN_YEAR;
+        if (this.opts.minYear < Year.min) {
+            this.opts.minYear = Year.min;
         }
-        if (this.opts.maxYear > this.MAX_YEAR) {
-            this.opts.maxYear = this.MAX_YEAR;
+        if (this.opts.maxYear > Year.max) {
+            this.opts.maxYear = Year.max;
         }
     }
 
