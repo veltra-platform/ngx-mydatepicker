@@ -11,6 +11,13 @@ const NGX_DP_VALUE_ACCESSOR = {
     multi: true
 };
 
+enum CalToggle {
+    Open = 1,
+    CloseByDateSel = 2,
+    CloseByCalBtn = 3,
+    CloseByOutClick = 4
+}
+
 @Directive({
     selector: "[ngx-mydatepicker]",
     exportAs: "ngx-mydatepicker",
@@ -69,7 +76,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
         if (evt.keyCode === 27) {
-            this.closeSelector(3);
+            this.closeSelector(CalToggle.CloseByCalBtn);
         }
         else {
             let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
@@ -78,7 +85,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.emitDateChanged(dateModel);
                 this.updateModel(dateModel);
                 this.emitInputFieldChanged(dateModel.formatted, true);
-                this.closeSelector(2);
+                this.closeSelector(CalToggle.CloseByDateSel);
             }
             else {
                 if (this.inputText !== this.elem.nativeElement.value) {
@@ -97,7 +104,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     @HostListener("document:click", ["$event"]) onClick(evt: MouseEvent) {
         if (!this.preventClose && evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target)) {
-            this.closeSelector(4);
+            this.closeSelector(CalToggle.CloseByOutClick);
         }
     }
 
@@ -159,19 +166,19 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 (dm: IMyDateModel) => {
                     this.emitDateChanged(dm);
                     this.updateModel(dm);
-                    this.closeSelector(2);
+                    this.closeSelector(CalToggle.CloseByDateSel);
             },  (cvc: IMyCalendarViewChanged) => {
                     this.emitCalendarChanged(cvc);
             });
-            this.emitCalendarToggle(1);
+            this.emitCalendarToggle(CalToggle.Open);
         }
         setTimeout(() => {
             this.preventClose = false;
-        }, 20);
+        }, 30);
     }
 
     public closeCalendar() {
-        this.closeSelector(3);
+        this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
     public toggleCalendar() {
@@ -179,7 +186,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             this.openCalendar();
         }
         else {
-            this.closeSelector(3);
+            this.closeSelector(CalToggle.CloseByCalBtn);
         }
     }
 
@@ -188,7 +195,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.emitInputFieldChanged("", false);
         this.onChangeCb("");
         this.setInputValue("");
-        this.closeSelector(3);
+        this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
     private closeSelector(reason: number) {
