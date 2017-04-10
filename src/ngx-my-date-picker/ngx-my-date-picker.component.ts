@@ -163,7 +163,7 @@ export class NgxMyDatePicker {
     }
 
     preventUserInput(event: any): boolean {
-        return (event.keyCode === KeyCode.enter || event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.rigthArrow);
+        return event.keyCode === KeyCode.enter || event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.rigthArrow;
     }
 
     isTodayDisabled(): void {
