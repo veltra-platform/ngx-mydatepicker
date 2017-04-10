@@ -8,6 +8,19 @@ const myDpStyles: string = require("./ngx-my-date-picker.component.css");
 const myDpTpl: string = require("./ngx-my-date-picker.component.html");
 // webpack2_
 
+enum KeyCode {
+    enter = 13,
+    space = 32,
+    leftArrow = 37,
+    rigthArrow = 39
+}
+
+enum MonthId {
+    prev = 1,
+    curr = 2,
+    next = 3
+}
+
 @Component({
     selector: "ngx-my-date-picker",
     styles: [myDpStyles],
@@ -43,9 +56,9 @@ export class NgxMyDatePicker {
     prevYearDisabled: boolean = false;
     nextYearDisabled: boolean = false;
 
-    PREV_MONTH: number = 1;
-    CURR_MONTH: number = 2;
-    NEXT_MONTH: number = 3;
+    prevMonthId: number = MonthId.prev;
+    currMonthId: number = MonthId.curr;
+    nextMonthId: number = MonthId.next;
 
     constructor(public elem: ElementRef, private renderer: Renderer, private utilService: UtilService) {
         renderer.listen(elem.nativeElement, "click", (evt: MouseEvent) => {
@@ -110,7 +123,7 @@ export class NgxMyDatePicker {
     }
 
     userMonthInput(event: any): void {
-        if (event.keyCode === 13 || event.keyCode === 37 || event.keyCode === 39) {
+        if (this.preventUserInput(event)) {
             return;
         }
 
@@ -130,7 +143,7 @@ export class NgxMyDatePicker {
     }
 
     userYearInput(event: any): void {
-        if (event.keyCode === 13 || event.keyCode === 37 || event.keyCode === 39) {
+        if (this.preventUserInput(event)) {
             return;
         }
 
@@ -147,6 +160,10 @@ export class NgxMyDatePicker {
         else {
             this.invalidYear = true;
         }
+    }
+
+    preventUserInput(event: any): boolean {
+        return (event.keyCode === KeyCode.enter || event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.rigthArrow);
     }
 
     isTodayDisabled(): void {
@@ -220,15 +237,15 @@ export class NgxMyDatePicker {
 
     cellClicked(cell: any): void {
         // Cell clicked on the calendar
-        if (cell.cmo === this.PREV_MONTH) {
+        if (cell.cmo === this.prevMonthId) {
             // Previous month of day
             this.prevMonth();
         }
-        else if (cell.cmo === this.CURR_MONTH) {
+        else if (cell.cmo === this.currMonthId) {
             // Current month of day
             this.selectDate(cell.dateObj);
         }
-        else if (cell.cmo === this.NEXT_MONTH) {
+        else if (cell.cmo === this.nextMonthId) {
             // Next month of day
             this.nextMonth();
         }
@@ -237,7 +254,7 @@ export class NgxMyDatePicker {
 
     cellKeyDown(event: any, cell: any) {
         // Cell keyboard handling
-        if ((event.keyCode === 13 || event.keyCode === 32) && !cell.disabled) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
             event.preventDefault();
             this.cellClicked(cell);
         }
@@ -272,7 +289,7 @@ export class NgxMyDatePicker {
 
     isCurrDay(d: number, m: number, y: number, cmo: number, today: IMyDate): boolean {
         // Check is a given date the today
-        return d === today.day && m === today.month && y === today.year && cmo === this.CURR_MONTH;
+        return d === today.day && m === today.month && y === today.year && cmo === this.currMonthId;
     }
 
     getToday(): IMyDate {
@@ -309,7 +326,7 @@ export class NgxMyDatePicker {
         let dInPrevM: number = this.daysInPrevMonth(m, y);
 
         let dayNbr: number = 1;
-        let cmo: number = this.PREV_MONTH;
+        let cmo: number = this.prevMonthId;
         for (let i = 1; i < 7; i++) {
             let week: Array<IMyCalendarDay> = [];
             if (i === 1) {
@@ -321,7 +338,7 @@ export class NgxMyDatePicker {
                     week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates)});
                 }
 
-                cmo = this.CURR_MONTH;
+                cmo = this.currMonthId;
                 // Current month
                 let daysLeft: number = 7 - week.length;
                 for (let j = 0; j < daysLeft; j++) {
@@ -336,9 +353,9 @@ export class NgxMyDatePicker {
                     if (dayNbr > dInThisM) {
                         // Next month
                         dayNbr = 1;
-                        cmo = this.NEXT_MONTH;
+                        cmo = this.nextMonthId;
                     }
-                    let date: IMyDate = {year: y, month: cmo === this.CURR_MONTH ? m : m + 1, day: dayNbr};
+                    let date: IMyDate = {year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr};
                     week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates)});
                     dayNbr++;
                 }
