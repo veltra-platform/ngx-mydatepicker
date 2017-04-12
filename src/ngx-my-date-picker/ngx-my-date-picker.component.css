@@ -141,11 +141,11 @@
     font-size: 14px;
 }
 
-.mydp .caltable tbody tr:nth-child(6) td:first-child {
+.ngxmdp .caltable tbody tr:nth-child(6) td:first-child {
     border-bottom-left-radius: 4px;
 }
 
-.mydp .caltable tbody tr:nth-child(6) td:last-child {
+.ngxmdp .caltable tbody tr:nth-child(6) td:last-child {
     border-bottom-right-radius: 4px;
 }
 
