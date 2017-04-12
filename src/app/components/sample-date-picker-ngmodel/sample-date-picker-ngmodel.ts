@@ -22,7 +22,8 @@ export class SampleDatePickerNgModel implements OnInit {
         minYear: 1900,
         showSelectorArrow: true,
         disableDates:[],
-        showWeekNumbers: false
+        showWeekNumbers: false,
+        markDates: []
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -69,6 +70,13 @@ export class SampleDatePickerNgModel implements OnInit {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
         copy.disableDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onMarkToday(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        copy.markDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
         this.myDatePickerOptions = copy;
     }
 

@@ -32,6 +32,12 @@
         </li>
         <li>
             <label>
+                <span>Mark today:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onMarkToday($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
                 <span>Show week numbers:</span>
                 <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)" [checked]="false">
             </label>
