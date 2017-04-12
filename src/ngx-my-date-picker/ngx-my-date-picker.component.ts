@@ -167,7 +167,7 @@ export class NgxMyDatePicker {
     }
 
     isTodayDisabled(): void {
-        this.disableTodayBtn = this.utilService.isDisabledDay(this.getToday(), this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates);
+        this.disableTodayBtn = this.utilService.isDisabledDate(this.getToday(), this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates);
     }
 
     setVisibleMonth(): void {
@@ -335,7 +335,7 @@ export class NgxMyDatePicker {
                 // Previous month
                 for (let j = pm; j <= dInPrevM; j++) {
                     let date: IMyDate = {year: y, month: m - 1, day: j};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates)});
+                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), mark: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)});
                 }
 
                 cmo = this.currMonthId;
@@ -343,7 +343,7 @@ export class NgxMyDatePicker {
                 let daysLeft: number = 7 - week.length;
                 for (let j = 0; j < daysLeft; j++) {
                     let date: IMyDate = {year: y, month: m, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates)});
+                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), mark: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)});
                     dayNbr++;
                 }
             }
@@ -356,7 +356,7 @@ export class NgxMyDatePicker {
                         cmo = this.nextMonthId;
                     }
                     let date: IMyDate = {year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDay(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates)});
+                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), dayNbr: this.getDayNumber(date), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), mark: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends)});
                     dayNbr++;
                 }
             }

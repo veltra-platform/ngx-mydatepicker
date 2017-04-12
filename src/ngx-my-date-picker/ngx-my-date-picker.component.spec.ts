@@ -1124,6 +1124,60 @@ describe('ngx-mydatepicker', () => {
         expect(disabled[5].textContent.trim()).toBe('12');
     });
 
+    it('options - markDates', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            markDates: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}]
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let markdate = getElements('.markdate');
+        expect(markdate).not.toBe(null);
+        expect(markdate.length).toBe(2);
+
+        comp.closeCalendar();
+
+        opts.markDates = [];
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        markdate = getElements('.markdate');
+        expect(markdate).not.toBe(null);
+        expect(markdate.length).toBe(0);
+    });
+
+    it('options - markWeekends', () => {
+        comp.setDefaultMonth('2017/01');
+        let opts: IMyOptions = {
+            markWeekends: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let markdate = getElements('.markdate');
+        expect(markdate).not.toBe(null);
+        expect(markdate.length).toBe(12);
+
+        comp.closeCalendar();
+
+        opts.markWeekends = false;
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        markdate = getElements('.markdate');
+        expect(markdate).not.toBe(null);
+        expect(markdate.length).toBe(0);
+    });
+
     it('options - disableWeekends', () => {
         comp.setDefaultMonth('2016/10');
         let opts: IMyOptions = {

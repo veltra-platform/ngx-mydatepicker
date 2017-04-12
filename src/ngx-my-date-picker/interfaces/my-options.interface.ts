@@ -19,6 +19,8 @@ export interface IMyOptions {
     disableSince?: IMyDate;
     disableDates?: Array<IMyDate>;
     enableDates?: Array<IMyDate>;
+    markDates?: Array<IMyDate>;
+    markWeekends?: boolean;
     disableDateRanges?: Array<IMyDateRange>;
     disableWeekends?: boolean;
     alignSelectorRight?: boolean;

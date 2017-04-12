@@ -6,4 +6,5 @@ export interface IMyCalendarDay {
     currDay: boolean;
     dayNbr: number;
     disabled: boolean;
+    mark: boolean;
 }

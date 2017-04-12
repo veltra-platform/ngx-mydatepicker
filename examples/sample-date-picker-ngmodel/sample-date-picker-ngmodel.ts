@@ -29,7 +29,9 @@ export class SampleDatePickerNgModel implements OnInit {
         disableDateRanges: [
             {begin: {year: 2016, month: 10, day: 5}, end: {year: 2016, month: 10, day: 7}},
             {begin: {year: 2016, month: 10, day: 10}, end: {year: 2016, month: 10, day: 12}}
-        ]
+        ],
+        markDates: [],
+        markWeekends: false
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -39,8 +41,8 @@ export class SampleDatePickerNgModel implements OnInit {
 
     private disabled: boolean = false;
 
-    //private model: string = '';   // not initial date set
-    private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
+    private model: string = '';   // not initial date set
+    //private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
 
     private defMonth: string = '';
 
@@ -84,6 +86,19 @@ export class SampleDatePickerNgModel implements OnInit {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
         copy.disableDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onMarkToday(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        copy.markDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onMarkWeekends(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.markWeekends = checked;
         this.myDatePickerOptions = copy;
     }
 

@@ -34,7 +34,7 @@ export class UtilService {
 
             let date: IMyDate = {year: year, month: month, day: day};
 
-            if (this.isDisabledDay(date, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, enableDates)) {
+            if (this.isDisabledDate(date, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, enableDates)) {
                 return returnDate;
             }
 
@@ -98,9 +98,9 @@ export class UtilService {
         return month;
     }
 
-    isDisabledDay(date: IMyDate, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDates: Array<IMyDate>): boolean {
-        for (let obj of enableDates) {
-            if (obj.year === date.year && obj.month === date.month && obj.day === date.day) {
+    isDisabledDate(date: IMyDate, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDates: Array<IMyDate>): boolean {
+        for (let d of enableDates) {
+            if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return false;
             }
         }
@@ -129,6 +129,21 @@ export class UtilService {
 
         for (let d of disableDateRanges) {
             if (this.isInitializedDate(d.begin) && this.isInitializedDate(d.end) && dateMs >= this.getTimeInMilliseconds(d.begin) && dateMs <= this.getTimeInMilliseconds(d.end)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isMarkedDate(date: IMyDate, markDates: Array<IMyDate>, markWeekends: boolean): boolean {
+        for (let d of markDates) {
+            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+                return true;
+            }
+        }
+        if (markWeekends) {
+            let dayNbr = this.getDayNumber(date);
+            if (dayNbr === 0 || dayNbr === 6) {
                 return true;
             }
         }
