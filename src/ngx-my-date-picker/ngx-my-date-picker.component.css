@@ -224,7 +224,6 @@
 }
 
 .ngxmdp .markdate {
-    background-color: #C30000;
     position: absolute;
     width: 4px;
     height: 4px;
@@ -349,9 +348,12 @@
     border: none;
 }
 
-.ngxmdp .headertodaybtnenabled:hover,
+.ngxmdp .headertodaybtnenabled:hover {
+    background-color: #E6E6E6;
+}
+
 .ngxmdp .tablesingleday:hover {
-    background-color: #8BDAF4;
+    background-color: #DDD;
 }
 
 .ngxmdp .monthlabel,
@@ -372,7 +374,7 @@
 .ngxmdp .headerbtnenabled:hover,
 .ngxmdp .monthlabel:hover,
 .ngxmdp .yearlabel:hover {
-    color: #8BDAF4;
+    color: #777;
 }
 
 @font-face {

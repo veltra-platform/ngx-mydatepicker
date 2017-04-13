@@ -1,4 +1,5 @@
 import { IMyDate } from "./my-date.interface";
+import { IMyMarkedDate } from "./my-marked-date.interface";
 
 export interface IMyCalendarDay {
     dateObj: IMyDate;
@@ -6,5 +7,5 @@ export interface IMyCalendarDay {
     currDay: boolean;
     dayNbr: number;
     disabled: boolean;
-    mark: boolean;
+    markedDate: IMyMarkedDate;
 }

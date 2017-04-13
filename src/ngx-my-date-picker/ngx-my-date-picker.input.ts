@@ -1,7 +1,7 @@
 import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged } from "./interfaces/index";
+import { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMyMarkedDates, IMyMarkedDate } from "./interfaces/index";
 import { NgxMyDatePicker } from "./ngx-my-date-picker.component";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 
@@ -58,8 +58,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         disableSince: <IMyDate> {year: 0, month: 0, day: 0},
         disableDates: <Array<IMyDate>> [],
         enableDates: <Array<IMyDate>> [],
-        markDates: <Array<IMyDate>> [],
-        markWeekends: <boolean> false,
+        markDates: <Array<IMyMarkedDates>> [],
+        markWeekends: <IMyMarkedDate> {},
         disableDateRanges: <Array<IMyDateRange>> [],
         disableWeekends: <boolean> false,
         alignSelectorRight: <boolean> false,

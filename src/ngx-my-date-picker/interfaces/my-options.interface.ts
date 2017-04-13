@@ -2,6 +2,8 @@ import { IMyDayLabels } from "./my-day-labels.interface";
 import { IMyMonthLabels } from "./my-month-labels.interface";
 import { IMyDate } from "./my-date.interface";
 import { IMyDateRange } from "./my-date-range.interface";
+import { IMyMarkedDates } from "./my-marked-dates.interface";
+import { IMyMarkedDate } from "./my-marked-date.interface";
 
 export interface IMyOptions {
     dayLabels?: IMyDayLabels;
@@ -19,8 +21,8 @@ export interface IMyOptions {
     disableSince?: IMyDate;
     disableDates?: Array<IMyDate>;
     enableDates?: Array<IMyDate>;
-    markDates?: Array<IMyDate>;
-    markWeekends?: boolean;
+    markDates?: Array<IMyMarkedDates>;
+    markWeekends?: IMyMarkedDate;
     disableDateRanges?: Array<IMyDateRange>;
     disableWeekends?: boolean;
     alignSelectorRight?: boolean;

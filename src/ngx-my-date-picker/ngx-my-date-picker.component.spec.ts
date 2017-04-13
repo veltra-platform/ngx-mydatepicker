@@ -1127,7 +1127,7 @@ describe('ngx-mydatepicker', () => {
     it('options - markDates', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            markDates: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}]
+            markDates: [{dates: [{year: 2017, month: 1, day: 14}, {year: 2017, month: 1, day: 15}], color: 'red'}]
         };
 
         comp.parseOptions(opts);
@@ -1154,7 +1154,7 @@ describe('ngx-mydatepicker', () => {
     it('options - markWeekends', () => {
         comp.setDefaultMonth('2017/01');
         let opts: IMyOptions = {
-            markWeekends: true
+            markWeekends: {marked: true, color: 'red'}
         };
 
         comp.parseOptions(opts);
@@ -1167,7 +1167,7 @@ describe('ngx-mydatepicker', () => {
 
         comp.closeCalendar();
 
-        opts.markWeekends = false;
+        opts.markWeekends = {marked: false, color: ''};
 
         comp.parseOptions(opts);
         comp.openCalendar();

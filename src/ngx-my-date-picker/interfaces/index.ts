@@ -11,3 +11,5 @@ export * from "./my-date-model.interface";
 export * from "./my-input-field-changed.interface";
 export * from "./my-weekday.interface";
 export * from "./my-calendar-view-changed.interface";
+export * from "./my-marked-date.interface";
+export * from "./my-marked-dates.interface";

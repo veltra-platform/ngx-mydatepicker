@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged} from '../../src/ngx-my-date-picker/interfaces';
+import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
 
 declare var require:any;
@@ -31,7 +31,7 @@ export class SampleDatePickerNgModel implements OnInit {
             {begin: {year: 2016, month: 10, day: 10}, end: {year: 2016, month: 10, day: 12}}
         ],
         markDates: [],
-        markWeekends: false
+        markWeekends: <IMyMarkedDate>{}
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -92,13 +92,13 @@ export class SampleDatePickerNgModel implements OnInit {
     onMarkToday(checked: boolean): void {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
-        copy.markDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        copy.markDates = checked ? [{dates: [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}], color: '#C30000'}] : [];
         this.myDatePickerOptions = copy;
     }
 
     onMarkWeekends(checked: boolean): void {
         let copy = this.getCopyOfOptions();
-        copy.markWeekends = checked;
+        copy.markWeekends = checked ? {marked: true, color: 'blue'} : {marked: false, color: ''};
         this.myDatePickerOptions = copy;
     }
 
