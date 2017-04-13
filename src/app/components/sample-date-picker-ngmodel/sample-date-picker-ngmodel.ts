@@ -76,7 +76,7 @@ export class SampleDatePickerNgModel implements OnInit {
     onMarkToday(checked: boolean): void {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
-        copy.markDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
+        copy.markDates = checked ? [{dates: [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}], color: 'blue'}] : [];
         this.myDatePickerOptions = copy;
     }
 
