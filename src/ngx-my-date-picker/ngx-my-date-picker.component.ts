@@ -8,18 +8,8 @@ const myDpStyles: string = require("./ngx-my-date-picker.component.css");
 const myDpTpl: string = require("./ngx-my-date-picker.component.html");
 // webpack2_
 
-enum KeyCode {
-    enter = 13,
-    space = 32,
-    leftArrow = 37,
-    rigthArrow = 39
-}
-
-enum MonthId {
-    prev = 1,
-    curr = 2,
-    next = 3
-}
+enum KeyCode {enter = 13, space = 32}
+enum MonthId {prev = 1, curr = 2, next = 3}
 
 @Component({
     selector: "ngx-my-date-picker",
@@ -122,14 +112,9 @@ export class NgxMyDatePicker {
         }
     }
 
-    userMonthInput(event: any): void {
-        if (this.preventUserInput(event)) {
-            return;
-        }
-
+    onUserMonthInput(value: string): void {
         this.invalidMonth = false;
-
-        let m: number = this.utilService.isMonthLabelValid(event.target.value, this.opts.monthLabels);
+        let m: number = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
         if (m !== -1) {
             this.editMonth = false;
             if (m !== this.visibleMonth.monthNbr) {
@@ -142,14 +127,9 @@ export class NgxMyDatePicker {
         }
     }
 
-    userYearInput(event: any): void {
-        if (this.preventUserInput(event)) {
-            return;
-        }
-
+    onUserYearInput(value: string): void {
         this.invalidYear = false;
-
-        let y: number = this.utilService.isYearLabelValid(Number(event.target.value), this.opts.minYear, this.opts.maxYear);
+        let y: number = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
         if (y !== -1) {
             this.editYear = false;
             if (y !== this.visibleMonth.year) {
@@ -160,10 +140,6 @@ export class NgxMyDatePicker {
         else {
             this.invalidYear = true;
         }
-    }
-
-    preventUserInput(event: any): boolean {
-        return event.keyCode === KeyCode.enter || event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.rigthArrow;
     }
 
     isTodayDisabled(): void {

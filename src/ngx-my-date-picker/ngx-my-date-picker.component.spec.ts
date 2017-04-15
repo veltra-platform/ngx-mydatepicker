@@ -1,5 +1,6 @@
 ///<reference path="../../node_modules/@types/jasmine/index.d.ts"/>
 
+import {FormsModule} from "@angular/forms";
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {DebugElement, Component, ViewChild} from '@angular/core';
@@ -67,7 +68,7 @@ describe('ngx-mydatepicker', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [NgxMyDatepickerTestComponent],
-            imports: [NgxMyDatePickerModule]
+            imports: [FormsModule, NgxMyDatePickerModule]
         });
         fixture = TestBed.createComponent(NgxMyDatepickerTestComponent);
         comp = fixture.componentInstance;
@@ -733,6 +734,9 @@ describe('ngx-mydatepicker', () => {
         let monthinput = getElement('.monthinput');
         expect(monthinput).not.toBe(null);
 
+        comp.closeCalendar();
+        comp.openCalendar();
+
         fixture.detectChanges();
         let yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
@@ -762,6 +766,9 @@ describe('ngx-mydatepicker', () => {
         monthinput = getElement('.monthinput');
         expect(monthinput).toBe(null);
 
+        comp.closeCalendar();
+        comp.openCalendar();
+
         fixture.detectChanges();
         yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
@@ -771,6 +778,7 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         yearinput = getElement('.yearinput');
         expect(yearinput).toBe(null);
+
     });
 
     it('options - disableHeaderButtons', () => {

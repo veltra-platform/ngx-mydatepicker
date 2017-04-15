@@ -6,7 +6,7 @@
                     <div style="float:left">
                         <div class="headerbtncell"><button type="button" [attr.aria-label]="opts.ariaLabelPrevMonth" class="headerbtn ngxmdpicon icon-ngxmydpleft" (click)="prevMonth()" [disabled]="prevMonthDisabled" [ngClass]="{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}"></button></div>
                         <div class="headermonthtxt">
-                            <input type="text" *ngIf="editMonth" class="monthinput" maxlength="10" [ngxfocus]="2" [value]="visibleMonth.monthTxt" (keyup)="userMonthInput($event)" (click)="$event.stopPropagation()" [ngClass]="{'invalidmonth': invalidMonth}">
+                            <input type="text" *ngIf="editMonth" class="monthinput" maxlength="10" [ngxfocus]="2" [value]="visibleMonth.monthTxt" [ngModel]="visibleMonth.monthTxt" (ngModelChange)="onUserMonthInput($event)" (click)="$event.stopPropagation()" [ngClass]="{'invalidmonth': invalidMonth}">
                             <button class="headerlabelbtn" [ngClass]="{'monthlabel': opts.editableMonthAndYear, 'headerlabelbtnnotedit': !opts.editableMonthAndYear}" type="button" *ngIf="!editMonth" (click)="editMonthClicked($event)" tabindex="{{opts.editableMonthAndYear?'0':'-1'}}">{{visibleMonth.monthTxt}}</button>
                         </div>
                         <div class="headerbtncell"><button type="button" [attr.aria-label]="opts.ariaLabelNextMonth" class="headerbtn ngxmdpicon icon-ngxmydpright" (click)="nextMonth()" [disabled]="nextMonthDisabled" [ngClass]="{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}"></button></div>
@@ -22,7 +22,7 @@
                     <div style="float:right">
                         <div class="headerbtncell"><button type="button" [attr.aria-label]="opts.ariaLabelPrevYear" class="headerbtn ngxmdpicon icon-ngxmydpleft" (click)="prevYear()" [disabled]="prevYearDisabled" [ngClass]="{'headerbtnenabled': !prevYearDisabled, 'headerbtndisabled': prevYearDisabled}"></button></div>
                         <div class="headeryeartxt">
-                            <input type="text" *ngIf="editYear" class="yearinput" maxlength="4" [ngxfocus]="2" [value]="visibleMonth.year" (keyup)="userYearInput($event)" (click)="$event.stopPropagation()" [ngClass]="{'invalidyear': invalidYear}">
+                            <input type="text" *ngIf="editYear" class="yearinput" maxlength="4" [ngxfocus]="2" [value]="visibleMonth.year" [ngModel]="visibleMonth.year" (ngModelChange)="onUserYearInput($event)" (click)="$event.stopPropagation()" [ngClass]="{'invalidyear': invalidYear}">
                             <button class="headerlabelbtn" [ngClass]="{'yearlabel': opts.editableMonthAndYear, 'headerlabelbtnnotedit': !opts.editableMonthAndYear}" type="button" *ngIf="!editYear" (click)="editYearClicked($event)" tabindex="{{opts.editableMonthAndYear?'0':'-1'}}">{{visibleMonth.year}}</button>
                         </div>
                         <div class="headerbtncell"><button type="button" [attr.aria-label]="opts.ariaLabelNextYear" class="headerbtn ngxmdpicon icon-ngxmydpright" (click)="nextYear()" [disabled]="nextYearDisabled" [ngClass]="{'headerbtnenabled': !nextYearDisabled, 'headerbtndisabled': nextYearDisabled}"></button></div>
