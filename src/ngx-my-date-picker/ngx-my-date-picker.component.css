@@ -98,10 +98,7 @@
 .ngxmdp .headertodaybtndisabled,
 .ngxmdp .headerbtndisabled {
     cursor: not-allowed;
-}
-
-.ngxmdp .headerbtndisabled {
-    opacity: 0.4;
+    opacity: 0.65;
 }
 
 .ngxmdp .headertodaybtn {
