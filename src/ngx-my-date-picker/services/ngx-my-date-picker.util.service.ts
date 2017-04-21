@@ -14,7 +14,7 @@ export class UtilService {
         let isMonthStr: boolean = dateFormat.indexOf("mmm") !== -1;
         let returnDate: IMyDate = {day: 0, month: 0, year: 0};
 
-        if (dateStr.length !== dateFormat.length) {
+        if (dateStr.length !== dateFormat.length && !isMonthStr) {
             return returnDate;
         }
 
@@ -25,9 +25,9 @@ export class UtilService {
             return returnDate;
         }
 
-        let day: number = this.parseDatePartNumber(dateFormat, dateStr, "dd");
         let month: number = isMonthStr ? this.parseDatePartMonthName(dateFormat, dateStr, "mmm", monthLabels) : this.parseDatePartNumber(dateFormat, dateStr, "mm");
-        let year: number = this.parseDatePartNumber(dateFormat, dateStr, "yyyy");
+        let day: number = this.parseDatePartNumber(dateFormat, dateStr, "dd", monthLabels[month]);
+        let year: number = this.parseDatePartNumber(dateFormat, dateStr, "yyyy", monthLabels[month]);
 
         if (day !== -1 && month !== -1 && year !== -1) {
             if (year < minYear || year > maxYear || month < 1 || month > 12) {
@@ -56,7 +56,7 @@ export class UtilService {
 
     isMonthLabelValid(monthLabel: string, monthLabels: IMyMonthLabels): number {
         for (let key = 1; key <= 12; key++) {
-            if (monthLabel.toLowerCase() === monthLabels[key].toLowerCase()) {
+            if (monthLabels[key].toLowerCase().indexOf(monthLabel.toLowerCase()) !== -1) {
                 return key;
             }
         }
@@ -70,9 +70,13 @@ export class UtilService {
         return -1;
     }
 
-    parseDatePartNumber(dateFormat: string, dateString: string, datePart: string): number {
+    parseDatePartNumber(dateFormat: string, dateString: string, datePart: string, monthLabel?: string): number {
         let pos: number = dateFormat.indexOf(datePart);
         if (pos !== -1) {
+            var monthStrPos = dateFormat.indexOf('mmm');
+            if (monthStrPos !== -1 && monthLabel) {
+                pos += (monthLabel.length - 'mmm'.length);
+            }
             let value: string = dateString.substring(pos, pos + datePart.length);
             if (!/^\d+$/.test(value)) {
                 return -1;
