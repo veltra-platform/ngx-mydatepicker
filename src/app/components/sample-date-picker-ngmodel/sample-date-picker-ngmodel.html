@@ -1,3 +1,22 @@
+<style>
+    .border {
+        padding: 4px;
+        border-radius: 4px;
+        float: right;
+        width: 100%;
+    }
+    .okDate {
+        color: #3c764d;
+        background-color: #dff0d6;
+        border: 1px solid #d6e9c2;
+    }
+    .invalidDate {
+        color: #a94444;
+        background-color: #f1dede;
+        border: 1px solid #ebccd2;
+    }
+</style>
+
 <div>
     <ul>
         <li>
@@ -60,7 +79,7 @@
                         <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
                                 [(ngModel)]="model" [options]="myDatePickerOptions" [defaultMonth]="defMonth" #dp="ngx-mydatepicker"
                                 (dateChanged)="onDateChanged($event)" (calendarViewChanged)="onCalendarViewChanged($event)"
-                                (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)"/>
+                                (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)" autocomplete="off"/>
 
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>
@@ -71,8 +90,9 @@
                 </form>
             </td>
             <td style="vertical-align: top;padding-left: 20px">
-                <div style="padding:4px;border-radius:4px;float:right" [ngStyle]="{border: border}">
-                    {{selectedTextNormal}}
+                <div *ngIf="inputText !== ''" class="border" [ngClass]="{'okDate': validDate, 'invalidDate': !validDate}">
+                    <span *ngIf="validDate">{{selectedTextNormal}}</span>
+                    <span *ngIf="!validDate">Invalid date</span>
                 </div>
             </td>
     </table>

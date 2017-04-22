@@ -29,10 +29,10 @@ export class SampleDatePickerNgModel implements OnInit {
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
 
     private selectedTextNormal: string = '';
-    private border: string = 'none';
+    private validDate: boolean = false;
+    private inputText: string = "";
 
-    //private model: string = '';   // not initial date set
-    private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
+    private model: string = '';   // not initial date set
 
     private defMonth: string = '';
 
@@ -76,7 +76,7 @@ export class SampleDatePickerNgModel implements OnInit {
     onMarkToday(checked: boolean): void {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
-        copy.markDates = checked ? [{dates: [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}], color: 'blue'}] : [];
+        copy.markDates = checked ? [{dates: [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}], color: 'green'}] : [];
         this.myDatePickerOptions = copy;
     }
 
@@ -99,16 +99,18 @@ export class SampleDatePickerNgModel implements OnInit {
         console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
         if(event.formatted !== '') {
             this.selectedTextNormal = 'Formatted: ' + event.formatted + ' - epoc timestamp: ' + event.epoc;
-            this.border = '1px solid #CCC';
+            this.validDate = true;
+            this.inputText = event.formatted;
         }
         else {
             this.selectedTextNormal = '';
-            this.border = 'none';
         }
     }
 
     onInputFieldChanged(event: IMyInputFieldChanged): void {
         console.log('onInputFieldChanged(): Value: ', event.value, ' - dateFormat: ', event.dateFormat, ' - valid: ', event.valid);
+        this.validDate = event.valid;
+        this.inputText = event.value;
     }
 
     onCalendarToggle(event: number): void {
