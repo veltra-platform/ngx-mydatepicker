@@ -1,6 +1,6 @@
 {
   "name": "ngx-mydatepicker",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Angular date picker",
   "keywords": [
     "Angular2",
@@ -19,7 +19,7 @@
     "test": "karma start config/karma.conf.js",
     "tslint": "gulp tslint",
     "ngc": "ngc -p tsconfig.publish.json",
-    "bundle": "rollup -c rollup.config.js && uglifyjs npmdist/bundles/ngx-mydatepicker.umd.js -c --screw-ie8 -o npmdist/bundles/ngx-mydatepicker.umd.min.js"
+    "bundle": "rollup -c rollup.config.js && uglifyjs npmdist/bundles/ngx-mydatepicker.umd.js --compress --mangle --screw-ie8 -o npmdist/bundles/ngx-mydatepicker.umd.min.js"
   },
   "main": "bundles/ngx-mydatepicker.umd.js",
   "typings": "index.d.ts",

@@ -11,17 +11,9 @@ const NGX_DP_VALUE_ACCESSOR = {
     multi: true
 };
 
-enum CalToggle {
-    Open = 1,
-    CloseByDateSel = 2,
-    CloseByCalBtn = 3,
-    CloseByOutClick = 4
-}
-
-enum Year {
-    min = 1000,
-    max = 9999
-}
+enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4}
+enum Year {min = 1000, max = 9999}
+enum KeyCode {esc = 27, leftArrow = 37, rightArrow = 39}
 
 @Directive({
     selector: "[ngx-mydatepicker]",
@@ -79,7 +71,10 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     constructor(private utilService: UtilService, private vcRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private renderer: Renderer, private elem: ElementRef) {}
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
-        if (evt.keyCode === 27) {
+        if (evt.keyCode === KeyCode.leftArrow || evt.keyCode === KeyCode.rightArrow) {
+            return;
+        }
+        else if (evt.keyCode === KeyCode.esc) {
             this.closeSelector(CalToggle.CloseByCalBtn);
         }
         else {

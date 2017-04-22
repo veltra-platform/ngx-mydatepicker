@@ -45,7 +45,7 @@ To install this component to an external project, follow the procedure:
             map: {
                 // Other components are here...
 
-                'ngx-mydatepicker': 'npm:ngx-mydatepicker/bundles/ngx-mydatepicker.umd.js'
+                'ngx-mydatepicker': 'npm:ngx-mydatepicker/bundles/ngx-mydatepicker.umd.min.js'
             },
             packages: {
             }
