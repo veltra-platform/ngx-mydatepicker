@@ -19,7 +19,7 @@ export class UtilService {
         let returnDate: IMyDate = {day: 0, month: 0, year: 0};
         let daysInMonth: Array<number> = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         let isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1;
-        let separators: string = dateFormat.replace(/[dmy]/g, "");
+        let separators: Array<string> = dateFormat.match(/[^(dmy)]{1,}/g);
 
         let month: number = isMonthStr ? this.parseDatePartMonthName(dateFormat, dateStr, MMM, monthLabels) : this.parseDatePartNumber(dateFormat, dateStr, MM);
         if (isMonthStr && monthLabels[month]) {
