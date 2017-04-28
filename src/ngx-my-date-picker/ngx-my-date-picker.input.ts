@@ -1,4 +1,4 @@
-import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
+import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMyMarkedDates, IMyMarkedDate } from "./interfaces/index";
@@ -68,7 +68,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
 
-    constructor(private utilService: UtilService, private vcRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private renderer: Renderer, private elem: ElementRef) {}
+    constructor(private utilService: UtilService, private vcRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private renderer: Renderer, private cdr: ChangeDetectorRef, private elem: ElementRef) {}
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
         if (evt.keyCode === KeyCode.leftArrow || evt.keyCode === KeyCode.rightArrow) {
@@ -153,6 +153,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     public openCalendar() {
         this.preventClose = true;
+        this.cdr.detectChanges();
         if (this.cRef === null) {
             let cf = this.cfr.resolveComponentFactory(NgxMyDatePicker);
             this.cRef = this.vcRef.createComponent(cf);
@@ -173,7 +174,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
         setTimeout(() => {
             this.preventClose = false;
-        }, 30);
+        }, 50);
     }
 
     public closeCalendar() {
