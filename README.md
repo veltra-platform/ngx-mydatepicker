@@ -337,6 +337,7 @@ Clears the date from the input box and model. For example:
       * 2 = calendar closed by date select
       * 3 = calendar closed by calendar button
       * 4 = calendar closed by outside click (document click)
+      * 5 = calendar closed by ESC key
 
   * Example of the calendar toggle callback:
   ```js

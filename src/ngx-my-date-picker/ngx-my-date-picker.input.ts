@@ -11,7 +11,7 @@ const NGX_DP_VALUE_ACCESSOR = {
     multi: true
 };
 
-enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4}
+enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4, CloseByEsc = 5}
 enum Year {min = 1000, max = 9999}
 enum KeyCode {esc = 27, leftArrow = 37, rightArrow = 39}
 
@@ -75,7 +75,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             return;
         }
         else if (evt.keyCode === KeyCode.esc) {
-            this.closeSelector(CalToggle.CloseByCalBtn);
+            this.closeSelector(CalToggle.CloseByEsc);
         }
         else {
             let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
@@ -167,9 +167,14 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                     this.emitDateChanged(dm);
                     this.updateModel(dm);
                     this.closeSelector(CalToggle.CloseByDateSel);
-            },  (cvc: IMyCalendarViewChanged) => {
+                },
+                (cvc: IMyCalendarViewChanged) => {
                     this.emitCalendarChanged(cvc);
-            });
+                },
+                () => {
+                    this.closeSelector(CalToggle.CloseByEsc);
+                }
+            );
             this.emitCalendarToggle(CalToggle.Open);
         }
         setTimeout(() => {

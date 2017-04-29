@@ -8,7 +8,7 @@ const myDpStyles: string = require("./ngx-my-date-picker.component.css");
 const myDpTpl: string = require("./ngx-my-date-picker.component.html");
 // webpack2_
 
-enum KeyCode {enter = 13, space = 32}
+enum KeyCode {enter = 13, esc = 27, space = 32}
 enum MonthId {prev = 1, curr = 2, next = 3}
 
 @Component({
@@ -37,6 +37,7 @@ export class NgxMyDatePicker {
 
     dateChanged: Function;
     calendarViewChanged: Function;
+    closedByEsc: Function;
     inputWidth: number = 0;
     inputHeight: number = 0;
     selectorWidth: number = 0;
@@ -58,7 +59,7 @@ export class NgxMyDatePicker {
         });
     }
 
-    initialize(opts: IMyOptions, defaultMonth: string, inputValue: string, inputWidth: number, inputHeight: number, dc: Function, cvc: Function): void {
+    initialize(opts: IMyOptions, defaultMonth: string, inputValue: string, inputWidth: number, inputHeight: number, dc: Function, cvc: Function, cbe: Function): void {
         this.opts = opts;
         this.weekDays.length = 0;
 
@@ -84,6 +85,7 @@ export class NgxMyDatePicker {
 
         this.dateChanged = dc;
         this.calendarViewChanged = cvc;
+        this.closedByEsc = cbe;
         this.inputWidth = inputWidth;
         this.inputHeight = inputHeight;
         this.selectorWidth = this.elem.nativeElement.children[0].children[0].offsetWidth;
@@ -98,14 +100,14 @@ export class NgxMyDatePicker {
         this.invalidYear = false;
     }
 
-    editMonthClicked(event: any): void {
+    onEditMonthClicked(event: any): void {
         event.stopPropagation();
         if (this.opts.editableMonthAndYear) {
             this.editMonth = true;
         }
     }
 
-    editYearClicked(event: any): void {
+    onEditYearClicked(event: any): void {
         event.stopPropagation();
         if (this.opts.editableMonthAndYear) {
             this.editYear = true;
@@ -169,7 +171,7 @@ export class NgxMyDatePicker {
         this.generateCalendar(m, y);
     }
 
-    prevMonth(): void {
+    onPrevMonth(): void {
         // Previous month from calendar
         let d: Date = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() - 1);
@@ -181,7 +183,7 @@ export class NgxMyDatePicker {
         this.generateCalendar(m, y);
     }
 
-    nextMonth(): void {
+    onNextMonth(): void {
         // Next month from calendar
         let d: Date = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() + 1);
@@ -193,29 +195,49 @@ export class NgxMyDatePicker {
         this.generateCalendar(m, y);
     }
 
-    prevYear(): void {
+    onPrevYear(): void {
         // Previous year from calendar
         this.visibleMonth.year--;
         this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
     }
 
-    nextYear(): void {
+    onNextYear(): void {
         // Next year from calendar
         this.visibleMonth.year++;
         this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
     }
 
-    todayClicked(): void {
+    onCloseSelector(event: any): void {
+        if (event.keyCode === KeyCode.esc) {
+            this.closedByEsc();
+        }
+    }
+
+    onCloseEditMonth(event: any): void {
+        if (event.keyCode === KeyCode.esc) {
+            event.stopPropagation();
+            this.editMonth = false;
+        }
+    }
+
+    onCloseEditYear(event: any): void {
+        if (event.keyCode === KeyCode.esc) {
+            event.stopPropagation();
+            this.editYear = false;
+        }
+    }
+
+    onTodayClicked(): void {
         // Today button clicked
         let today: IMyDate = this.getToday();
         this.selectDate(today);
     }
 
-    cellClicked(cell: any): void {
+    onCellClicked(cell: any): void {
         // Cell clicked on the calendar
         if (cell.cmo === this.prevMonthId) {
             // Previous month of day
-            this.prevMonth();
+            this.onPrevMonth();
         }
         else if (cell.cmo === this.currMonthId) {
             // Current month of day
@@ -223,16 +245,16 @@ export class NgxMyDatePicker {
         }
         else if (cell.cmo === this.nextMonthId) {
             // Next month of day
-            this.nextMonth();
+            this.onNextMonth();
         }
         this.resetMonthYearEdit();
     }
 
-    cellKeyDown(event: any, cell: any) {
+    onCellKeyDown(event: any, cell: any) {
         // Cell keyboard handling
         if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
             event.preventDefault();
-            this.cellClicked(cell);
+            this.onCellClicked(cell);
         }
     }
 
