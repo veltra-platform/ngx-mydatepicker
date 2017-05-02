@@ -45,8 +45,14 @@
         </li>
         <li>
             <label>
-                <span>Editable month and year:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onEditableMonthAndYear($event.currentTarget.checked)" [checked]="true">
+                <span>Month selector:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onMonthSelector($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Year selector:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onYearSelector($event.currentTarget.checked)" [checked]="true">
             </label>
         </li>
         <li>

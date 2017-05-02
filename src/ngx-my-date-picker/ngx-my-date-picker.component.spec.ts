@@ -314,64 +314,6 @@ describe('ngx-mydatepicker', () => {
         expect(yearlabel.textContent).toBe('2017');
     });
 
-    it('edit month', () => {
-        comp.setDefaultMonth('2016/12');
-
-        comp.openCalendar();
-
-        fixture.detectChanges();
-        let monthinput = getElement('.monthinput');
-        expect(monthinput).toBe(null);
-
-        fixture.detectChanges();
-        let monthlabel = getElement(MONTHLABEL);
-        expect(monthlabel).not.toBe(null);
-
-        monthlabel.click();
-
-        fixture.detectChanges();
-        monthinput = getElement('.monthinput');
-        expect(monthinput).not.toBe(null);
-
-        fixture.detectChanges();
-        let headerbtncell = getElement('.headerbtncell');
-        expect(headerbtncell).not.toBe(null);
-        headerbtncell.click();
-
-        fixture.detectChanges();
-        monthinput = getElement('.monthinput');
-        expect(monthinput).toBe(null);
-    });
-
-    it('edit year', () => {
-        comp.setDefaultMonth('2016/12');
-
-        comp.openCalendar();
-
-        fixture.detectChanges();
-        let yearinput = getElement('.yearinput');
-        expect(yearinput).toBe(null);
-
-        fixture.detectChanges();
-        let yearlabel = getElement(YEARLABEL);
-        expect(yearlabel).not.toBe(null);
-
-        yearlabel.click();
-
-        fixture.detectChanges();
-        yearinput = getElement('.yearinput');
-        expect(yearinput).not.toBe(null);
-
-        fixture.detectChanges();
-        let headerbtncell = getElement('.headerbtncell');
-        expect(headerbtncell).not.toBe(null);
-        headerbtncell.click();
-
-        fixture.detectChanges();
-        yearinput = getElement('.yearinput');
-        expect(yearinput).toBe(null);
-    });
-
     it('edit date in input box', () => {
         let opts: IMyOptions = {
             dateFormat: 'dd mmm yyyy'
@@ -713,11 +655,11 @@ describe('ngx-mydatepicker', () => {
         expect(currday).toBe(null);
     });
 
-    it('options - editableMonthAndYear', () => {
-        comp.setDefaultMonth('2016/12');
+    it('options - monthSelector', () => {
+        comp.setDefaultMonth('2016/05');
 
         let opts: IMyOptions = {
-            editableMonthAndYear: true
+            monthSelector: true
         };
 
         comp.parseOptions(opts);
@@ -725,60 +667,77 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        let monthlabel = getElement(MONTHLABEL);
-        expect(monthlabel).not.toBe(null);
-
-        monthlabel.click();
-
-        fixture.detectChanges();
-        let monthinput = getElement('.monthinput');
-        expect(monthinput).not.toBe(null);
-
-        comp.closeCalendar();
-        comp.openCalendar();
+        let montlabel = getElement('.headermonthtxt .headerlabelbtn');
+        expect(montlabel).not.toBe(null);
+        montlabel.click();
 
         fixture.detectChanges();
-        let yearlabel = getElement(YEARLABEL);
-        expect(yearlabel).not.toBe(null);
-
-        yearlabel.click();
+        let monthtable = getElement('.monthtable');
+        expect(monthtable).not.toBe(null);
 
         fixture.detectChanges();
-        let yearinput = getElement('.yearinput');
-        expect(yearinput).not.toBe(null);
+        let monthcell = getElements('.monthcell');
+        expect(monthcell).not.toBe(null);
+        expect(monthcell.length).toBe(12);
 
-        comp.closeCalendar();
+        fixture.detectChanges();
+        expect(monthcell[0].textContent.trim()).toBe('Jan');
 
+        fixture.detectChanges();
+        expect(monthcell[11].textContent.trim()).toBe('Dec');
 
-        opts.editableMonthAndYear = false;
+        fixture.detectChanges();
+        let selectedmonth = getElement('.selectedmonth');
+        expect(selectedmonth).not.toBe(null);
+        expect(selectedmonth.textContent.trim()).toBe('May');
+        selectedmonth.click();
+
+        fixture.detectChanges();
+        monthtable = getElement('.monthtable');
+        expect(monthtable).toBe(null);
+    });
+
+    it('options - yearSelector', () => {
+        comp.setDefaultMonth('2016/05');
+
+        let opts: IMyOptions = {
+            yearSelector: true
+        };
 
         comp.parseOptions(opts);
 
         comp.openCalendar();
 
         fixture.detectChanges();
-        monthlabel = getElement(MONTHLABEL);
-        expect(monthlabel).not.toBe(null);
-
-        monthlabel.click();
-
-        fixture.detectChanges();
-        monthinput = getElement('.monthinput');
-        expect(monthinput).toBe(null);
-
-        comp.closeCalendar();
-        comp.openCalendar();
-
-        fixture.detectChanges();
-        yearlabel = getElement(YEARLABEL);
+        let yearlabel = getElement('.headeryeartxt .headerlabelbtn');
         expect(yearlabel).not.toBe(null);
-
         yearlabel.click();
 
         fixture.detectChanges();
-        yearinput = getElement('.yearinput');
-        expect(yearinput).toBe(null);
+        let yeartable = getElement('.yeartable');
+        expect(yeartable).not.toBe(null);
 
+        fixture.detectChanges();
+        let yearcell = getElements('.yearcell');
+        expect(yearcell).not.toBe(null);
+        expect(yearcell.length).toBe(25);
+
+        fixture.detectChanges();
+        expect(yearcell[0].textContent.trim()).toBe('2016');
+
+        fixture.detectChanges();
+        expect(yearcell[24].textContent.trim()).toBe('2040');
+
+        fixture.detectChanges();
+        let selectedyear = getElement('.selectedyear');
+        expect(selectedyear).not.toBe(null);
+        expect(selectedyear.textContent.trim()).toBe('2016');
+
+        selectedyear.click();
+
+        fixture.detectChanges();
+        yeartable = getElement('.yeartable');
+        expect(yeartable).toBe(null);
     });
 
     it('options - disableHeaderButtons', () => {

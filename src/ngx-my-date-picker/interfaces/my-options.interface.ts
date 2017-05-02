@@ -14,7 +14,8 @@ export interface IMyOptions {
     firstDayOfWeek?: string;
     sunHighlight?: boolean;
     markCurrentDay?: boolean;
-    editableMonthAndYear?: boolean;
+    monthSelector?: boolean;
+    yearSelector?: boolean;
     disableHeaderButtons?: boolean;
     showWeekNumbers?: boolean;
     disableUntil?: IMyDate;

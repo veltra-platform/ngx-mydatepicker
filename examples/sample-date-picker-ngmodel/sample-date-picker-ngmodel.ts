@@ -22,7 +22,8 @@ export class SampleDatePickerNgModel implements OnInit {
         minYear: 1900,
         maxYear: 2200,
         showSelectorArrow: true,
-        editableMonthAndYear: true,
+        monthSelector: true,
+        yearSelector: true,
         disableDates:[],
         disableHeaderButtons: true,
         showWeekNumbers: false,
@@ -77,9 +78,15 @@ export class SampleDatePickerNgModel implements OnInit {
         this.myDatePickerOptions = copy;
     }
 
-    onEditableMonthAndYear(checked: boolean): void {
+    onMonthSelector(checked: boolean) {
         let copy = this.getCopyOfOptions();
-        copy.editableMonthAndYear = checked;
+        copy.monthSelector = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onYearSelector(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.yearSelector = checked;
         this.myDatePickerOptions = copy;
     }
 

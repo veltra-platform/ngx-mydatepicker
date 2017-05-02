@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewEncapsulation, Renderer } from "@angular/core";
-import { IMyDate, IMyMonth, IMyCalendarDay, IMyWeek, IMyOptions } from "./interfaces/index";
+import { Component, ElementRef, ViewEncapsulation, ViewChild, Renderer, ChangeDetectorRef } from "@angular/core";
+import { IMyDate, IMyMonth, IMyCalendarDay, IMyCalendarMonth, IMyCalendarYear, IMyWeek, IMyOptions } from "./interfaces/index";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 
 // webpack1_
@@ -20,20 +20,21 @@ enum MonthId {prev = 1, curr = 2, next = 3}
 })
 
 export class NgxMyDatePicker {
+    @ViewChild("selectorEl") selectorEl: any;
     opts: IMyOptions;
     visibleMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
     selectedMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
     selectedDate: IMyDate = {year: 0, month: 0, day: 0};
     weekDays: Array<string> = [];
     dates: Array<IMyWeek> = [];
+    months: Array<Array<IMyCalendarMonth>> = [];
+    years: Array<Array<IMyCalendarYear>> = [];
     disableTodayBtn: boolean = false;
     dayIdx: number = 0;
     weekDayOpts: Array<string> = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
-    editMonth: boolean = false;
-    invalidMonth: boolean = false;
-    editYear: boolean = false;
-    invalidYear: boolean = false;
+    selectMonth: boolean = false;
+    selectYear: boolean = false;
 
     dateChanged: Function;
     calendarViewChanged: Function;
@@ -46,15 +47,17 @@ export class NgxMyDatePicker {
     nextMonthDisabled: boolean = false;
     prevYearDisabled: boolean = false;
     nextYearDisabled: boolean = false;
+    prevYearsDisabled: boolean = false;
+    nextYearsDisabled: boolean = false;
 
     prevMonthId: number = MonthId.prev;
     currMonthId: number = MonthId.curr;
     nextMonthId: number = MonthId.next;
 
-    constructor(public elem: ElementRef, private renderer: Renderer, private utilService: UtilService) {
+    constructor(public elem: ElementRef, private renderer: Renderer, private cdr: ChangeDetectorRef, private utilService: UtilService) {
         renderer.listen(elem.nativeElement, "click", (evt: MouseEvent) => {
-            if (this.opts.editableMonthAndYear && evt.target) {
-                this.resetMonthYearEdit();
+            if ((this.opts.monthSelector || this.opts.yearSelector) && evt.target) {
+                this.resetMonthYearSelect();
             }
         });
     }
@@ -93,54 +96,93 @@ export class NgxMyDatePicker {
         this.setVisibleMonth();
     }
 
-    resetMonthYearEdit(): void {
-        this.editMonth = false;
-        this.editYear = false;
-        this.invalidMonth = false;
-        this.invalidYear = false;
+    resetMonthYearSelect(): void {
+        this.selectMonth = false;
+        this.selectYear = false;
     }
 
-    onEditMonthClicked(event: any): void {
+    onSelectMonthClicked(event: any): void {
         event.stopPropagation();
-        if (this.opts.editableMonthAndYear) {
-            this.editMonth = true;
-        }
-    }
-
-    onEditYearClicked(event: any): void {
-        event.stopPropagation();
-        if (this.opts.editableMonthAndYear) {
-            this.editYear = true;
-        }
-    }
-
-    onUserMonthInput(value: string): void {
-        this.invalidMonth = false;
-        let m: number = this.utilService.isMonthLabelValid(value, this.opts.monthLabels);
-        if (m !== -1) {
-            this.editMonth = false;
-            if (m !== this.visibleMonth.monthNbr) {
-                this.visibleMonth = {monthTxt: this.opts.monthLabels[m], monthNbr: m, year: this.visibleMonth.year};
-                this.generateCalendar(m, this.visibleMonth.year);
+        this.selectMonth = !this.selectMonth;
+        this.selectYear = false;
+        this.cdr.detectChanges();
+        if (this.selectMonth) {
+            this.months.length = 0;
+            for (let i = 1; i <= 12; i += 3) {
+                let row: Array<IMyCalendarMonth> = [];
+                for (let j = i; j < i + 3; j++) {
+                    let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: this.visibleMonth.year, month: j, day: this.daysInMonth(j, this.visibleMonth.year)}, this.opts.disableUntil)
+                        || this.utilService.isMonthDisabledByDisableSince({year: this.visibleMonth.year, month: j, day: 1}, this.opts.disableSince);
+                    row.push({nbr: j, name: this.opts.monthLabels[j], selected: j === this.visibleMonth.monthNbr, disabled: disabled});
+                }
+                this.months.push(row);
             }
         }
-        else {
-            this.invalidMonth = true;
+    }
+
+    onMonthCellClicked(cell: IMyCalendarMonth): void {
+        let mc: boolean = cell.nbr !== this.visibleMonth.monthNbr;
+        this.visibleMonth = {monthTxt: this.opts.monthLabels[cell.nbr], monthNbr: cell.nbr, year: this.visibleMonth.year};
+        this.generateCalendar(cell.nbr, this.visibleMonth.year, mc);
+        this.selectMonth = false;
+        this.selectorEl.nativeElement.focus();
+    }
+
+    onMonthCellKeyDown(event: any, cell: IMyCalendarMonth) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+            event.preventDefault();
+            this.onMonthCellClicked(cell);
         }
     }
 
-    onUserYearInput(value: string): void {
-        this.invalidYear = false;
-        let y: number = this.utilService.isYearLabelValid(Number(value), this.opts.minYear, this.opts.maxYear);
-        if (y !== -1) {
-            this.editYear = false;
-            if (y !== this.visibleMonth.year) {
-                this.visibleMonth = {monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: y};
-                this.generateCalendar(this.visibleMonth.monthNbr, y);
-            }
+    onSelectYearClicked(event: any): void {
+        event.stopPropagation();
+        this.selectYear = !this.selectYear;
+        this.selectMonth = false;
+        this.cdr.detectChanges();
+        if (this.selectYear) {
+            this.generateYears(this.visibleMonth.year);
         }
-        else {
-            this.invalidYear = true;
+    }
+
+    onYearCellClicked(cell: IMyCalendarYear): void {
+        let yc: boolean = cell.year !== this.visibleMonth.year;
+        this.visibleMonth = {monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: cell.year};
+        this.generateCalendar(this.visibleMonth.monthNbr, cell.year, yc);
+        this.selectYear = false;
+        this.selectorEl.nativeElement.focus();
+    }
+
+    onPrevYears(event: any, year: number): void {
+        event.stopPropagation();
+        this.generateYears(year - 25);
+    }
+
+    onNextYears(event: any, year: number): void {
+        event.stopPropagation();
+        this.generateYears(year + 25);
+    }
+
+    generateYears(year: number): void {
+        this.years.length = 0;
+        for (let i = year; i <= 20 + year; i += 5) {
+            let row: Array<IMyCalendarYear> = [];
+            for (let j = i; j < i + 5; j++) {
+                let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: j, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, j)}, this.opts.disableUntil)
+                    || this.utilService.isMonthDisabledByDisableSince({year: j, month: this.visibleMonth.monthNbr, day: 1}, this.opts.disableSince);
+                let minMax: boolean = j < this.opts.minYear || j > this.opts.maxYear;
+                row.push({year: j, selected: j === this.visibleMonth.year, disabled: disabled || minMax});
+            }
+            this.years.push(row);
+        }
+        this.prevYearsDisabled = this.years[0][0].year <= this.opts.minYear || this.utilService.isMonthDisabledByDisableUntil({year: this.years[0][0].year - 1, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, this.years[0][0].year - 1)}, this.opts.disableUntil);
+        this.nextYearsDisabled = this.years[4][4].year >= this.opts.maxYear || this.utilService.isMonthDisabledByDisableSince({year: this.years[4][4].year + 1, month: this.visibleMonth.monthNbr, day: 1}, this.opts.disableSince);
+    }
+
+    onYearCellKeyDown(event: any, cell: IMyCalendarYear) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+            event.preventDefault();
+            this.onYearCellClicked(cell);
         }
     }
 
@@ -168,7 +210,7 @@ export class NgxMyDatePicker {
         this.visibleMonth = {monthTxt: this.opts.monthLabels[m], monthNbr: m, year: y};
 
         // Create current month
-        this.generateCalendar(m, y);
+        this.generateCalendar(m, y, true);
     }
 
     onPrevMonth(): void {
@@ -180,7 +222,7 @@ export class NgxMyDatePicker {
         let m: number = d.getMonth() + 1;
 
         this.visibleMonth = {monthTxt: this.opts.monthLabels[m], monthNbr: m, year: y};
-        this.generateCalendar(m, y);
+        this.generateCalendar(m, y, true);
     }
 
     onNextMonth(): void {
@@ -192,38 +234,24 @@ export class NgxMyDatePicker {
         let m: number = d.getMonth() + 1;
 
         this.visibleMonth = {monthTxt: this.opts.monthLabels[m], monthNbr: m, year: y};
-        this.generateCalendar(m, y);
+        this.generateCalendar(m, y, true);
     }
 
     onPrevYear(): void {
         // Previous year from calendar
         this.visibleMonth.year--;
-        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
+        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
     }
 
     onNextYear(): void {
         // Next year from calendar
         this.visibleMonth.year++;
-        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year);
+        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
     }
 
     onCloseSelector(event: any): void {
         if (event.keyCode === KeyCode.esc) {
             this.closedByEsc();
-        }
-    }
-
-    onCloseEditMonth(event: any): void {
-        if (event.keyCode === KeyCode.esc) {
-            event.stopPropagation();
-            this.editMonth = false;
-        }
-    }
-
-    onCloseEditYear(event: any): void {
-        if (event.keyCode === KeyCode.esc) {
-            event.stopPropagation();
-            this.editYear = false;
         }
     }
 
@@ -247,7 +275,7 @@ export class NgxMyDatePicker {
             // Next month of day
             this.onNextMonth();
         }
-        this.resetMonthYearEdit();
+        this.resetMonthYearSelect();
     }
 
     onCellKeyDown(event: any, cell: any) {
@@ -316,7 +344,7 @@ export class NgxMyDatePicker {
         return this.dayIdx > 0 ? 7 - this.dayIdx : 0;
     }
 
-    generateCalendar(m: number, y: number): void {
+    generateCalendar(m: number, y: number, notifyChange: boolean): void {
         this.dates.length = 0;
         let today: IMyDate = this.getToday();
         let monthStart: number = this.monthStartIdx(y, m);
@@ -364,8 +392,10 @@ export class NgxMyDatePicker {
 
         this.setHeaderBtnDisabledState(m, y);
 
-        // Notify parent
-        this.calendarViewChanged({year: y, month: m, first: {number: 1, weekday: this.getWeekday({year: y, month: m, day: 1})}, last: {number: dInThisM, weekday: this.getWeekday({year: y, month: m, day: dInThisM})}});
+        if (notifyChange) {
+            // Notify parent
+            this.calendarViewChanged({year: y, month: m, first: {number: 1, weekday: this.getWeekday({year: y, month: m, day: 1})}, last: {number: dInThisM, weekday: this.getWeekday({year: y, month: m, day: dInThisM})}});
+        }
     }
 
     setHeaderBtnDisabledState(m: number, y: number): void {

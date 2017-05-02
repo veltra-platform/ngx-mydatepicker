@@ -12,7 +12,7 @@ const NGX_DP_VALUE_ACCESSOR = {
 };
 
 enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4, CloseByEsc = 5}
-enum Year {min = 1000, max = 9999}
+enum Year {min = 1100, max = 9100}
 enum KeyCode {esc = 27, leftArrow = 37, rightArrow = 39}
 
 @Directive({
@@ -43,7 +43,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         firstDayOfWeek: <string> "mo",
         sunHighlight: <boolean> true,
         markCurrentDay: <boolean> true,
-        editableMonthAndYear: <boolean> true,
+        monthSelector: <boolean> true,
+        yearSelector: <boolean> true,
         disableHeaderButtons: <boolean> true,
         showWeekNumbers: <boolean> false,
         disableUntil: <IMyDate> {year: 0, month: 0, day: 0},

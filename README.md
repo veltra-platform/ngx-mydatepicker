@@ -201,9 +201,10 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 | __firstDayOfWeek__   | mo | string | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
 | __sunHighlight__   | true | boolean | Sunday red colored on calendar. |
 | __markCurrentDay__   | true | boolean | Is current day (today) marked on calendar. |
-| __editableMonthAndYear__   | true | boolean | Is month and year labels editable or not. |
-| __minYear__   | 1000 | number | Minimum allowed year in calendar. Cannot be less than 1000. |
-| __maxYear__   | 9999 | number | Maximum allowed year in calendar. Cannot be more than 9999. |
+| __monthSelector__  | true | boolean | If month label is selected opens a selector of months. |
+| __yearSelector__  | true | boolean | If year label is selected opens a selector of years. |
+| __minYear__   | 1100 | number | Minimum allowed year in calendar. Cannot be less than 1100. |
+| __maxYear__   | 9100 | number | Maximum allowed year in calendar. Cannot be more than 9100. |
 | __disableUntil__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates backward starting from the given date. For example: {year: 2016, month: 6, day: 26} |
 | __disableSince__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates forward starting from the given date. For example: {year: 2016, month: 7, day: 22} |
 | __disableDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Disable single dates one by one. Array of disabled dates. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
