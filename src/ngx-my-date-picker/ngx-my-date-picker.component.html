@@ -54,7 +54,7 @@
         <table class="yeartable" *ngIf="selectYear">
             <tbody>
                 <tr>
-                    <td colspan="5" class="yearchangebtncell">
+                    <td colspan="5" class="yearchangebtncell" (click)="$event.stopPropagation()">
                         <button type="button" class="yearchangebtn ngxmdpicon icon-ngxmydpup" (click)="onPrevYears($event, years[0][0].year)" [disabled]="prevYearsDisabled" [ngClass]="{'yearchangebtnenabled': !prevYearsDisabled, 'yearchangebtndisabled': prevYearsDisabled}"></button>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="yearchangebtncell">
+                    <td colspan="5" class="yearchangebtncell" (click)="$event.stopPropagation()">
                         <button type="button" class="yearchangebtn ngxmdpicon icon-ngxmydpdown" (click)="onNextYears($event, years[0][0].year)" [disabled]="nextYearsDisabled" [ngClass]="{'yearchangebtnenabled': !nextYearsDisabled, 'yearchangebtndisabled': nextYearsDisabled}"></button>
                     </td>
                 </tr>
