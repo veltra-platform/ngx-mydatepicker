@@ -81,6 +81,24 @@
         </li>
         <li>
             <label>
+                <span>Highlight Saturday:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onHighlighSaturday($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Highlight Sunday:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onHighlighSunday($event.currentTarget.checked)" [checked]="true">
+            </label>
+        </li>
+        <li>
+            <label>
+                <span>Highlight dates:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onHighlightDates($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
                 <span>Disable header buttons:</span>
                 <input style="cursor: pointer" type="checkbox" (change)="onDisableHeaderButtons($event.currentTarget.checked)" [checked]="true">
             </label>

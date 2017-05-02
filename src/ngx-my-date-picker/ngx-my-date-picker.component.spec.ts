@@ -611,9 +611,9 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        let sunday = getElements('.sunday');
-        expect(sunday).not.toBe(null);
-        expect(sunday.length).toBe(6);
+        let highlight = getElements('.highlight');
+        expect(highlight).not.toBe(null);
+        expect(highlight.length).toBe(6);
 
         comp.closeCalendar();
 
@@ -625,8 +625,71 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        sunday = getElements('.sunday');
-        expect(sunday.length).toBe(0);
+        highlight = getElements('.highlight');
+        expect(highlight.length).toBe(0);
+    });
+
+    it('options - satHighlight', () => {
+        comp.setDefaultMonth('2016/01');
+
+        let opts: IMyOptions = {
+            sunHighlight: false,
+            satHighlight: true
+        };
+
+        comp.parseOptions(opts);
+
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let highlight = getElements('.highlight');
+        expect(highlight).not.toBe(null);
+        expect(highlight.length).toBe(6);
+
+        comp.closeCalendar();
+
+
+        opts.satHighlight = false;
+
+        comp.parseOptions(opts);
+
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        highlight = getElements('.highlight');
+        expect(highlight.length).toBe(0);
+    });
+
+    it('options - highlightDates', () => {
+        comp.setDefaultMonth('2016/01');
+
+        let opts: IMyOptions = {
+            sunHighlight: false,
+            satHighlight: false,
+            highlightDates: [{year: 2016, month: 1, day: 10}, {year: 2016, month: 1, day: 12}, {year: 2016, month: 1, day: 13}]
+        };
+
+        comp.parseOptions(opts);
+
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let highlight = getElements('.highlight');
+        expect(highlight).not.toBe(null);
+        expect(highlight.length).toBe(3);
+
+        comp.closeCalendar();
+
+
+        opts.highlightDates = [];
+
+        comp.parseOptions(opts);
+
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        highlight = getElements('.highlight');
+        expect(highlight.length).toBe(0);
     });
 
     it('options - markCurrentDay', () => {

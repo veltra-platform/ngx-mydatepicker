@@ -232,11 +232,11 @@
     background: #FBEFEF !important;
 }
 
-.ngxmdp .sunday {
+.ngxmdp .highlight {
     color: #C30000;
 }
 
-.ngxmdp .sundayDim {
+.ngxmdp .dimday {
     opacity: 0.5;
 }
 

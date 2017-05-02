@@ -200,6 +200,8 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 | __todayBtnTxt__   | Today | string | Today button text. Can be used if __showTodayBtn = true__. |
 | __firstDayOfWeek__   | mo | string | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
 | __sunHighlight__   | true | boolean | Sunday red colored on calendar. |
+| __satHighlight__   | false | boolean | Saturday red colored on calendar. |
+| __highlightDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Dates red colored on calendar. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
 | __markCurrentDay__   | true | boolean | Is current day (today) marked on calendar. |
 | __monthSelector__  | true | boolean | If month label is selected opens a selector of months. |
 | __yearSelector__  | true | boolean | If year label is selected opens a selector of years. |

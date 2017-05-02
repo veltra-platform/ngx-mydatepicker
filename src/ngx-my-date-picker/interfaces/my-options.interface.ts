@@ -12,7 +12,9 @@ export interface IMyOptions {
     showTodayBtn?: boolean;
     todayBtnTxt?: string;
     firstDayOfWeek?: string;
+    satHighlight?: boolean;
     sunHighlight?: boolean;
+    highlightDates?: Array<IMyDate>;
     markCurrentDay?: boolean;
     monthSelector?: boolean;
     yearSelector?: boolean;

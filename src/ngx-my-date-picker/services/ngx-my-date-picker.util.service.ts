@@ -172,6 +172,19 @@ export class UtilService {
         return {marked: false, color: ""};
     }
 
+    isHighlightedDate(date: IMyDate, sunHighlight: boolean, satHighlight: boolean, highlightDates: Array<IMyDate>): boolean {
+        let dayNbr: number = this.getDayNumber(date);
+        if (sunHighlight && dayNbr === 0 || satHighlight && dayNbr === 6) {
+            return true;
+        }
+        for (let d of highlightDates) {
+            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     getWeekNumber(date: IMyDate): number {
         let d: Date = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
         d.setDate(d.getDate() + (d.getDay() === 0 ? -3 : 4 - d.getDay()));

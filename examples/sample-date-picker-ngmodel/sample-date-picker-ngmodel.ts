@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate} from '../../src/ngx-my-date-picker/interfaces';
+import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
 
 declare var require:any;
@@ -24,6 +24,8 @@ export class SampleDatePickerNgModel implements OnInit {
         showSelectorArrow: true,
         monthSelector: true,
         yearSelector: true,
+        satHighlight: false,
+        highlightDates: [],
         disableDates:[],
         disableHeaderButtons: true,
         showWeekNumbers: false,
@@ -107,6 +109,33 @@ export class SampleDatePickerNgModel implements OnInit {
     onMarkWeekends(checked: boolean): void {
         let copy = this.getCopyOfOptions();
         copy.markWeekends = checked ? {marked: true, color: 'blue'} : {marked: false, color: ''};
+        this.myDatePickerOptions = copy;
+    }
+
+    onHighlighSaturday(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.satHighlight = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onHighlighSunday(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.sunHighlight = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onHighlightDates(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        let dates: Array<IMyDate> = [];
+        dates.push({year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()});
+
+        d.setDate(d.getDate() + 1);
+        dates.push({year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()});
+
+        dates.push({year: 2017, month: 6, day: 1});
+
+        copy.highlightDates = checked ? dates : [];
         this.myDatePickerOptions = copy;
     }
 
