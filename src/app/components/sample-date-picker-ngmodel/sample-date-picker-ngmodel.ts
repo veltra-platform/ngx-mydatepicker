@@ -20,6 +20,7 @@ export class SampleDatePickerNgModel implements OnInit {
         alignSelectorRight: false,
         openSelectorTopOfInput: false,
         minYear: 1900,
+        maxYear: 2200,
         showSelectorArrow: true,
         disableDates:[],
         showWeekNumbers: false,
