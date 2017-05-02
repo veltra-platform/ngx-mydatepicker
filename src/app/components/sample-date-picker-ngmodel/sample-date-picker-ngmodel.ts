@@ -23,6 +23,7 @@ export class SampleDatePickerNgModel implements OnInit {
         maxYear: 2200,
         showSelectorArrow: true,
         disableDates:[],
+        highlightDates: [],
         showWeekNumbers: false,
         markDates: []
     };
@@ -78,6 +79,13 @@ export class SampleDatePickerNgModel implements OnInit {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
         copy.markDates = checked ? [{dates: [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}], color: 'green'}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onHighlightToday(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        copy.highlightDates = checked ? [{year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}] : [];
         this.myDatePickerOptions = copy;
     }
 

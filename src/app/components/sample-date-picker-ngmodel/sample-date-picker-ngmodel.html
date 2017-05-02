@@ -57,6 +57,12 @@
         </li>
         <li>
             <label>
+                <span>Highlight today:</span>
+                <input style="cursor: pointer" type="checkbox" (change)="onHighlightToday($event.currentTarget.checked)" [checked]="false">
+            </label>
+        </li>
+        <li>
+            <label>
                 <span>Show week numbers:</span>
                 <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)" [checked]="false">
             </label>
