@@ -2,17 +2,15 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged} from 'ngx-mydatepicker';
 import {NgxMyDatePickerDirective} from 'ngx-mydatepicker';
 
-declare var require:any;
-const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
-
 @Component({
     selector: 'sample-date-picker-ngmodel',
-    template: normalSampleTpl
+    templateUrl: 'sample-date-picker-ngmodel.html',
+    moduleId: module.id,
 })
 
 export class SampleDatePickerNgModel implements OnInit {
 
-    private myDatePickerOptions: IMyOptions = {
+    myDatePickerOptions: IMyOptions = {
         dateFormat: 'dd mmm yyyy',
         firstDayOfWeek: 'mo',
         sunHighlight: true,
@@ -30,13 +28,13 @@ export class SampleDatePickerNgModel implements OnInit {
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
 
-    private selectedTextNormal: string = '';
-    private validDate: boolean = false;
-    private inputText: string = "";
+    selectedTextNormal: string = '';
+    validDate: boolean = false;
+    inputText: string = "";
 
-    private model: string = '';   // not initial date set
+    model: string = '';   // not initial date set
 
-    private defMonth: string = '';
+    defMonth: string = '';
 
     constructor() {}
 

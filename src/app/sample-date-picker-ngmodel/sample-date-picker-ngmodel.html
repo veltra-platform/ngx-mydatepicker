@@ -1,0 +1,137 @@
+<style>
+  .border {
+    padding: 4px;
+    border-radius: 4px;
+    float: right;
+    width: 100%;
+  }
+  .okDate {
+    color: #3c764d;
+    background-color: #dff0d6;
+    border: 1px solid #d6e9c2;
+  }
+  .invalidDate {
+    color: #a94444;
+    background-color: #f1dede;
+    border: 1px solid #ebccd2;
+  }
+
+  .settingstable {
+    width: 100%;
+    border: none;
+  }
+  .settingstable tr td {
+    width: 50%;
+    border: none;
+  }
+  .buttonrow {
+    margin: 15px 0;
+  }
+</style>
+
+<div>
+  <table class="settingstable">
+    <tr>
+      <td>
+        <label>
+          <span>Show today button:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onShowTodayButton($event.currentTarget.checked)"
+                 [checked]="true">
+        </label>
+      </td>
+      <td>
+        <label>
+          <span>Open selector top of input field:</span>
+          <input style="cursor: pointer" type="checkbox"
+                 (change)="onOpenSelectorTopOfInput($event.currentTarget.checked)" [checked]="false">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <span>Align selector right:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onAlignSelectorRight($event.currentTarget.checked)"
+                 [checked]="false">
+        </label>
+      </td>
+      <td>
+        <label>
+          <span>Show selector arrow:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onShowSelectorArrow($event.currentTarget.checked)"
+                 [checked]="true">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <span>Disable today:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onDisableToday($event.currentTarget.checked)"
+                 [checked]="false">
+        </label>
+      </td>
+      <td>
+        <label>
+          <span>Mark today:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onMarkToday($event.currentTarget.checked)"
+                 [checked]="false">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <span>Highlight today:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onHighlightToday($event.currentTarget.checked)"
+                 [checked]="false">
+        </label>
+      </td>
+      <td>
+        <label>
+          <span>Show week numbers:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)"
+                 [checked]="false">
+        </label>
+      </td>
+    </tr>
+
+    <div class="buttonrow">
+      <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>
+      <button style="cursor: pointer" type="button" (click)="dp.openCalendar();$event.stopPropagation()">Open</button>
+      <button style="cursor: pointer" type="button" (click)="dp.closeCalendar();$event.stopPropagation()">Close</button>
+      <button style="cursor: pointer" type="button" (click)="clearDate()">Clear</button>
+    </div>
+
+  </table>
+
+  <table style="width: 100%">
+    <tr>
+      <td style="vertical-align: top; width: 220px">
+        <form>
+          <div class="input-group">
+
+            <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="mydate"
+                   [(ngModel)]="model" [options]="myDatePickerOptions" [defaultMonth]="defMonth" #dp="ngx-mydatepicker"
+                   (dateChanged)="onDateChanged($event)" (calendarViewChanged)="onCalendarViewChanged($event)"
+                   (calendarToggle)="onCalendarToggle($event)" (inputFieldChanged)="onInputFieldChanged($event)"
+                   autocomplete="off"/>
+
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" (click)="dp.clearDate();$event.stopPropagation()"><i class="glyphicon glyphicon-remove"></i></button>
+              <button type="button" class="btn btn-default" (click)="dp.toggleCalendar();$event.stopPropagation()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+
+          </div>
+        </form>
+      </td>
+      <td style="vertical-align: top;padding-left: 20px">
+        <div *ngIf="inputText !== ''" class="border" [ngClass]="{'okDate': validDate, 'invalidDate': !validDate}">
+          <span *ngIf="validDate">{{selectedTextNormal}}</span>
+          <span *ngIf="!validDate">Invalid date</span>
+        </div>
+      </td>
+  </table>
+
+</div>
+
