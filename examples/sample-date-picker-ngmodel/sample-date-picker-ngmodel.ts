@@ -45,7 +45,7 @@ export class SampleDatePickerNgModel implements OnInit {
     private validDate: boolean = false;
     private inputText: string = "";
 
-    private model: string = '';   // not initial date set
+    private model: string = null;   // not initial date set
     //private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
 
     private defMonth: string = '';

@@ -24,7 +24,7 @@ export class SampleDatePickerReacticeForms implements OnInit {
         console.log('onInit(): SampleDatePickerReacticeForms');
         let d: Date = new Date();
         this.myForm = this.formBuilder.group({
-            //myDate: ['', Validators.required]   // not initial date set
+            //myDate: [null, Validators.required]   // not initial date set
             myDate: [{date: {year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()}}, Validators.required]   // this example is initialized to specific date
         });
     }
@@ -47,6 +47,6 @@ export class SampleDatePickerReacticeForms implements OnInit {
 
     clearDate(): void {
         // Clear the date using the setValue function
-        this.myForm.setValue({myDate: ''});
+        this.myForm.setValue({myDate: null});
     }
 }

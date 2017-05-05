@@ -132,11 +132,11 @@ export class MyTestApp implements OnInit {
 
     ngOnInit() {
         this.myForm = this.formBuilder.group({
-            // Empty string means no initial value. Can be also specific date for
+            // Empty string or null means no initial value. Can be also specific date for
             // example: {date: {year: 2018, month: 10, day: 9}} which sets this date to initial
             // value.
 
-            myDate: ['', Validators.required]
+            myDate: [null, Validators.required]
             // other controls are here...
         });
     }
@@ -154,7 +154,7 @@ export class MyTestApp implements OnInit {
 
     clearDate(): void {
         // Clear the date using the setValue function
-        this.myForm.setValue({myDate: ''});
+        this.myForm.setValue({myDate: null});
     }
 }
 ```
