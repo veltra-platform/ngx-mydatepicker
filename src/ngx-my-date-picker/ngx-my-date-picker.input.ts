@@ -139,13 +139,10 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             let formatted: string = this.utilService.formatDate(value["date"], this.opts.dateFormat, this.opts.monthLabels);
             this.setInputValue(formatted);
             this.emitInputFieldChanged(formatted, true);
-            this.updateModel(this.utilService.getDateModel(value["date"], this.opts.dateFormat, this.opts.monthLabels));
         }
         else if (value === null || value === "") {
             this.setInputValue("");
             this.emitInputFieldChanged("", false);
-            this.onChangeCb(null);
-            this.onTouchedCb();
         }
     }
 
