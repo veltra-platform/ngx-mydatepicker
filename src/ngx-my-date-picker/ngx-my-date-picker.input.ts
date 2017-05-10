@@ -135,8 +135,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     public writeValue(value: Object): void {
-        if (value && value["date"]) {
-            let formatted: string = this.utilService.formatDate(value["date"], this.opts.dateFormat, this.opts.monthLabels);
+        if (value && (value["date"] || value["jsdate"])) {
+            let formatted: string = this.utilService.formatDate(value["date"] ? value["date"] : this.jsDateToMyDate(value["jsdate"]), this.opts.dateFormat, this.opts.monthLabels);
             this.setInputValue(formatted);
             this.emitInputFieldChanged(formatted, true);
         }
@@ -154,7 +154,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.onTouchedCb = fn;
     }
 
-    public openCalendar() {
+    public openCalendar(): void {
         this.preventClose = true;
         this.cdr.detectChanges();
         if (this.cRef === null) {
@@ -185,11 +185,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }, 50);
     }
 
-    public closeCalendar() {
+    public closeCalendar(): void {
         this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
-    public toggleCalendar() {
+    public toggleCalendar(): void {
         if (this.cRef === null) {
             this.openCalendar();
         }
@@ -198,7 +198,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
     }
 
-    public clearDate() {
+    public clearDate(): void {
         this.emitDateChanged({date: {year: 0, month: 0, day: 0}, jsdate: null, formatted: "", epoc: 0});
         this.emitInputFieldChanged("", false);
         this.onChangeCb(null);
@@ -207,7 +207,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
-    private closeSelector(reason: number) {
+    private closeSelector(reason: number): void {
         if (this.cRef !== null) {
             this.vcRef.remove(this.vcRef.indexOf(this.cRef.hostView));
             this.cRef = null;
@@ -215,22 +215,22 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
     }
 
-    private updateModel(model: IMyDateModel) {
+    private updateModel(model: IMyDateModel): void {
         this.onChangeCb(model);
         this.onTouchedCb();
         this.setInputValue(model.formatted);
     }
 
-    private setInputValue(value: string) {
+    private setInputValue(value: string): void {
         this.inputText = value;
         this.renderer.setElementProperty(this.elem.nativeElement, "value", value);
     }
 
-    private emitDateChanged(dateModel: IMyDateModel) {
+    private emitDateChanged(dateModel: IMyDateModel): void {
         this.dateChanged.emit(dateModel);
     }
 
-    private emitInputFieldChanged(value: string, valid: boolean) {
+    private emitInputFieldChanged(value: string, valid: boolean): void {
         this.inputFieldChanged.emit({value: value, dateFormat: this.opts.dateFormat, valid: valid});
     }
 
@@ -238,7 +238,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.calendarViewChanged.emit(cvc);
     }
 
-    private emitCalendarToggle(reason: number) {
+    private emitCalendarToggle(reason: number): void {
         this.calendarToggle.emit(reason);
+    }
+
+    private jsDateToMyDate(date: Date): IMyDate {
+        return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
     }
 }
