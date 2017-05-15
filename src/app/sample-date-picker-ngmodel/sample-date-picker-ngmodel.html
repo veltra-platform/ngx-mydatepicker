@@ -101,6 +101,20 @@
         </label>
       </td>
     </tr>
+    <tr>
+      <td>
+        <label>
+          <span style="margin-right: 10px">Selector size:</span>
+          <span>
+              <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
+                  <option *ngFor="let s of selectorSizes">{{s}}</option>
+              </select>
+          </span>
+        </label>
+      </td>
+      <td>
+      </td>
+    </tr>
 
     <div class="buttonrow">
       <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar();$event.stopPropagation()">Toggle</button>

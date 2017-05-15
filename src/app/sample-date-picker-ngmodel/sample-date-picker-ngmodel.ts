@@ -23,7 +23,9 @@ export class SampleDatePickerNgModel implements OnInit {
         disableDates:[],
         highlightDates: [],
         showWeekNumbers: false,
-        markDates: []
+        markDates: [],
+        selectorHeight: '232px',
+        selectorWidth: '252px'
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -36,10 +38,31 @@ export class SampleDatePickerNgModel implements OnInit {
 
     defMonth: string = '';
 
+    selectorSizes: Array<string> = new Array('252*232', '220*200', '290*260');
+
     constructor() {}
 
     clearDate(): void {
         this.ngxdp.clearDate();
+    }
+
+    onSelectorSize(size:string) {
+        let copy = this.getCopyOfOptions();
+        if (size === '252*232') {
+            copy.selectorHeight = '232px';
+            copy.selectorWidth = '252px';
+            this.myDatePickerOptions = copy;
+        }
+        else if (size === '220*200') {
+            copy.selectorHeight = '200px';
+            copy.selectorWidth = '220px';
+            this.myDatePickerOptions = copy;
+        }
+        else {
+            copy.selectorHeight = '260px';
+            copy.selectorWidth = '290px';
+            this.myDatePickerOptions = copy;
+        }
     }
 
     onShowTodayButton(checked: boolean): void {
