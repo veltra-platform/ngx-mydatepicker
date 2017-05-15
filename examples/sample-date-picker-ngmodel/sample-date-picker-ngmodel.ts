@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IMyOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate} from '../../src/ngx-my-date-picker/interfaces';
+import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
 
 declare var require:any;
@@ -12,7 +12,7 @@ const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
 
 export class SampleDatePickerNgModel implements OnInit {
 
-    private myDatePickerOptions: IMyOptions = {
+    private myDatePickerOptions: INgxMyDpOptions = {
         dateFormat: 'dd.mm.yyyy',
         firstDayOfWeek: 'mo',
         sunHighlight: true,
@@ -184,7 +184,7 @@ export class SampleDatePickerNgModel implements OnInit {
         }
     }
 
-    getCopyOfOptions(): IMyOptions {
+    getCopyOfOptions(): INgxMyDpOptions {
         return JSON.parse(JSON.stringify(this.myDatePickerOptions));
     }
 

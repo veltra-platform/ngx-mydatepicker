@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {IMyOptions} from '../../src/ngx-my-date-picker/interfaces';
+import {INgxMyDpOptions} from '../../src/ngx-my-date-picker/interfaces';
 
 declare var require:any;
 const amSampleTpl: string = require('./sample-date-picker-reactive-forms.html');
@@ -12,7 +12,7 @@ const amSampleTpl: string = require('./sample-date-picker-reactive-forms.html');
 
 export class SampleDatePickerReacticeForms implements OnInit {
 
-    private myDatePickerOptions: IMyOptions = {
+    private myDatePickerOptions: INgxMyDpOptions = {
         dateFormat: 'dd.mm.yyyy'
     };
 

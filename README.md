@@ -65,12 +65,12 @@ is an example application. It shows how to use the __ngModel__.
 To use ngModel define the application class as follows:
 
 ```ts
-import {IMyOptions, IMyDateModel} from 'ngx-mydatepicker';
+import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 // other imports here...
 
 export class MyTestApp {
 
-    private myOptions: IMyOptions = {
+    private myOptions: INgxMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
     };
@@ -116,12 +116,12 @@ is an example application. It shows how to use the __formControlName__.
 To use reactive forms define the application class as follows:
 
 ```ts
-import {IMyOptions} from 'ngx-mydatepicker';
+import {INgxMyDpOptions} from 'ngx-mydatepicker';
 // other imports here...
 
 export class MyTestApp implements OnInit {
 
-    private myOptions: IMyOptions = {
+    private myOptions: INgxMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
     };
@@ -189,7 +189,7 @@ Add the following snippet inside your template:
 
 ### options attribute
 
-Value of the __options__ attribute is a type of [IMyOptions](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-options.interface.ts). It can contain the following properties.
+Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-options.interface.ts). It can contain the following properties.
 
 | Option         | Default        | Type | Description |
 | :------------- | :------------- | :----| :---------- |
@@ -228,7 +228,7 @@ Value of the __options__ attribute is a type of [IMyOptions](https://github.com/
 
 * Example of the options data (not all properties listed):
 ```ts
-  myOptions: IMyOptions = {
+  myOptions: INgxMyDpOptions = {
       todayBtnTxt: 'Today',
       dateFormat: 'yyyy-mm-dd',
       firstDayOfWeek: 'mo',

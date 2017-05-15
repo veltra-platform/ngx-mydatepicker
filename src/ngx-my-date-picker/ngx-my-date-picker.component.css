@@ -259,10 +259,6 @@
     border-radius: 2px;
 }
 
-.ngxmdp .selectedmonth .monthvalue {
-    padding: 6px;
-}
-
 .ngxmdp .headerbtncell {
     background-color: #FAFAFA;
     display: table-cell;
