@@ -49,6 +49,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         yearSelector: <boolean> true,
         disableHeaderButtons: <boolean> true,
         showWeekNumbers: <boolean> false,
+        selectorHeight: <string> "232px",
+        selectorWidth: <string> "252px",
         disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
         disableSince: <IMyDate> {year: 0, month: 0, day: 0},
         disableDates: <Array<IMyDate>> [],

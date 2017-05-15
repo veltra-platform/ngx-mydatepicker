@@ -20,6 +20,8 @@ export interface IMyOptions {
     yearSelector?: boolean;
     disableHeaderButtons?: boolean;
     showWeekNumbers?: boolean;
+    selectorHeight?: string;
+    selectorWidth?: string;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
     disableDates?: Array<IMyDate>;

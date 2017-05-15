@@ -951,6 +951,38 @@ describe('ngx-mydatepicker', () => {
         expect(daycellweeknbr[5].textContent.trim()).toBe('6');
     });
 
+    it('options - selectorHeight', () => {
+        comp.setDefaultMonth('2017/01');
+
+        let opts: IMyOptions = {
+            selectorHeight: '200px'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+        expect(selector.style['height']).toBe('200px');
+    });
+
+    it('options - selectorWidth', () => {
+        comp.setDefaultMonth('2017/01');
+
+        let opts: IMyOptions = {
+            selectorWidth: '220px'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+        expect(selector.style['width']).toBe('220px');
+    });
+
     it('options - minYear', () => {
         comp.setDefaultMonth('2011/12');
         let opts: IMyOptions = {

@@ -15,7 +15,6 @@
     margin-top: 2px;
     margin-left: -1px;
     position: absolute;
-    width: 252px;
     padding: 0;
     border: 1px solid #CCC;
     border-radius: 4px;
@@ -150,6 +149,7 @@
 .ngxmdp .yeartable {
     table-layout: fixed;
     width: 100%;
+    height: calc(100% - 30px);
     background-color: #FFF;
     font-size: 14px;
 }
@@ -189,19 +189,14 @@
     border-right: 1px solid #BBB;
 }
 
-.ngxmdp .daycell {
-    height: 30px;
-}
-
 .ngxmdp .monthcell {
     background-color: #FAFAFA;
-    height: 50px;
-    width: 33.3333%;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .ngxmdp .yearcell {
     background-color: #FAFAFA;
-    height: 30px;
     width: 20%;
 }
 
@@ -259,17 +254,13 @@
 .ngxmdp .selectedday .datevalue,
 .ngxmdp .selectedmonth .monthvalue,
 .ngxmdp .selectedyear .yearvalue {
-    border: 1px solid #004198;
+    border: none;
     background-color: #8EBFFF !important;
     border-radius: 2px;
 }
 
 .ngxmdp .selectedmonth .monthvalue {
     padding: 6px;
-}
-
-.ngxmdp .selectedyear .yearvalue {
-    padding: 2px;
 }
 
 .ngxmdp .headerbtncell {
@@ -280,7 +271,6 @@
 
 .ngxmdp .yearchangebtncell {
     text-align: center;
-    height: 25px;
     background-color: #FAFAFA;
 }
 

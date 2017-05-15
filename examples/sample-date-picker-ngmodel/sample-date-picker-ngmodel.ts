@@ -34,7 +34,9 @@ export class SampleDatePickerNgModel implements OnInit {
             {begin: {year: 2016, month: 10, day: 10}, end: {year: 2016, month: 10, day: 12}}
         ],
         markDates: [],
-        markWeekends: <IMyMarkedDate>{}
+        markWeekends: <IMyMarkedDate>{},
+        selectorHeight: '232px',
+        selectorWidth: '252px'
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -50,6 +52,7 @@ export class SampleDatePickerNgModel implements OnInit {
     //private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
 
     private defMonth: string = '';
+    private selectorSizes: Array<string> = new Array('normal', 'small', 'big');
 
     constructor() {}
 
@@ -160,6 +163,25 @@ export class SampleDatePickerNgModel implements OnInit {
 
     onDisableInput(checked: boolean) {
         this.disabled = checked;
+    }
+
+    onSelectorSize(size:string) {
+        let copy = this.getCopyOfOptions();
+        if (size === 'normal') {
+            copy.selectorHeight = '232px';
+            copy.selectorWidth = '252px';
+            this.myDatePickerOptions = copy;
+        }
+        else if (size === 'small') {
+            copy.selectorHeight = '200px';
+            copy.selectorWidth = '220px';
+            this.myDatePickerOptions = copy;
+        }
+        else {
+            copy.selectorHeight = '260px';
+            copy.selectorWidth = '290px';
+            this.myDatePickerOptions = copy;
+        }
     }
 
     getCopyOfOptions(): IMyOptions {
