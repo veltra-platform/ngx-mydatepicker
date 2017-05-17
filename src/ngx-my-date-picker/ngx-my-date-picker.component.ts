@@ -96,6 +96,11 @@ export class NgxMyDatePicker {
         this.setVisibleMonth();
     }
 
+    setCalendarView(date: IMyDate): void {
+        this.selectedDate = date;
+        this.setVisibleMonth();
+    }
+
     resetMonthYearSelect(): void {
         this.selectMonth = false;
         this.selectYear = false;
@@ -259,6 +264,9 @@ export class NgxMyDatePicker {
         // Today button clicked
         let today: IMyDate = this.getToday();
         this.selectDate(today);
+        if (!this.opts.closeSelectorOnDateSelect) {
+            this.setVisibleMonth();
+        }
     }
 
     onCellClicked(cell: any): void {
@@ -288,7 +296,8 @@ export class NgxMyDatePicker {
 
     selectDate(date: IMyDate): void {
         // Notifies parent using callback
-        this.dateChanged(this.utilService.getDateModel(date, this.opts.dateFormat, this.opts.monthLabels));
+        this.selectedDate = date;
+        this.dateChanged(this.utilService.getDateModel(date, this.opts.dateFormat, this.opts.monthLabels), this.opts.closeSelectorOnDateSelect);
     }
 
     monthStartIdx(y: number, m: number): number {

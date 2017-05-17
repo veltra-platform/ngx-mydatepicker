@@ -1303,6 +1303,45 @@ describe('ngx-mydatepicker', () => {
         expect(selector.attributes['style'].textContent).not.toContain('bottom: initial');
     });
 
+    it('options - closeSelectorOnDateSelect', () => {
+        comp.setDefaultMonth('2017/05');
+        let opts: IMyOptions = {
+            closeSelectorOnDateSelect: false
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let daycell = getElements('.daycell');
+        expect(daycell).not.toBe(null);
+        expect(daycell.length).toBe(42);
+
+        daycell[0].click();
+
+        fixture.detectChanges();
+        let selector = getElement('.selector');
+        expect(selector).not.toBe(null);
+
+        comp.closeCalendar();
+
+        opts.closeSelectorOnDateSelect = true;
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        daycell = getElements('.daycell');
+        expect(daycell).not.toBe(null);
+        expect(daycell.length).toBe(42);
+
+        daycell[0].click();
+
+        fixture.detectChanges();
+        selector = getElement('.selector');
+        expect(selector).toBe(null);
+    });
+
     it('options - ariaLabelPrevMonth', () => {
         comp.setDefaultMonth('2017/02');
         let opts: IMyOptions = {

@@ -221,6 +221,7 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __selectorWidth__   | 252px | string | Selector width. |
 | __alignSelectorRight__   | false | boolean | Align selector right. |
 | __openSelectorTopOfInput__   | false | boolean | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
+| __closeSelectorOnDateSelect__ | true | boolean | Is selector closed or not on a date select. |
 | __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |

@@ -61,6 +61,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         disableWeekends: <boolean> false,
         alignSelectorRight: <boolean> false,
         openSelectorTopOfInput: <boolean> false,
+        closeSelectorOnDateSelect: <boolean> true,
         minYear: <number> Year.min,
         maxYear: <number> Year.max,
         showSelectorArrow: <boolean> true,
@@ -89,7 +90,12 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.emitDateChanged(dateModel);
                 this.updateModel(dateModel);
                 this.emitInputFieldChanged(dateModel.formatted, true);
-                this.closeSelector(CalToggle.CloseByDateSel);
+                if (this.opts.closeSelectorOnDateSelect) {
+                    this.closeSelector(CalToggle.CloseByDateSel);
+                }
+                else if (this.cRef !== null) {
+                    this.cRef.instance.setCalendarView(date);
+                }
             }
             else {
                 if (this.inputText !== this.elem.nativeElement.value) {
@@ -168,10 +174,12 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.elem.nativeElement.value,
                 this.elem.nativeElement.offsetWidth,
                 this.elem.nativeElement.offsetHeight,
-                (dm: IMyDateModel) => {
+                (dm: IMyDateModel, close: boolean) => {
                     this.emitDateChanged(dm);
                     this.updateModel(dm);
-                    this.closeSelector(CalToggle.CloseByDateSel);
+                    if (close) {
+                        this.closeSelector(CalToggle.CloseByDateSel);
+                    }
                 },
                 (cvc: IMyCalendarViewChanged) => {
                     this.emitCalendarChanged(cvc);

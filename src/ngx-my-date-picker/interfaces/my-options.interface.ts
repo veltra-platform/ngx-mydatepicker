@@ -32,6 +32,7 @@ export interface IMyOptions {
     disableWeekends?: boolean;
     alignSelectorRight?: boolean;
     openSelectorTopOfInput?: boolean;
+    closeSelectorOnDateSelect?: boolean;
     minYear?: number;
     maxYear?: number;
     showSelectorArrow?: boolean;
