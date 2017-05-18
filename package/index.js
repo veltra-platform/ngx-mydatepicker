@@ -1,1 +1,1 @@
-export {NgxMyDatePicker, NgxMyDatePickerModule} from "./dist/index";
+export {NgxMyDatePicker, NgxMyDatePickerDirective, NgxMyDatePickerModule} from "./dist/index";
