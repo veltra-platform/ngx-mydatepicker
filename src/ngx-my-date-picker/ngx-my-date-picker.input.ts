@@ -172,7 +172,6 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.opts,
                 this.defaultMonth,
                 this.elem.nativeElement.value,
-                this.elem.nativeElement.offsetWidth,
                 this.elem.nativeElement.offsetHeight,
                 (dm: IMyDateModel, close: boolean) => {
                     this.emitDateChanged(dm);

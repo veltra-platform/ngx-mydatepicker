@@ -39,9 +39,7 @@ export class NgxMyDatePicker {
     dateChanged: Function;
     calendarViewChanged: Function;
     closedByEsc: Function;
-    inputWidth: number = 0;
     inputHeight: number = 0;
-    selectorWidth: number = 0;
 
     prevMonthDisabled: boolean = false;
     nextMonthDisabled: boolean = false;
@@ -62,7 +60,7 @@ export class NgxMyDatePicker {
         });
     }
 
-    initialize(opts: IMyOptions, defaultMonth: string, inputValue: string, inputWidth: number, inputHeight: number, dc: Function, cvc: Function, cbe: Function): void {
+    initialize(opts: IMyOptions, defaultMonth: string, inputValue: string, inputHeight: number, dc: Function, cvc: Function, cbe: Function): void {
         this.opts = opts;
         this.weekDays.length = 0;
 
@@ -89,9 +87,7 @@ export class NgxMyDatePicker {
         this.dateChanged = dc;
         this.calendarViewChanged = cvc;
         this.closedByEsc = cbe;
-        this.inputWidth = inputWidth;
         this.inputHeight = inputHeight;
-        this.selectorWidth = this.elem.nativeElement.children[0].children[0].offsetWidth;
 
         this.setVisibleMonth();
     }
