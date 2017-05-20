@@ -203,6 +203,8 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __satHighlight__   | false | boolean | Saturday red colored on calendar. |
 | __highlightDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Dates red colored on calendar. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}] |
 | __markCurrentDay__   | true | boolean | Is current day (today) marked on calendar. |
+| __markCurrentMonth__   | true | boolean | Is current month marked on calendar. Can be used if __monthSelector = true__. |
+| __markCurrentYear__   | true | boolean | Is current year marked on calendar. Can be used if __yearSelector = true__. |
 | __monthSelector__  | true | boolean | If month label is selected opens a selector of months. |
 | __yearSelector__  | true | boolean | If year label is selected opens a selector of years. |
 | __minYear__   | 1100 | number | Minimum allowed year in calendar. Cannot be less than 1100. |

@@ -108,13 +108,14 @@ export class NgxMyDatePicker {
         this.selectYear = false;
         this.cdr.detectChanges();
         if (this.selectMonth) {
+            let today: IMyDate = this.getToday();
             this.months.length = 0;
             for (let i = 1; i <= 12; i += 3) {
                 let row: Array<IMyCalendarMonth> = [];
                 for (let j = i; j < i + 3; j++) {
                     let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: this.visibleMonth.year, month: j, day: this.daysInMonth(j, this.visibleMonth.year)}, this.opts.disableUntil)
                         || this.utilService.isMonthDisabledByDisableSince({year: this.visibleMonth.year, month: j, day: 1}, this.opts.disableSince);
-                    row.push({nbr: j, name: this.opts.monthLabels[j], selected: j === this.visibleMonth.monthNbr, disabled: disabled});
+                    row.push({nbr: j, name: this.opts.monthLabels[j], currMonth: j === today.month, selected: j === this.visibleMonth.monthNbr, disabled: disabled});
                 }
                 this.months.push(row);
             }
@@ -166,13 +167,14 @@ export class NgxMyDatePicker {
 
     generateYears(year: number): void {
         this.years.length = 0;
+        let today: IMyDate = this.getToday();
         for (let i = year; i <= 20 + year; i += 5) {
             let row: Array<IMyCalendarYear> = [];
             for (let j = i; j < i + 5; j++) {
                 let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: j, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, j)}, this.opts.disableUntil)
                     || this.utilService.isMonthDisabledByDisableSince({year: j, month: this.visibleMonth.monthNbr, day: 1}, this.opts.disableSince);
                 let minMax: boolean = j < this.opts.minYear || j > this.opts.maxYear;
-                row.push({year: j, selected: j === this.visibleMonth.year, disabled: disabled || minMax});
+                row.push({year: j, currYear: j === today.year, selected: j === this.visibleMonth.year, disabled: disabled || minMax});
             }
             this.years.push(row);
         }

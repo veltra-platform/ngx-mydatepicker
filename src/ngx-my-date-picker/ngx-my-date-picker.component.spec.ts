@@ -217,10 +217,10 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        let currday = getElement('.currday');
-        expect(currday).not.toBe(null);
+        let markcurrday = getElement('.markcurrday');
+        expect(markcurrday).not.toBe(null);
 
-        currday.click();
+        markcurrday.click();
 
         fixture.detectChanges();
         let selection = getElement('.myDateInput');
@@ -701,8 +701,8 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        let currday = getElement('.currday');
-        expect(currday).not.toBe(null);
+        let markcurrday = getElement('.markcurrday');
+        expect(markcurrday).not.toBe(null);
 
         comp.closeCalendar();
 
@@ -714,8 +714,42 @@ describe('ngx-mydatepicker', () => {
         comp.openCalendar();
 
         fixture.detectChanges();
-        currday = getElement('.currday');
-        expect(currday).toBe(null);
+        markcurrday = getElement('.markcurrday');
+        expect(markcurrday).toBe(null);
+    });
+
+    it('options - markCurrentMonth', () => {
+        let opts: IMyOptions = {
+            markCurrentMonth: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let monthlabel = getElement('.monthlabel');
+        monthlabel.click();
+
+        fixture.detectChanges();
+        let markcurrmonth = getElement('.markcurrmonth');
+        expect(markcurrmonth).not.toBe(null);
+    });
+
+    it('options - markCurrentYear', () => {
+        let opts: IMyOptions = {
+            markCurrentYear: true
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let yearlabel = getElement('.yearlabel');
+        yearlabel.click();
+
+        fixture.detectChanges();
+        let markcurryear = getElement('.markcurryear');
+        expect(markcurryear).not.toBe(null);
     });
 
     it('options - monthSelector', () => {

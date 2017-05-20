@@ -247,7 +247,9 @@
     border-radius: 4px;
 }
 
-.ngxmdp .currday {
+.ngxmdp .markcurrday,
+.ngxmdp .markcurrmonth,
+.ngxmdp .markcurryear {
     text-decoration: underline;
 }
 
