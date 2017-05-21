@@ -13,4 +13,12 @@ export class MyDatePickerApp {
     console.log('constructor: MyDatePickerApp');
   }
 
+  toMyDatePicker(): void {
+    window.open('http://kekeh.github.io/mydatepicker', '_self');
+  }
+
+  toDateRangePicker(): void {
+    window.open('http://kekeh.github.io/mydaterangepicker', '_self');
+  }
+
 }

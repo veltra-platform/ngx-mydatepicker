@@ -3,7 +3,15 @@
     <div>Angular date picker</div>
 </div>
 <div class="pagecontent">
+    <div class="tabcontainer">
+        <div class="tab activetab">ngx-mydatepicker</div>
+        <div class="tab inactivetab" (click)="toMyDatePicker()">mydatepicker</div>
+        <div class="tab inactivetab" (click)="toDateRangePicker()">mydaterangepicker</div>
+    </div>
+
     <div>
+        <hr/>
+        <div class="pagetext">Attribute directive date picker. You have full control to the input box and the buttons of the input box. Otherwise this is similar as mydatepicker. The date picker below has bootstrap 3.3.7 styled input box with glyphicons.</div>
         <div class="normalmode">
             <sample-date-picker-ngmodel>loading...</sample-date-picker-ngmodel>
         </div>
