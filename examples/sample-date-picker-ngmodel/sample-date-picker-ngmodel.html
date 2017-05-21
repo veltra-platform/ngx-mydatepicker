@@ -1,9 +1,31 @@
 <style>
+    .settingstable,
+    .pickertable {
+        width: 100%;
+        border: none;
+    }
+    .settingstable tr td {
+        width: 50%;
+        border: none;
+    }
+    .pickertable tr td {
+        vertical-align: top;
+    }
+    .pickertable tr td:first-child {
+        width: 240px;
+    }
+    .pickertable tr td:last-child {
+        width: calc(100% - 260px);
+        padding-left: 20px;
+    }
     .border {
         padding: 4px;
         border-radius: 4px;
         float: right;
         width: 100%;
+    }
+    .buttondiv {
+        margin: 15px 0;
     }
     .okDate {
         color: #3c764d;
@@ -18,131 +40,151 @@
 </style>
 
 <div>
-    <ul>
-        <li>
-            <label>
-                <span>Show today button:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onShowTodayButton($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Open selector top of input field:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onOpenSelectorTopOfInput($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Align selector right:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onAlignSelectorRight($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Show selector arrow:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onShowSelectorArrow($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Month selector:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onMonthSelector($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Year selector:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onYearSelector($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Disable today:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onDisableToday($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Mark today:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onMarkToday($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Mark weekends:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onMarkWeekends($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Disable weekends:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onDisableWeekends($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Highlight Saturday:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onHighlighSaturday($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Highlight Sunday:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onHighlighSunday($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Highlight dates:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onHighlightDates($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Disable header buttons:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onDisableHeaderButtons($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Show week numbers:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Disable input box:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onDisableInput($event.currentTarget.checked)" [checked]="false">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span>Close selector on date select:</span>
-                <input style="cursor: pointer" type="checkbox" (change)="onCloseSelectorOnDateSelect($event.currentTarget.checked)" [checked]="true">
-            </label>
-        </li>
-        <li>
-            <label>
-                <span style="margin-right: 10px">Selector size:</span>
-                <span>
+    <table class="settingstable">
+        <tr>
+            <td>
+                <label>
+                    <span>Show today button:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onShowTodayButton($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Open selector top of input field:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onOpenSelectorTopOfInput($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Align selector right:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onAlignSelectorRight($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Show selector arrow:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onShowSelectorArrow($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Month selector:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onMonthSelector($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Year selector:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onYearSelector($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Disable today:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisableToday($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Mark today:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onMarkToday($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Mark weekends:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onMarkWeekends($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Disable weekends:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisableWeekends($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Highlight Saturday:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onHighlighSaturday($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Highlight Sunday:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onHighlighSunday($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Highlight dates:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onHighlightDates($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Disable header buttons:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisableHeaderButtons($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Show week numbers:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onShowWeekNumbers($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Disable input box:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisableInput($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Close selector on date select:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onCloseSelectorOnDateSelect($event.currentTarget.checked)" [checked]="true">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span style="margin-right: 10px">Selector size:</span>
+                    <span>
                     <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
                         <option *ngFor="let s of selectorSizes">{{s}}</option>
                     </select>
                 </span>
-            </label>
-        </li>
+                </label>
+            </td>
+        </tr>
+    </table>
 
-        <li>
-            <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar()">Toggle</button>
-            <button style="cursor: pointer" type="button" (click)="dp.openCalendar()">Open</button>
-            <button style="cursor: pointer" type="button" (click)="dp.closeCalendar()">Close</button>
-            <button style="cursor: pointer" type="button" (click)="clearDate()">Clear</button>
-        </li>
-    </ul>
 
-    <table style="width: 100%">
+    <div class="buttondiv">
+        <button style="cursor: pointer" type="button" (click)="dp.toggleCalendar()">Toggle</button>
+        <button style="cursor: pointer" type="button" (click)="dp.openCalendar()">Open</button>
+        <button style="cursor: pointer" type="button" (click)="dp.closeCalendar()">Close</button>
+        <button style="cursor: pointer" type="button" (click)="clearDate()">Clear</button>
+    </div>
+
+
+    <table class="pickertable">
         <tr>
-            <td style="vertical-align: top; width: 220px">
+            <td>
                 <form>
                     <div class="input-group">
 
@@ -159,7 +201,7 @@
                     </div>
                 </form>
             </td>
-            <td style="vertical-align: top;padding-left: 20px">
+            <td>
                 <div *ngIf="inputText !== ''" class="border" [ngClass]="{'okDate': validDate, 'invalidDate': !validDate}">
                     <span *ngIf="validDate">{{selectedTextNormal}}</span>
                     <span *ngIf="!validDate">Invalid date</span>
