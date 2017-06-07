@@ -12,3 +12,4 @@ export * from "./dist/interfaces/my-options.interface";
 export * from "./dist/interfaces/my-weekday.interface";
 export * from "./dist/interfaces/my-marked-date.interface";
 export * from "./dist/interfaces/my-marked-dates.interface";
+export * from "./dist/interfaces/my-default-month.interface";

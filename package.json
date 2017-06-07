@@ -1,6 +1,6 @@
 {
   "name": "ngx-mydatepicker",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Angular date picker",
   "keywords": [
     "Angular2",
@@ -84,7 +84,7 @@
     "to-string-loader": "1.1.4",
     "tslint": "4.0.2",
     "typescript": "2.0.3",
-    "uglifyjs": "2.4.10",
+    "uglify-js": "3.0.13",
     "webpack": "1.13.3",
     "webpack-dev-server": "1.16.2",
     "webpack-livereload-plugin": "0.10.0",

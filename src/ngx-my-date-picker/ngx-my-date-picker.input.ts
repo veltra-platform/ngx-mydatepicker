@@ -126,7 +126,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
 
         if (changes.hasOwnProperty("defaultMonth")) {
-            this.defaultMonth = changes["defaultMonth"].currentValue;
+            let dm: any = changes["defaultMonth"].currentValue;
+            if (typeof dm === "object") {
+                dm = dm.defMonth;
+            }
+            this.defaultMonth = dm;
         }
     }
 

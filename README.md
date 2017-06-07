@@ -242,14 +242,14 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 
 ### defaultMonth attribute
 
-If initial date is not specified, when the datepicker is opened, you would prefer
+If initial date is not specified, when the calendar is opened, it will
+ordinarily default to selecting the current date. If you would prefer
 a different year and month to be the default for a freshly chosen date
-picking operation, specify the __defaultMonth__ attribute.
+picking operation, specify a __defaultMonth__ attribute.
 
-Value of the __defaultMonth__ attribute is a string which contain year number and
-month number separated by delimiter. The delimiter can be any special character.
-For example the value of the __defaultMonth__ attribute can be: __2016.08__,
-__08-2016__, __08/2016__.
+Value of the defaultMonth attribute can be:
+  * [IMyDefaultMonth](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-default-month.interface.ts) object. The value of __defMonth__ property can be a string which contain year number and month number separated by delimiter. The delimiter can be any special character. For example: __08-2016__ or __08/2016__.
+  * a string which contain year number and month number separated by delimiter. The delimiter can be any special character. For example: __08-2016__ or __08/2016__.
 
 ## Functions
 

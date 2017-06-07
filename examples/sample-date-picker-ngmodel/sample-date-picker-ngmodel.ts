@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate} from '../../src/ngx-my-date-picker/interfaces';
+import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate, IMyDefaultMonth} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
 
 declare var require:any;
@@ -52,7 +52,10 @@ export class SampleDatePickerNgModel implements OnInit {
     //private model: Object = {jsdate: new Date()};   // initialize today with jsdate property
     //private model: Object = {date: {year: 2018, month: 10, day: 9}};   // this example is initialized to specific date
 
-    private defMonth: string = '';
+    private defMonth: IMyDefaultMonth = {
+        defMonth: ''
+    };
+
     private selectorSizes: Array<string> = new Array('normal', 'small', 'big');
 
     constructor() {}
