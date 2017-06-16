@@ -87,7 +87,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
         else {
             let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
-            if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
+            if (this.utilService.isInitializedDate(date)) {
                 let dateModel: IMyDateModel = this.utilService.getDateModel(date, this.opts.dateFormat, this.opts.monthLabels);
                 this.emitDateChanged(dateModel);
                 this.updateModel(dateModel);
@@ -152,7 +152,8 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         if (value && (value["date"] || value["jsdate"])) {
             let formatted: string = this.utilService.formatDate(value["date"] ? value["date"] : this.jsDateToMyDate(value["jsdate"]), this.opts.dateFormat, this.opts.monthLabels);
             this.setInputValue(formatted);
-            this.emitInputFieldChanged(formatted, true);
+            let date: IMyDate = this.utilService.isDateValid(formatted, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
+            this.emitInputFieldChanged(formatted, this.utilService.isInitializedDate(date));
         }
         else if (value === null || value === "") {
             this.setInputValue("");
