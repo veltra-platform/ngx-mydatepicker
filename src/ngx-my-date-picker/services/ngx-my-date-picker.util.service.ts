@@ -41,7 +41,7 @@ export class UtilService {
 
             let date: IMyDate = {year: year, month: month, day: day};
 
-            if (this.isDisabledDate(date, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, enableDates)) {
+            if (this.isDisabledDate(date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, enableDates)) {
                 return returnDate;
             }
 
@@ -118,11 +118,15 @@ export class UtilService {
         return month;
     }
 
-    isDisabledDate(date: IMyDate, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDates: Array<IMyDate>): boolean {
+    isDisabledDate(date: IMyDate, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDates: Array<IMyDate>): boolean {
         for (let d of enableDates) {
             if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return false;
             }
+        }
+
+        if (date.year < minYear && date.month === 12 || date.year > maxYear && date.month === 1) {
+            return true;
         }
 
         let dateMs: number = this.getTimeInMilliseconds(date);

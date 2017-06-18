@@ -190,7 +190,7 @@ export class NgxMyDatePicker {
     }
 
     isTodayDisabled(): void {
-        this.disableTodayBtn = this.utilService.isDisabledDate(this.getToday(), this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates);
+        this.disableTodayBtn = this.utilService.isDisabledDate(this.getToday(), this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates);
     }
 
     setVisibleMonth(): void {
@@ -367,8 +367,13 @@ export class NgxMyDatePicker {
                 let pm = dInPrevM - monthStart + 1;
                 // Previous month
                 for (let j = pm; j <= dInPrevM; j++) {
-                    let date: IMyDate = {year: y, month: m - 1, day: j};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends), highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                    let date: IMyDate = {year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: j};
+                    week.push({dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(j, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                 }
 
                 cmo = this.currMonthId;
@@ -376,7 +381,12 @@ export class NgxMyDatePicker {
                 let daysLeft: number = 7 - week.length;
                 for (let j = 0; j < daysLeft; j++) {
                     let date: IMyDate = {year: y, month: m, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends), highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                    week.push({dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                     dayNbr++;
                 }
             }
@@ -388,8 +398,13 @@ export class NgxMyDatePicker {
                         dayNbr = 1;
                         cmo = this.nextMonthId;
                     }
-                    let date: IMyDate = {year: y, month: cmo === this.currMonthId ? m : m + 1, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today), disabled: this.utilService.isDisabledDate(date, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates), markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends), highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                    let date: IMyDate = {year: cmo === this.nextMonthId && m === 12 ? y + 1 : y, month: cmo === this.currMonthId ? m : cmo === this.nextMonthId && m < 12 ? m + 1 : 1, day: dayNbr};
+                    week.push({dateObj: date,
+                        cmo: cmo,
+                        currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                     dayNbr++;
                 }
             }
