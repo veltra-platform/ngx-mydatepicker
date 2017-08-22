@@ -9,7 +9,7 @@ import {SampleDatePickerReacticeForms} from './sample-date-picker-reactive-forms
 import {NgxMyDatePickerModule} from '../src/ngx-my-date-picker/ngx-my-date-picker.module';
 
 @NgModule({
-    imports: [BrowserModule, ReactiveFormsModule, FormsModule, NgxMyDatePickerModule],
+    imports: [BrowserModule, ReactiveFormsModule, FormsModule, NgxMyDatePickerModule.forRoot()],
     declarations: [MyDatePickerApp, SampleDatePickerNgModel, SampleDatePickerReacticeForms],
     bootstrap: [MyDatePickerApp]
 })
