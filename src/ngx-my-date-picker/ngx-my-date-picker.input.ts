@@ -1,19 +1,22 @@
-import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
+import {
+    Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef,
+    ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener
+} from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { IMyDate, IMyDateRange, IMyDayLabels, IMyMonthLabels, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMyMarkedDates, IMyMarkedDate } from "./interfaces/index";
+import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged } from "./interfaces/index";
 import { NgxMyDatePicker } from "./ngx-my-date-picker.component";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
+import { NgxMyDatePickerConfig } from "./services/ngx-my-date-picker.config";
+import { CalToggle } from "./enums/cal-toggle.enum";
+import { Year } from "./enums/year.enum";
+import { KeyCode } from "./enums/key-code.enum";
 
 const NGX_DP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NgxMyDatePickerDirective),
     multi: true
 };
-
-enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4, CloseByEsc = 5}
-enum Year {min = 1100, max = 9100}
-enum KeyCode {esc = 27, leftArrow = 37, rightArrow = 39}
 
 @Directive({
     selector: "[ngx-mydatepicker]",
@@ -33,50 +36,21 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     private inputText: string = "";
     private preventClose: boolean = false;
 
-    // Default options
-    private opts: IMyOptions = {
-        dayLabels: <IMyDayLabels> {su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat"},
-        monthLabels: <IMyMonthLabels> {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"},
-        dateFormat: <string> "yyyy-mm-dd",
-        showTodayBtn: <boolean> true,
-        todayBtnTxt: <string> "Today",
-        firstDayOfWeek: <string> "mo",
-        satHighlight: <boolean> false,
-        sunHighlight: <boolean> true,
-        highlightDates: <Array<IMyDate>> [],
-        markCurrentDay: <boolean> true,
-        markCurrentMonth: <boolean> true,
-        markCurrentYear: <boolean> true,
-        monthSelector: <boolean> true,
-        yearSelector: <boolean> true,
-        disableHeaderButtons: <boolean> true,
-        showWeekNumbers: <boolean> false,
-        selectorHeight: <string> "232px",
-        selectorWidth: <string> "252px",
-        disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
-        disableSince: <IMyDate> {year: 0, month: 0, day: 0},
-        disableDates: <Array<IMyDate>> [],
-        enableDates: <Array<IMyDate>> [],
-        markDates: <Array<IMyMarkedDates>> [],
-        markWeekends: <IMyMarkedDate> {},
-        disableDateRanges: <Array<IMyDateRange>> [],
-        disableWeekends: <boolean> false,
-        alignSelectorRight: <boolean> false,
-        openSelectorTopOfInput: <boolean> false,
-        closeSelectorOnDateSelect: <boolean> true,
-        minYear: <number> Year.min,
-        maxYear: <number> Year.max,
-        showSelectorArrow: <boolean> true,
-        ariaLabelPrevMonth: <string> "Previous Month",
-        ariaLabelNextMonth: <string> "Next Month",
-        ariaLabelPrevYear: <string> "Previous Year",
-        ariaLabelNextYear: <string> "Next Year",
-    };
+    private opts: IMyOptions;
 
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
 
-    constructor(private utilService: UtilService, private vcRef: ViewContainerRef, private cfr: ComponentFactoryResolver, private renderer: Renderer, private cdr: ChangeDetectorRef, private elem: ElementRef) {}
+    constructor(private utilService: UtilService,
+                private vcRef: ViewContainerRef,
+                private cfr: ComponentFactoryResolver,
+                private renderer: Renderer,
+                private cdr: ChangeDetectorRef,
+                private elem: ElementRef,
+                private config: NgxMyDatePickerConfig) {
+        this.opts = Object.assign({}, config);
+        this.parseOptions(config);
+    }
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
         if (evt.keyCode === KeyCode.leftArrow || evt.keyCode === KeyCode.rightArrow) {

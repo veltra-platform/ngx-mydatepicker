@@ -28,7 +28,7 @@ To install this component to an external project, follow the procedure:
     import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
     @NgModule({
-        imports:      [ BrowserModule, NgxMyDatePickerModule ],
+        imports:      [ BrowserModule, NgxMyDatePickerModule.forRoot() ],
         declarations: [ MyTestApp ],
         bootstrap:    [ MyTestApp ]
     })

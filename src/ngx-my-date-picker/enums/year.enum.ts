@@ -1,0 +1,1 @@
+export enum Year {min = 1100, max = 9100}

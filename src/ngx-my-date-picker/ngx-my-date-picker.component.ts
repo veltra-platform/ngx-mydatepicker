@@ -1,15 +1,14 @@
 import { Component, ElementRef, ViewEncapsulation, ViewChild, Renderer, ChangeDetectorRef } from "@angular/core";
 import { IMyDate, IMyMonth, IMyCalendarDay, IMyCalendarMonth, IMyCalendarYear, IMyWeek, IMyOptions } from "./interfaces/index";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
+import { KeyCode } from "./enums/key-code.enum";
+import { MonthId } from "./enums/month-id.enum";
 
 // webpack1_
 declare var require: any;
 const myDpStyles: string = require("./ngx-my-date-picker.component.css");
 const myDpTpl: string = require("./ngx-my-date-picker.component.html");
 // webpack2_
-
-enum KeyCode {enter = 13, esc = 27, space = 32}
-enum MonthId {prev = 1, curr = 2, next = 3}
 
 @Component({
     selector: "ngx-my-date-picker",

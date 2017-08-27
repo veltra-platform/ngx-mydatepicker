@@ -7,6 +7,7 @@ import {DebugElement, Component, ViewChild} from '@angular/core';
 import {NgxMyDatePickerModule} from './ngx-my-date-picker.module';
 import {NgxMyDatePickerDirective} from './ngx-my-date-picker.input';
 import {IMyOptions} from "./interfaces/my-options.interface";
+import {NgxMyDatePickerConfig} from './services/ngx-my-date-picker.config';
 
 let comp: NgxMyDatepickerTestComponent;
 let fixture: ComponentFixture<NgxMyDatepickerTestComponent>;
@@ -68,7 +69,8 @@ describe('ngx-mydatepicker', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [NgxMyDatepickerTestComponent],
-            imports: [FormsModule, NgxMyDatePickerModule]
+            imports: [FormsModule, NgxMyDatePickerModule],
+            providers: [NgxMyDatePickerConfig]
         });
         fixture = TestBed.createComponent(NgxMyDatepickerTestComponent);
         comp = fixture.componentInstance;
