@@ -16,7 +16,7 @@ import {NgxMyDatePickerModule} from 'ngx-mydatepicker';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgxMyDatePickerModule
+    NgxMyDatePickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [MyDatePickerApp]
