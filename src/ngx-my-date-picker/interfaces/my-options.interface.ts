@@ -35,6 +35,7 @@ export interface IMyOptions {
     alignSelectorRight?: boolean;
     openSelectorTopOfInput?: boolean;
     closeSelectorOnDateSelect?: boolean;
+    closeSelectorOnDocumentClick?: boolean;
     minYear?: number;
     maxYear?: number;
     showSelectorArrow?: boolean;

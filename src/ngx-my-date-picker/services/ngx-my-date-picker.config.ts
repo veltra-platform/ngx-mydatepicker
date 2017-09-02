@@ -44,6 +44,7 @@ export class NgxMyDatePickerConfig implements IMyOptions {
     alignSelectorRight = false;
     openSelectorTopOfInput = false;
     closeSelectorOnDateSelect = true;
+    closeSelectorOnDocumentClick = true;
     minYear = <number> Year.min;
     maxYear = <number> Year.max;
     showSelectorArrow = true;

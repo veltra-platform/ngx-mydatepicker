@@ -162,13 +162,25 @@
             </td>
             <td>
                 <label>
+                    <span>Close selector on document click:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onCloseSelectorOnDocumentClick($event.currentTarget.checked)" [checked]="true">
+                </label>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
                     <span style="margin-right: 10px">Selector size:</span>
                     <span>
-                    <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
-                        <option *ngFor="let s of selectorSizes">{{s}}</option>
-                    </select>
-                </span>
+                        <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
+                            <option *ngFor="let s of selectorSizes">{{s}}</option>
+                        </select>
+                    </span>
                 </label>
+            </td>
+            <td>
+
             </td>
         </tr>
     </table>

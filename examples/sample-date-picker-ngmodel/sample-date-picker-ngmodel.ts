@@ -37,7 +37,8 @@ export class SampleDatePickerNgModel implements OnInit {
         markWeekends: <IMyMarkedDate>{},
         selectorHeight: '232px',
         selectorWidth: '252px',
-        closeSelectorOnDateSelect: true
+        closeSelectorOnDateSelect: true,
+        closeSelectorOnDocumentClick: true
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -168,6 +169,12 @@ export class SampleDatePickerNgModel implements OnInit {
     onCloseSelectorOnDateSelect(checked: boolean) {
         let copy = this.getCopyOfOptions();
         copy.closeSelectorOnDateSelect = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onCloseSelectorOnDocumentClick(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.closeSelectorOnDocumentClick = checked;
         this.myDatePickerOptions = copy;
     }
 
