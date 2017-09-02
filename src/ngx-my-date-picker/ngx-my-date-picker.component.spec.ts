@@ -26,15 +26,15 @@ function getDefaultDateString(date: Date): string {
 }
 
 function getElement(id: string): any {
-    return fixture.nativeElement.querySelector(id);
+    return document.body.querySelector(id);
 }
 
-function getElements(id: string): Array<any> {
-    return fixture.nativeElement.querySelectorAll(id);
+function getElements(id: string): any {
+    return document.body.querySelectorAll(id);
 }
 
 @Component({
-    template: '<input class="myDateInput" id="myDateInput" ngx-mydatepicker #dp="ngx-mydatepicker" name="mydate"/>'
+    template: '<input style="width: 400px;" class="myDateInput" id="myDateInput" ngx-mydatepicker #dp="ngx-mydatepicker" name="mydate"/>'
 })
 class NgxMyDatepickerTestComponent {
     @ViewChild('dp') vcDp: NgxMyDatePickerDirective;
@@ -143,6 +143,8 @@ describe('ngx-mydatepicker', () => {
 
             prevmonth.click();
         }
+
+        comp.closeCalendar();
     });
 
     it('select next month', () => {
@@ -167,6 +169,7 @@ describe('ngx-mydatepicker', () => {
 
             nextmonth.click();
         }
+        comp.closeCalendar();
     });
 
     it('select previous month form selector', () => {
@@ -190,6 +193,8 @@ describe('ngx-mydatepicker', () => {
         let yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2015');
+
+        comp.closeCalendar();
     });
 
     it('select next month form selector', () => {
@@ -213,6 +218,8 @@ describe('ngx-mydatepicker', () => {
         let yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2016');
+
+        comp.closeCalendar();
     });
 
     it('select today from selector', () => {
@@ -232,7 +239,10 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         selection = getElement('.myDateInput');
         expect(selection.value).toBe('');
+
+        comp.closeCalendar();
     });
+
 
     it('select previous year', () => {
         comp.setDefaultMonth('2010/12');
@@ -251,6 +261,8 @@ describe('ngx-mydatepicker', () => {
 
             prevyear.click();
         }
+
+        comp.closeCalendar();
     });
 
     it('select next year', () => {
@@ -270,6 +282,8 @@ describe('ngx-mydatepicker', () => {
 
             nextyear.click();
         }
+
+        comp.closeCalendar();
     });
 
     it('select previous month year change', () => {
@@ -292,6 +306,8 @@ describe('ngx-mydatepicker', () => {
         let yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2015');
+
+        comp.closeCalendar();
     });
 
     it('select next month year change', () => {
@@ -314,6 +330,8 @@ describe('ngx-mydatepicker', () => {
         let yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2017');
+
+        comp.closeCalendar();
     });
 
     it('edit date in input box', () => {
@@ -370,6 +388,8 @@ describe('ngx-mydatepicker', () => {
 
             nextmonth.click();
         }
+
+        comp.closeCalendar();
     });
 
     it('test calendar year 2016 month one by one - previous month button', () => {
@@ -408,6 +428,8 @@ describe('ngx-mydatepicker', () => {
 
             prevmonth.click();
         }
+
+        comp.closeCalendar();
     });
 
     // options
@@ -427,6 +449,8 @@ describe('ngx-mydatepicker', () => {
             let el = ths[i];
             expect(parseInt(el.textContent.trim())).toBe(i + 1);
         }
+
+        comp.closeCalendar();
     });
 
     it('options - monthLabels', () => {
@@ -451,6 +475,8 @@ describe('ngx-mydatepicker', () => {
 
             nextmonth.click();
         }
+
+        comp.closeCalendar();
     });
 
     it('options - dateFormat', () => {
@@ -510,6 +536,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         selection = getElement('.myDateInput');
         expect(selection.value).toBe('01 Jan 2016');
+
+        comp.closeCalendar();
     });
 
     it('options - showTodayBtn', () => {
@@ -539,6 +567,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         headertodaybtn = getElement('.headertodaybtn');
         expect(headertodaybtn).toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - todatBtnTxt', () => {
@@ -565,6 +595,8 @@ describe('ngx-mydatepicker', () => {
         headertodaybtn = getElement('.headertodaybtn span:last-child');
         expect(headertodaybtn).not.toBe(null);
         expect(headertodaybtn.textContent).toBe('text');
+
+        comp.closeCalendar();
     });
 
     it('options - firstDayOfWeek', () => {
@@ -599,6 +631,8 @@ describe('ngx-mydatepicker', () => {
         last = getElement('.weekdaytitle:last-child');
         expect(last).not.toBe(null);
         expect(last.textContent).toBe('Sat');
+
+        comp.closeCalendar();
     });
 
     it('options - sunHighlight', () => {
@@ -629,7 +663,10 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         highlight = getElements('.highlight');
         expect(highlight.length).toBe(0);
+
+        comp.closeCalendar();
     });
+
 
     it('options - satHighlight', () => {
         comp.setDefaultMonth('2016/01');
@@ -660,6 +697,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         highlight = getElements('.highlight');
         expect(highlight.length).toBe(0);
+
+        comp.closeCalendar();
     });
 
     it('options - highlightDates', () => {
@@ -692,6 +731,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         highlight = getElements('.highlight');
         expect(highlight.length).toBe(0);
+
+        comp.closeCalendar();
     });
 
     it('options - markCurrentDay', () => {
@@ -718,6 +759,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         markcurrday = getElement('.markcurrday');
         expect(markcurrday).toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - markCurrentMonth', () => {
@@ -735,6 +778,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let markcurrmonth = getElement('.markcurrmonth');
         expect(markcurrmonth).not.toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - markCurrentYear', () => {
@@ -752,6 +797,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let markcurryear = getElement('.markcurryear');
         expect(markcurryear).not.toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - monthSelector', () => {
@@ -794,6 +841,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         monthtable = getElement('.monthtable');
         expect(monthtable).toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - yearSelector', () => {
@@ -837,6 +886,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         yeartable = getElement('.yeartable');
         expect(yeartable).toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - disableHeaderButtons', () => {
@@ -930,6 +981,8 @@ describe('ngx-mydatepicker', () => {
         yearlabel = getElement('.headeryeartxt .headerlabelbtn');
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2016');
+
+        comp.closeCalendar();
     });
 
     it('options - showWeekNmbers', () => {
@@ -985,6 +1038,8 @@ describe('ngx-mydatepicker', () => {
         expect(daycellweeknbr[3].textContent.trim()).toBe('4');
         expect(daycellweeknbr[4].textContent.trim()).toBe('5');
         expect(daycellweeknbr[5].textContent.trim()).toBe('6');
+
+        comp.closeCalendar();
     });
 
     it('options - selectorHeight', () => {
@@ -1001,6 +1056,8 @@ describe('ngx-mydatepicker', () => {
         let selector = getElement('.selector');
         expect(selector).not.toBe(null);
         expect(selector.style['height']).toBe('200px');
+
+        comp.closeCalendar();
     });
 
     it('options - selectorWidth', () => {
@@ -1017,6 +1074,8 @@ describe('ngx-mydatepicker', () => {
         let selector = getElement('.selector');
         expect(selector).not.toBe(null);
         expect(selector.style['width']).toBe('220px');
+
+        comp.closeCalendar();
     });
 
     it('options - minYear', () => {
@@ -1045,6 +1104,8 @@ describe('ngx-mydatepicker', () => {
         yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2010');
+
+        comp.closeCalendar();
     });
 
     it('options - maxYear', () => {
@@ -1073,6 +1134,8 @@ describe('ngx-mydatepicker', () => {
         yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent).toBe('2020');
+
+        comp.closeCalendar();
     });
 
     it('options - disableUntil', () => {
@@ -1100,6 +1163,8 @@ describe('ngx-mydatepicker', () => {
         disabled = getElements('.disabled');
         expect(disabled).not.toBe(null);
         expect(disabled.length).toBe(42);
+
+        comp.closeCalendar();
     });
 
     it('options - disableSince', () => {
@@ -1127,6 +1192,8 @@ describe('ngx-mydatepicker', () => {
         disabled = getElements('.disabled');
         expect(disabled).not.toBe(null);
         expect(disabled.length).toBe(42);
+
+        comp.closeCalendar();
     });
 
     it('options - disableDates', () => {
@@ -1167,6 +1234,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         selection = getElement('.myDateInput');
         expect(selection.value).toBe('2017-01-13');
+
+        comp.closeCalendar();
     });
 
     it('options - enableDates', () => {
@@ -1194,6 +1263,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let selection = getElement('.myDateInput');
         expect(selection.value).toBe('2017-01-14');
+
+        comp.closeCalendar();
     });
 
     it('options - disableDateRanges', () => {
@@ -1220,6 +1291,8 @@ describe('ngx-mydatepicker', () => {
         expect(disabled[3].textContent.trim()).toBe('10');
         expect(disabled[4].textContent.trim()).toBe('11');
         expect(disabled[5].textContent.trim()).toBe('12');
+
+        comp.closeCalendar();
     });
 
     it('options - markDates', () => {
@@ -1247,6 +1320,8 @@ describe('ngx-mydatepicker', () => {
         markdate = getElements('.markdate');
         expect(markdate).not.toBe(null);
         expect(markdate.length).toBe(0);
+
+        comp.closeCalendar();
     });
 
     it('options - markWeekends', () => {
@@ -1274,6 +1349,8 @@ describe('ngx-mydatepicker', () => {
         markdate = getElements('.markdate');
         expect(markdate).not.toBe(null);
         expect(markdate.length).toBe(0);
+
+        comp.closeCalendar();
     });
 
     it('options - disableWeekends', () => {
@@ -1307,6 +1384,8 @@ describe('ngx-mydatepicker', () => {
 
         let lastDisabled = disabled[disabled.length - 1];
         expect(lastDisabled.textContent.trim()).toBe('6');
+
+        comp.closeCalendar();
     });
 
     it('options - alignSelectorRight', () => {
@@ -1321,7 +1400,16 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let selector = getElement('.selector');
         expect(selector).not.toBe(null);
-        expect(selector.attributes['style'].textContent).not.toContain('left: 0px');
+        let posSelector = selector.getBoundingClientRect();
+
+        fixture.detectChanges();
+        let input = getElement('.myDateInput');
+        expect(input).not.toBe(null);
+        let posInput = input.getBoundingClientRect();
+
+        expect(posSelector.right).toBe(posInput.width);
+
+        comp.closeCalendar();
     });
 
     it('options - openSelectorTopOfInput', () => {
@@ -1336,7 +1424,10 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let selector = getElement('.selector');
         expect(selector).not.toBe(null);
-        expect(selector.attributes['style'].textContent).not.toContain('bottom: initial');
+        let posSelector = selector.getBoundingClientRect();
+        expect(posSelector.bottom).toBe(0);
+
+        comp.closeCalendar();
     });
 
     it('options - closeSelectorOnDateSelect', () => {
@@ -1376,6 +1467,8 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         selector = getElement('.selector');
         expect(selector).toBe(null);
+
+        comp.closeCalendar();
     });
 
     it('options - ariaLabelPrevMonth', () => {
@@ -1391,6 +1484,8 @@ describe('ngx-mydatepicker', () => {
         let prevmonth = getElement(PREVMONTH);
         expect(prevmonth).not.toBe(null);
         expect(prevmonth.attributes['aria-label'].textContent).toBe(opts.ariaLabelPrevMonth);
+
+        comp.closeCalendar();
     });
 
     it('options - ariaLabelNextMonth', () => {
@@ -1406,6 +1501,8 @@ describe('ngx-mydatepicker', () => {
         let nextmonth = getElement(NEXTMONTH);
         expect(nextmonth).not.toBe(null);
         expect(nextmonth.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextMonth);
+
+        comp.closeCalendar();
     });
 
 
@@ -1422,6 +1519,8 @@ describe('ngx-mydatepicker', () => {
         let prevyear = getElement(PREVYEAR);
         expect(prevyear).not.toBe(null);
         expect(prevyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelPrevYear);
+
+        comp.closeCalendar();
     });
 
     it('options - ariaLabelNextYear', () => {
@@ -1437,6 +1536,8 @@ describe('ngx-mydatepicker', () => {
         let nextyear = getElement(NEXTYEAR);
         expect(nextyear).not.toBe(null);
         expect(nextyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextYear);
+
+        comp.closeCalendar();
     });
 
     it('defaultMonth attribute', () => {
@@ -1468,8 +1569,9 @@ describe('ngx-mydatepicker', () => {
         yearlabel = getElement(YEARLABEL);
         expect(yearlabel).not.toBe(null);
         expect(yearlabel.textContent.trim()).toBe('2018');
-    });
 
+        comp.closeCalendar();
+    });
 });
 
 

@@ -219,8 +219,8 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __markWeekends__   | no default value | [IMyMarkedDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-marked-date.interface.ts) | Mark weekends (Saturday and Sunday). For example: {marked: true, color: 'red'}. Value of color can be any CSS color code. To reset existing markWeekends set: {marked: false, color: ''} |
 | __disableHeaderButtons__   | true | boolean | Prevent to change the calendar view with header buttons if previous or next month are fully disabled by disableUntil or disableSince. |
 | __showWeekNumbers__   | false | boolean | Are week numbers visible or not on calendar. Can be used if __firstDayOfWeek = mo__. |
-| __selectorHeight__   | 232px | string | Selector height. |
-| __selectorWidth__   | 252px | string | Selector width. |
+| __selectorHeight__   | 232px | string | Selector height in pixels. |
+| __selectorWidth__   | 252px | string | Selector width in pixels. |
 | __alignSelectorRight__   | false | boolean | Align selector right. |
 | __openSelectorTopOfInput__   | false | boolean | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
 | __closeSelectorOnDateSelect__ | true | boolean | Is selector closed or not on a date select. |

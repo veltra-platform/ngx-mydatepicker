@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewEncapsulation, ViewChild, Renderer, ChangeDetectorRef } from "@angular/core";
-import { IMyDate, IMyMonth, IMyCalendarDay, IMyCalendarMonth, IMyCalendarYear, IMyWeek, IMyOptions } from "./interfaces/index";
+import { IMyDate, IMyMonth, IMyCalendarDay, IMyCalendarMonth, IMyCalendarYear, IMyWeek, IMyOptions, IMySelectorPosition } from "./interfaces/index";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 import { KeyCode } from "./enums/key-code.enum";
 import { MonthId } from "./enums/month-id.enum";
@@ -38,7 +38,7 @@ export class NgxMyDatePicker {
     dateChanged: Function;
     calendarViewChanged: Function;
     closedByEsc: Function;
-    inputHeight: number = 0;
+    selectorPos: IMySelectorPosition = null;
 
     prevMonthDisabled: boolean = false;
     nextMonthDisabled: boolean = false;
@@ -59,8 +59,9 @@ export class NgxMyDatePicker {
         });
     }
 
-    initialize(opts: IMyOptions, defaultMonth: string, inputValue: string, inputHeight: number, dc: Function, cvc: Function, cbe: Function): void {
+    initialize(opts: IMyOptions, defaultMonth: string, selectorPos: IMySelectorPosition, inputValue: string, dc: Function, cvc: Function, cbe: Function): void {
         this.opts = opts;
+        this.selectorPos = selectorPos;
         this.weekDays.length = 0;
 
         this.isTodayDisabled();
@@ -86,7 +87,6 @@ export class NgxMyDatePicker {
         this.dateChanged = dc;
         this.calendarViewChanged = cvc;
         this.closedByEsc = cbe;
-        this.inputHeight = inputHeight;
 
         this.setVisibleMonth();
     }

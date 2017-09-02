@@ -1,10 +1,7 @@
-import {
-    Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef,
-    ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener
-} from "@angular/core";
+import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged } from "./interfaces/index";
+import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMySelectorPosition } from "./interfaces/index";
 import { NgxMyDatePicker } from "./ngx-my-date-picker.component";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 import { NgxMyDatePickerConfig } from "./services/ngx-my-date-picker.config";
@@ -151,13 +148,13 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.preventClose = true;
         this.cdr.detectChanges();
         if (this.cRef === null) {
-            let cf = this.cfr.resolveComponentFactory(NgxMyDatePicker);
-            this.cRef = this.vcRef.createComponent(cf);
+            this.cRef = this.vcRef.createComponent(this.cfr.resolveComponentFactory(NgxMyDatePicker));
+            this.appendSelectorToBody(this.cRef.location.nativeElement);
             this.cRef.instance.initialize(
                 this.opts,
                 this.defaultMonth,
+                this.getSelectorPosition(this.elem.nativeElement),
                 this.elem.nativeElement.value,
-                this.elem.nativeElement.offsetHeight,
                 (dm: IMyDateModel, close: boolean) => {
                     this.emitDateChanged(dm);
                     this.updateModel(dm);
@@ -238,5 +235,33 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     private jsDateToMyDate(date: Date): IMyDate {
         return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+    }
+
+    private appendSelectorToBody(elem: any): void {
+        document.querySelector("body").appendChild(elem);
+    }
+
+    private getSelectorPosition(elem: any): IMySelectorPosition {
+        let b: any = document.body.getBoundingClientRect();
+        let e: any = elem.getBoundingClientRect();
+
+        let top: number = e.top - b.top;
+        let left: number = e.left - b.left;
+
+        if (this.opts.openSelectorTopOfInput) {
+            top = top - this.getSelectorDimension(this.opts.selectorHeight) - 2;
+        }
+        else {
+            top = top + elem.offsetHeight + (this.opts.showSelectorArrow ? 12 : 2);
+        }
+
+        if (this.opts.alignSelectorRight) {
+            left = left + elem.offsetWidth - this.getSelectorDimension(this.opts.selectorWidth);
+        }
+        return {top: top + "px", left: left + "px"};
+    }
+
+    private getSelectorDimension(value: string): number {
+        return Number(value.replace("px", ""));
     }
 }
