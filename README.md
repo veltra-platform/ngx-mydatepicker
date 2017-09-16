@@ -70,13 +70,13 @@ import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 
 export class MyTestApp {
 
-    private myOptions: INgxMyDpOptions = {
+    myOptions: INgxMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
     };
 
     // Initialized to specific date (09.10.2018)
-    private model: Object = { date: { year: 2018, month: 10, day: 9 } };
+    model: any = { date: { year: 2018, month: 10, day: 9 } };
 
     constructor() { }
 
@@ -121,7 +121,7 @@ import {INgxMyDpOptions} from 'ngx-mydatepicker';
 
 export class MyTestApp implements OnInit {
 
-    private myOptions: INgxMyDpOptions = {
+    myOptions: INgxMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
     };
