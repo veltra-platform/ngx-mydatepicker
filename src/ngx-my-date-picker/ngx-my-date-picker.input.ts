@@ -50,7 +50,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     @HostListener("keyup", ["$event"]) onKeyUp(evt: KeyboardEvent) {
-        if (evt.keyCode === KeyCode.leftArrow || evt.keyCode === KeyCode.rightArrow) {
+        if (this.ignoreKeyPress(evt.keyCode)) {
             return;
         }
         else if (evt.keyCode === KeyCode.esc) {
@@ -196,6 +196,10 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.onTouchedCb();
         this.setInputValue("");
         this.closeSelector(CalToggle.CloseByCalBtn);
+    }
+
+    private ignoreKeyPress(keyCode: number): boolean {
+        return keyCode === KeyCode.leftArrow || keyCode === KeyCode.rightArrow || keyCode === KeyCode.upArrow || keyCode === KeyCode.downArrow || keyCode === KeyCode.tab || keyCode === KeyCode.shift;
     }
 
     private closeSelector(reason: number): void {
