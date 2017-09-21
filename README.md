@@ -207,8 +207,8 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __markCurrentYear__   | true | boolean | Is current year marked on calendar. Can be used if __yearSelector = true__. |
 | __monthSelector__  | true | boolean | If month label is selected opens a selector of months. |
 | __yearSelector__  | true | boolean | If year label is selected opens a selector of years. |
-| __minYear__   | 1100 | number | Minimum allowed year in calendar. Cannot be less than 1100. |
-| __maxYear__   | 9100 | number | Maximum allowed year in calendar. Cannot be more than 9100. |
+| __minYear__   | 1000 | number | Minimum allowed year in calendar. Cannot be less than 1000. |
+| __maxYear__   | 9999 | number | Maximum allowed year in calendar. Cannot be more than 9999. |
 | __disableUntil__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates backward starting from the given date. For example: {year: 2016, month: 6, day: 26}. To reset existing disableUntil value set: {year: 0, month: 0, day: 0} |
 | __disableSince__   | no default value | [IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts) | Disable dates forward starting from the given date. For example: {year: 2016, month: 7, day: 22}. To reset existing disableSince value set: {year: 0, month: 0, day: 0} |
 | __disableDates__   | no default value | Array<[IMyDate](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-date.interface.ts)> | Disable single dates one by one. Array of disabled dates. For example: [{year: 2016, month: 11, day: 14}, {year: 2016, month: 1, day: 15}]. To reset existing disableDates value set empty array to it. |
