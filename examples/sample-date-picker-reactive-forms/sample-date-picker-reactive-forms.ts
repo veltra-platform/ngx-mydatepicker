@@ -15,7 +15,6 @@ const amSampleTpl: string = require('./sample-date-picker-reactive-forms.html');
 })
 
 export class SampleDatePickerReacticeForms implements OnInit {
-
 	private myDatePickerOptions: INgxMyDpOptions = {
         dateFormat: 'dd.mm.yyyy'
     };
@@ -58,8 +57,6 @@ export class SampleDatePickerReacticeForms implements OnInit {
     }
 
 	disable(): void {
-		//this.datePicker.setDisabledState(true);
-		//this.renderer.setElementAttribute(this.datePicker.)
 		this.myForm.get('myDate').disable();
 	}
 }
