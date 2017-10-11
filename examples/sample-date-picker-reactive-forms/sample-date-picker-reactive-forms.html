@@ -38,7 +38,7 @@
             <form [formGroup]="myForm" (ngSubmit)="onSubmitReactiveForms()" novalidate>
                 <div class="input-group">
                     <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="reactiveFormsDate" formControlName="myDate"
-                           [options]="myDatePickerOptions" #dp="ngx-mydatepicker" autocomplete="off"/>
+                           [options]="myDatePickerOptions" #dp="ngx-mydatepicker" autocomplete="off" #daco/>
 
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" (click)="dp.clearDate()"><i class="glyphicon glyphicon-remove"></i></button>
@@ -51,6 +51,7 @@
                     <button class="button" type="button" (click)="setDate()">Set Today</button>
                     <button class="button" type="button" (click)="resetDate()">Reset Today</button>
                     <button class="button" type="button" (click)="clearDate()">Set Empty</button>
+                    <button class="button" type="button" (click)="disable()">Disable</button>
                     <p class="error" *ngIf="myForm.controls.myDate.errors">Date is required!</p>
                 </div>
             </form>

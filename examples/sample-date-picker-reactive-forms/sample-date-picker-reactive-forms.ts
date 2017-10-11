@@ -1,4 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {
+	Component,
+	OnInit,
+	Renderer,
+} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {INgxMyDpOptions} from '../../src/ngx-my-date-picker/interfaces';
 
@@ -12,13 +16,14 @@ const amSampleTpl: string = require('./sample-date-picker-reactive-forms.html');
 
 export class SampleDatePickerReacticeForms implements OnInit {
 
-    private myDatePickerOptions: INgxMyDpOptions = {
+	private myDatePickerOptions: INgxMyDpOptions = {
         dateFormat: 'dd.mm.yyyy'
     };
 
     private myForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder,
+	            private renderer: Renderer) { }
 
     ngOnInit(): void {
         console.log('onInit(): SampleDatePickerReacticeForms');
@@ -51,4 +56,10 @@ export class SampleDatePickerReacticeForms implements OnInit {
         // Clear the date using the setValue function
         this.myForm.setValue({myDate: null});
     }
+
+	disable(): void {
+		//this.datePicker.setDisabledState(true);
+		//this.renderer.setElementAttribute(this.datePicker.)
+		this.myForm.get('myDate').disable();
+	}
 }
