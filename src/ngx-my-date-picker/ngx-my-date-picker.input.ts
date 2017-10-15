@@ -32,9 +32,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     private cRef: ComponentRef<NgxMyDatePicker> = null;
     private inputText: string = "";
     private preventClose: boolean = false;
-	private disabled = false;
+    private disabled = false;
 
-	private opts: IMyOptions;
+    private opts: IMyOptions;
 
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
@@ -145,16 +145,16 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.onTouchedCb = fn;
     }
 
-	public setDisabledState(isDisabled: boolean): void {
-    	this.disabled = isDisabled;
+    public setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
         this.renderer.setElementProperty(this.elem.nativeElement, "disabled", isDisabled);
 
         if (isDisabled) {
-	        this.closeCalendar();
+            this.closeCalendar();
         }
-	}
+    }
 
-	public openCalendar(): void {
+    public openCalendar(): void {
         if (this.disabled) {
             return;
         }
@@ -194,9 +194,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     public toggleCalendar(): void {
-	    if (this.disabled) {
-		    return;
-	    }
+        if (this.disabled) {
+            return;
+        }
         if (this.cRef === null) {
             this.openCalendar();
         }
