@@ -271,6 +271,9 @@ export class NgxMyDatePicker {
         if (cell.cmo === this.prevMonthId) {
             // Previous month of day
             this.onPrevMonth();
+            if (!this.opts.allowSelectionOnlyInCurrentMonth) {
+                this.selectDate(cell.dateObj);
+            }
         }
         else if (cell.cmo === this.currMonthId) {
             // Current month of day
@@ -279,6 +282,9 @@ export class NgxMyDatePicker {
         else if (cell.cmo === this.nextMonthId) {
             // Next month of day
             this.onNextMonth();
+            if (!this.opts.allowSelectionOnlyInCurrentMonth) {
+                this.selectDate(cell.dateObj);
+            }
         }
         this.resetMonthYearSelect();
     }

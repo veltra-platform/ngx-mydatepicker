@@ -206,6 +206,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     public clearDate(): void {
+        if (this.disabled) {
+            return;
+        }
         this.emitDateChanged({date: {year: 0, month: 0, day: 0}, jsdate: null, formatted: "", epoc: 0});
         this.emitInputFieldChanged("", false);
         this.onChangeCb(null);

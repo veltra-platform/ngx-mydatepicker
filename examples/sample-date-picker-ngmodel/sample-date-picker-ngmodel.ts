@@ -38,7 +38,8 @@ export class SampleDatePickerNgModel implements OnInit {
         selectorHeight: '232px',
         selectorWidth: '252px',
         closeSelectorOnDateSelect: true,
-        closeSelectorOnDocumentClick: true
+        closeSelectorOnDocumentClick: true,
+        allowSelectionOnlyInCurrentMonth: true
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -175,6 +176,12 @@ export class SampleDatePickerNgModel implements OnInit {
     onCloseSelectorOnDocumentClick(checked: boolean) {
         let copy = this.getCopyOfOptions();
         copy.closeSelectorOnDocumentClick = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onAllowSelectionOnlyCurrentMonth(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.allowSelectionOnlyInCurrentMonth = checked;
         this.myDatePickerOptions = copy;
     }
 

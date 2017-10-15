@@ -1471,6 +1471,49 @@ describe('ngx-mydatepicker', () => {
         comp.closeCalendar();
     });
 
+    it('options - allowSelectionOnlyInCurrentMonth', () => {
+        comp.setDefaultMonth('2017/10');
+        let opts: IMyOptions = {
+            allowSelectionOnlyInCurrentMonth: true,
+            dateFormat: 'dd.mm.yyyy'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let currmonth = getElements('.daycell');
+        expect(currmonth).not.toBe(null);
+        expect(currmonth.length).toBe(42);
+
+        currmonth[0].click();
+
+        fixture.detectChanges();
+        let selection = getElement('.myDateInput');
+        expect(selection.value).toBe('');
+
+        comp.closeCalendar();
+
+
+        opts.allowSelectionOnlyInCurrentMonth = false;
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        currmonth = getElements('.daycell');
+        expect(currmonth).not.toBe(null);
+        expect(currmonth.length).toBe(42);
+
+        currmonth[0].click();
+
+        fixture.detectChanges();
+        selection = getElement('.myDateInput');
+        expect(selection.value).toBe('25.09.2017');
+
+        comp.closeCalendar();
+    });
+
     it('options - ariaLabelPrevMonth', () => {
         comp.setDefaultMonth('2017/02');
         let opts: IMyOptions = {

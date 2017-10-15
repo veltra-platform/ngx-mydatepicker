@@ -225,6 +225,8 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __openSelectorTopOfInput__   | false | boolean | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
 | __closeSelectorOnDateSelect__ | true | boolean | Is selector closed or not on a date select. |
 | __closeSelectorOnDocumentClick__ | true | boolean | Is selector closed or not on document click. |
+| __allowSelectionOnlyInCurrentMonth__ | true | boolean | Is a date selection allowed or not other than current month. |
+| __showSelectorArrow__   | true | boolean | Is selector (calendar) arrow shown or not. |
 | __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |

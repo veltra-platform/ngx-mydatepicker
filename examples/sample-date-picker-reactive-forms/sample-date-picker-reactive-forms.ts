@@ -19,6 +19,8 @@ export class SampleDatePickerReacticeForms implements OnInit {
         dateFormat: 'dd.mm.yyyy'
     };
 
+	private disabled: boolean = false;
+
     private myForm: FormGroup;
 
     constructor(private formBuilder: FormBuilder,
@@ -57,6 +59,13 @@ export class SampleDatePickerReacticeForms implements OnInit {
     }
 
 	disable(): void {
-		this.myForm.get('myDate').disable();
+        this.disabled = !this.disabled;
+        if(this.disabled) {
+            this.myForm.get('myDate').disable();
+        }
+        else {
+            this.myForm.get('myDate').enable();
+        }
+
 	}
 }
