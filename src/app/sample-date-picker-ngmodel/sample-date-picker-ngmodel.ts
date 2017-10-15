@@ -25,7 +25,8 @@ export class SampleDatePickerNgModel implements OnInit {
         showWeekNumbers: false,
         markDates: [],
         selectorHeight: '232px',
-        selectorWidth: '252px'
+        selectorWidth: '252px',
+        allowSelectionOnlyInCurrentMonth: true
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -113,6 +114,12 @@ export class SampleDatePickerNgModel implements OnInit {
     onShowWeekNumbers(checked: boolean) {
         let copy = this.getCopyOfOptions();
         copy.showWeekNumbers = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onAllowSelectionOnlyCurrentMonth(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.allowSelectionOnlyInCurrentMonth = checked;
         this.myDatePickerOptions = copy;
     }
 
