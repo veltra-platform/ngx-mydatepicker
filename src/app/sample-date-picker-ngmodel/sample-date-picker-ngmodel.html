@@ -110,6 +110,15 @@
       </td>
       <td>
         <label>
+          <span>Append selector to body:</span>
+          <input style="cursor: pointer" type="checkbox" (change)="onAppendSelectorToBody($event.currentTarget.checked)" [checked]="false">
+        </label>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <label>
           <span style="margin-right: 10px">Selector size:</span>
           <span>
               <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
@@ -118,7 +127,11 @@
           </span>
         </label>
       </td>
+      <td>
+
+      </td>
     </tr>
+
 
     <a href="https://github.com/kekeh/ngx-mydatepicker#options-attribute">all options...</a>
 
