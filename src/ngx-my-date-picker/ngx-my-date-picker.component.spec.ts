@@ -1415,7 +1415,8 @@ describe('ngx-mydatepicker', () => {
     it('options - openSelectorTopOfInput', () => {
         comp.setDefaultMonth('2017/02');
         let opts: IMyOptions = {
-            openSelectorTopOfInput: true
+            openSelectorTopOfInput: true,
+            appendSelectorToBody: true
         };
 
         comp.parseOptions(opts);

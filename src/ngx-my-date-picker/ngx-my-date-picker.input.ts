@@ -162,7 +162,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.cdr.detectChanges();
         if (this.cRef === null) {
             this.cRef = this.vcRef.createComponent(this.cfr.resolveComponentFactory(NgxMyDatePicker));
-            this.appendSelectorToBody(this.cRef.location.nativeElement);
+            this.appendSelector(this.cRef.location.nativeElement);
             this.cRef.instance.initialize(
                 this.opts,
                 this.defaultMonth,
@@ -260,16 +260,22 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
     }
 
-    private appendSelectorToBody(elem: any): void {
-        document.querySelector("body").appendChild(elem);
+    private appendSelector(elem: any): void {
+        if (this.opts.appendSelectorToBody) {
+            document.querySelector("body").appendChild(elem);
+        }
     }
 
     private getSelectorPosition(elem: any): IMySelectorPosition {
-        let b: any = document.body.getBoundingClientRect();
-        let e: any = elem.getBoundingClientRect();
+        let top: number = 0;
+        let left: number = 0;
 
-        let top: number = e.top - b.top;
-        let left: number = e.left - b.left;
+        if (this.opts.appendSelectorToBody) {
+            let b: any = document.body.getBoundingClientRect();
+            let e: any = elem.getBoundingClientRect();
+            top = e.top - b.top;
+            left = e.left - b.left;
+        }
 
         if (this.opts.openSelectorTopOfInput) {
             top = top - this.getSelectorDimension(this.opts.selectorHeight) - 2;

@@ -108,6 +108,20 @@ Add the following snippet inside your template:
 </form>
 ```
 
+There are two ways to set an initial date to the model.
+
+  * Initialize with the __IMyDate__ object:
+  ```ts
+  // Initialized to specific date (09.10.2018)
+  model: any = { date: { year: 2018, month: 10, day: 9 } };
+  ```
+
+  * Initialize with the __JS date__ object:
+  ```ts
+  // Initialized to today
+  model: any = { jsdate: new Date() };
+  ```
+
 ### 2. Reactive forms
 
 In this option the value accessor of reactive forms is used. [Here](https://github.com/kekeh/ngx-mydatepicker/tree/master/examples/sample-date-picker-reactive-forms)
@@ -142,9 +156,9 @@ export class MyTestApp implements OnInit {
     }
 
     setDate(): void {
-        // Set today date using the setValue function
+        // Set today date using the patchValue function
         let date = new Date();
-        this.myForm.setValue({myDate: {
+        this.myForm.patchValue({myDate: {
         date: {
             year: date.getFullYear(),
             month: date.getMonth() + 1,
@@ -153,8 +167,8 @@ export class MyTestApp implements OnInit {
     }
 
     clearDate(): void {
-        // Clear the date using the setValue function
-        this.myForm.setValue({myDate: null});
+        // Clear the date using the patchValue function
+        this.myForm.patchValue({myDate: null});
     }
 }
 ```
@@ -227,6 +241,7 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __closeSelectorOnDocumentClick__ | true | boolean | Is selector closed or not on document click. |
 | __allowSelectionOnlyInCurrentMonth__ | true | boolean | Is a date selection allowed or not other than current month. |
 | __showSelectorArrow__   | true | boolean | Is selector (calendar) arrow shown or not. |
+| __appendSelectorToBody__   | false | boolean | Is selector (calendar) appended to body element or not. |
 | __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |

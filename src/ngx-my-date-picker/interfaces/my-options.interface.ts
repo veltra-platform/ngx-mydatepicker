@@ -40,6 +40,7 @@ export interface IMyOptions {
     maxYear?: number;
     showSelectorArrow?: boolean;
     allowSelectionOnlyInCurrentMonth?: boolean;
+    appendSelectorToBody?: boolean;
     ariaLabelPrevMonth?: string;
     ariaLabelNextMonth?: string;
     ariaLabelPrevYear?: string;
