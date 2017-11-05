@@ -11,7 +11,7 @@ import {NgxMyDatePickerDirective} from 'ngx-mydatepicker';
 export class SampleDatePickerNgModel implements OnInit {
 
     myDatePickerOptions: IMyOptions = {
-        dateFormat: 'dd mmm yyyy',
+        dateFormat: 'd mmm yyyy',
         firstDayOfWeek: 'mo',
         sunHighlight: true,
         markCurrentDay: true,
