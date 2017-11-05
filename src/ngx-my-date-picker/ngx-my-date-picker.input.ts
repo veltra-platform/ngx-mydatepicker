@@ -170,6 +170,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.elem.nativeElement.value,
                 (dm: IMyDateModel, close: boolean) => {
                     this.emitDateChanged(dm);
+                    this.emitInputFieldChanged(dm.formatted, true);
                     this.updateModel(dm);
                     if (close) {
                         this.closeSelector(CalToggle.CloseByDateSel);
