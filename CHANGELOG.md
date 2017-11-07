@@ -1,4 +1,15 @@
-# [2.2.0](https://github.com/kekeh/ngx-mydatepicker/commit/ddc95ca3cc0888a32186daf1a06baf58903f970e) (2017-11-05)
+# 2.3.0 (2017-11-07)
+
+### Bug Fixes
+
+* Fixing short date format functionality.
+
+### Features
+
+* none
+
+
+# 2.2.0 (2017-11-05)
 
 ### Bug Fixes
 
@@ -10,7 +21,7 @@
   * Issue: Manually entered dates without leading zeroes being ignored, treated as empty fields. ([#63](https://github.com/kekeh/ngx-mydatepicker/issues/63))
 
 
-# [2.1.6](https://github.com/kekeh/ngx-mydatepicker/commit/0348b234339dbe953c2e774deb66cf935f7bed18) (2017-11-04)
+# 2.1.6 (2017-11-04)
 
 ### Bug Fixes
 
@@ -21,7 +32,7 @@
 * none
 
 
-# [2.1.5](https://github.com/kekeh/ngx-mydatepicker/commit/22e87fd6875594e2c4bbca8fcc759fc9fb21ced7) (2017-10-21)
+# 2.1.5 (2017-10-21)
 
 ### Bug Fixes
 
@@ -32,7 +43,7 @@
 * Added option __appendSelectorToBody__.
 
 
-# [2.1.4](https://github.com/kekeh/ngx-mydatepicker/commit/58c9abe2cdf6b679a0fc6e1d2e221b1431c29934) (2017-10-15)
+# 2.1.4 (2017-10-15)
 
 ### Bug Fixes
 

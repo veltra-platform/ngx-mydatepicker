@@ -13,7 +13,7 @@ const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
 export class SampleDatePickerNgModel implements OnInit {
 
     private myDatePickerOptions: INgxMyDpOptions = {
-        dateFormat: 'd.m.yyyy',
+        dateFormat: 'dd.mm.yyyy',
         firstDayOfWeek: 'mo',
         sunHighlight: true,
         markCurrentDay: true,

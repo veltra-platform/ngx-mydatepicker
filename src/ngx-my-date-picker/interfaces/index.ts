@@ -17,3 +17,4 @@ export * from "./my-marked-date.interface";
 export * from "./my-marked-dates.interface";
 export * from "./my-default-month.interface";
 export * from "./my-selector-pos.interface";
+export * from "./my-date-format.interface";

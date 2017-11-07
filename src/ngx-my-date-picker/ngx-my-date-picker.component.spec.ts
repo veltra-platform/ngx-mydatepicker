@@ -344,7 +344,7 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let selection = getElement('.myDateInput');
 
-        selection.value = '12 feb 2017';
+        selection.value = '12 Feb 2017';
         selection.dispatchEvent(new Event('keyup'));
 
         fixture.detectChanges();
