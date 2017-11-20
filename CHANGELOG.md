@@ -1,3 +1,13 @@
+# 2.3.2 (2017-11-20)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* The __isDateValid()__ function now calls also the __inputFieldChanged__ callback. (#107).
+
 # 2.3.1 (2017-11-20)
 
 ### Bug Fixes

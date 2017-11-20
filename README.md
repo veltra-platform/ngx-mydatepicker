@@ -308,7 +308,7 @@ Clears the date from the input box and model. For example:
 
 ### isDateValid function
 
-Returns true if the date in the input box is valid. Otherwise it returns false.
+Returns true if the date in the input box is valid. Otherwise it returns false. This function also calls the __inputFieldChanged__ callback.
 ```html
 <input ngx-mydatepicker [(ngModel)]="model" [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
 ```

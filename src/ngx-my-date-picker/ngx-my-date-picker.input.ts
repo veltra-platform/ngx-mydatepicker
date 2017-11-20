@@ -222,9 +222,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         if (this.elem.nativeElement.value !== "") {
             let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
             if (this.utilService.isInitializedDate(date)) {
+                this.emitInputFieldChanged(this.elem.nativeElement.value, true);
                 return true;
             }
         }
+        this.emitInputFieldChanged(this.elem.nativeElement.value, false);
         return false;
     }
 
