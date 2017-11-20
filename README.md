@@ -306,6 +306,22 @@ Clears the date from the input box and model. For example:
 <button type="button" (click)="dp.clearDate()">Clear</button>
 ```
 
+### isDateValid function
+
+Returns true if the date in the input box is valid. Otherwise it returns false.
+```html
+<input ngx-mydatepicker [(ngModel)]="model" [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
+```
+
+```ts
+@ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
+
+checkDateValidity(): void {
+    let valid: boolean = this.ngxdp.isDateValid();
+    console.log('Valid date in the input box: ', valid);
+}
+```
+
 ## Callbacks
 
 ### dateChanged callback

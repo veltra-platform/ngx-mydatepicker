@@ -218,6 +218,16 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
+    public isDateValid(): boolean {
+        if (this.elem.nativeElement.value !== "") {
+            let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
+            if (this.utilService.isInitializedDate(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private ignoreKeyPress(keyCode: number): boolean {
         return keyCode === KeyCode.leftArrow || keyCode === KeyCode.rightArrow || keyCode === KeyCode.upArrow || keyCode === KeyCode.downArrow || keyCode === KeyCode.tab || keyCode === KeyCode.shift;
     }

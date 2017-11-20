@@ -1,3 +1,14 @@
+# 2.3.1 (2017-11-20)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* Added new function __isDateValid()__ (#107).
+
+
 # 2.3.0 (2017-11-07)
 
 ### Bug Fixes
