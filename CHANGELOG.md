@@ -1,8 +1,20 @@
+# 2.3.3 (2017-11-28)
+
+### Bug Fixes
+
+* Unsubscribe click listener in the OnDestroy callback.
+
+### Features
+
+* none
+
+
 # 2.3.2 (2017-11-20)
 
 ### Bug Fixes
 
 * -
+
 
 ### Features
 
@@ -13,6 +25,7 @@
 ### Bug Fixes
 
 * -
+
 
 ### Features
 

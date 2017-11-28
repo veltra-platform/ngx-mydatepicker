@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewEncapsulation, ViewChild, Renderer, ChangeDetectorRef } from "@angular/core";
+import { Component, ElementRef, ViewEncapsulation, ViewChild, Renderer, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { IMyDate, IMyMonth, IMyCalendarDay, IMyCalendarMonth, IMyCalendarYear, IMyWeek, IMyOptions, IMySelectorPosition } from "./interfaces/index";
 import { UtilService } from "./services/ngx-my-date-picker.util.service";
 import { KeyCode } from "./enums/key-code.enum";
@@ -18,7 +18,7 @@ const myDpTpl: string = require("./ngx-my-date-picker.component.html");
     encapsulation: ViewEncapsulation.None
 })
 
-export class NgxMyDatePicker {
+export class NgxMyDatePicker implements OnDestroy {
     @ViewChild("selectorEl") selectorEl: any;
     opts: IMyOptions;
     visibleMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
@@ -51,12 +51,18 @@ export class NgxMyDatePicker {
     currMonthId: number = MonthId.curr;
     nextMonthId: number = MonthId.next;
 
+    clickListener: Function;
+
     constructor(public elem: ElementRef, private renderer: Renderer, private cdr: ChangeDetectorRef, private utilService: UtilService) {
-        renderer.listen(elem.nativeElement, "click", (evt: MouseEvent) => {
+        this.clickListener = renderer.listen(elem.nativeElement, "click", (evt: MouseEvent) => {
             if ((this.opts.monthSelector || this.opts.yearSelector) && evt.target) {
                 this.resetMonthYearSelect();
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.clickListener();
     }
 
     initialize(opts: IMyOptions, defaultMonth: string, selectorPos: IMySelectorPosition, inputValue: string, dc: Function, cvc: Function, cbe: Function): void {
