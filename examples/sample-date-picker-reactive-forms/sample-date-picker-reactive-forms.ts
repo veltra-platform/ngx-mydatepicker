@@ -60,12 +60,11 @@ export class SampleDatePickerReacticeForms implements OnInit {
 
 	disable(): void {
         this.disabled = !this.disabled;
-        if(this.disabled) {
+        if (this.disabled) {
             this.myForm.get('myDate').disable();
         }
         else {
             this.myForm.get('myDate').enable();
         }
-
 	}
 }
