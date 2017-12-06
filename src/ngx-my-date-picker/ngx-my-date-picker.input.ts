@@ -194,6 +194,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
                 this.getSelectorPosition(this.elem.nativeElement),
                 this.elem.nativeElement.value,
                 (dm: IMyDateModel, close: boolean) => {
+                    this.focusToInput();
                     this.emitDateChanged(dm);
                     this.emitInputFieldChanged(dm.formatted, true);
                     this.updateModel(dm);
@@ -276,6 +277,12 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     private setInputValue(value: string): void {
         this.inputText = value;
         this.renderer.setElementProperty(this.elem.nativeElement, "value", value);
+    }
+
+    private focusToInput(): void {
+        setTimeout(()=> {
+            this.elem.nativeElement.focus();
+        });
     }
 
     private emitDateChanged(dateModel: IMyDateModel): void {
