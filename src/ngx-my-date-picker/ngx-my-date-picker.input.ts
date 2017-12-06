@@ -280,7 +280,7 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
     }
 
     private focusToInput(): void {
-        setTimeout(()=> {
+        setTimeout(() => {
             this.elem.nativeElement.focus();
         });
     }
