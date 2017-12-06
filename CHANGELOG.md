@@ -1,3 +1,14 @@
+# 2.3.4 (2017-12-06)
+
+### Bug Fixes
+
+* none
+
+### Features
+
+* Merged #111 which adds invalid date validator. Now focus is set to the input box when a date is selected from the calendar.
+
+
 # 2.3.3 (2017-11-28)
 
 ### Bug Fixes
