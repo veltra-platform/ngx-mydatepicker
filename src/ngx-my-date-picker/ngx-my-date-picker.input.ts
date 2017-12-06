@@ -1,11 +1,5 @@
 import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
-import {
-    AbstractControl,
-    ControlValueAccessor,
-    NG_VALIDATORS,
-    NG_VALUE_ACCESSOR,
-    Validator
-} from "@angular/forms";
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from "@angular/forms";
 
 import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMySelectorPosition } from "./interfaces/index";
 import { NgxMyDatePicker } from "./ngx-my-date-picker.component";
@@ -138,22 +132,21 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
 
     public writeValue(value: any): void {
         if (!this.disabled) {
-
             if (value && (value["date"] || value["jsdate"])) {
                 let formatted: string = this.utilService.formatDate(value["date"] ? value["date"] : this.jsDateToMyDate(value["jsdate"]), this.opts.dateFormat, this.opts.monthLabels);
                 let date: IMyDate = this.utilService.isDateValid(formatted, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
-
                 if (!this.utilService.isInitializedDate(date)) {
                     throw new Error(`The value you want to set is invalid: ${JSON.stringify(value)}`);
-                } else {
+                }
+                else {
                     this.setInputValue(formatted);
                     this.emitInputFieldChanged(formatted, this.utilService.isInitializedDate(date));
                 }
 
-            } else if (value === null || value === "") {
+            }
+            else if (value === null || value === "") {
                 this.setInputValue("");
                 this.emitInputFieldChanged("", false);
-                this.onChangeCb(null);
             }
         }
     }
@@ -175,17 +168,14 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         }
     }
 
-    validate(c: AbstractControl): { [p: string]: any } {
-
+    public validate(c: AbstractControl): { [p: string]: any } {
         if (this.elem.nativeElement.value === null || this.elem.nativeElement.value === "") {
             return null;
         }
-
         let date: IMyDate = this.utilService.isDateValid(this.elem.nativeElement.value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
         if (!this.utilService.isInitializedDate(date)) {
             return {invalidDateFormat: true};
         }
-
         return null;
     }
 

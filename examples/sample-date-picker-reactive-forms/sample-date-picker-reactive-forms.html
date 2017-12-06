@@ -52,8 +52,8 @@
                     <button class="button" type="button" (click)="resetDate()">Reset Today</button>
                     <button class="button" type="button" (click)="clearDate()">Set Empty</button>
                     <button class="button" type="button" (click)="disable()">{{!disabled ? 'Disable' : 'Enable'}}</button>
-                    <p class="error" *ngIf="myForm.controls.myDate.errors.required">Date is required!</p>
-                    <p class="error" *ngIf="myForm.controls.myDate.errors.invalidDateFormat">Invalid date format!</p>
+                    <p class="error" *ngIf="myForm.controls.myDate.errors && myForm.controls.myDate.errors.required">Date is required!</p>
+                    <p class="error" *ngIf="myForm.controls.myDate.errors && myForm.controls.myDate.errors.invalidDateFormat">Invalid date format!</p>
                 </div>
             </form>
 

@@ -3,8 +3,8 @@
   "version": "2.3.3",
   "description": "Angular date picker",
   "keywords": [
-    "Angular2",
-    "Angular4",
+    "Angular",
+    "typescript",
     "date picker"
   ],
   "author": "kekeh",
