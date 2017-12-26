@@ -1,3 +1,14 @@
+# 2.4.0 (2017-12-26)
+
+### Bug Fixes
+
+* none
+
+### Features
+
+* Error is not now thrown if the input date that is set is invalid (for example disabled date). Now the component only calls the __inputFieldChanged__ callback with valid value of false.
+
+
 # 2.3.4 (2017-12-06)
 
 ### Bug Fixes
