@@ -96,10 +96,9 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         this.onTouchedCb();
     }
 
-    //wrapper with arrow function to preserve the use of 'this' word
+    // wrapper with arrow function to preserve the use of 'this' word
     private onClickWrapper = (ev: MouseEvent) => { this.onClick(ev); };
-    
-    //@HostListener("document:click", ["$event"])
+
     onClick(evt: MouseEvent) {
         if (this.opts.closeSelectorOnDocumentClick && !this.preventClose && evt.target && this.cRef !== null && this.elem.nativeElement !== evt.target && !this.cRef.location.nativeElement.contains(evt.target) && !this.disabled) {
             this.closeSelector(CalToggle.CloseByOutClick);
@@ -223,11 +222,11 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             return;
         }
         if (this.cRef === null) {
-            document.addEventListener('click', this.onClickWrapper);
-            this.openCalendar();            
+            document.addEventListener("click", this.onClickWrapper);
+            this.openCalendar();
         }
         else {
-            document.removeEventListener('click', this.onClickWrapper);
+            document.removeEventListener("click", this.onClickWrapper);
             this.closeSelector(CalToggle.CloseByCalBtn);
         }
     }
