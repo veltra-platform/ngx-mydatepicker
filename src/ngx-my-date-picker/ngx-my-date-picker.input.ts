@@ -131,7 +131,6 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
         if (this.opts.maxYear > Year.max) {
             this.opts.maxYear = Year.max;
         }
-        this.validate(undefined);
     }
 
     public writeValue(value: any): void {
