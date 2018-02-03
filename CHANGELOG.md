@@ -1,3 +1,14 @@
+# 2.4.3 (2018-02-03)
+
+### Bug Fixes
+
+* Merged #125
+
+### Features
+
+* README.md file updated.
+
+
 # 2.4.2 (2018-01-08)
 
 ### Bug Fixes
