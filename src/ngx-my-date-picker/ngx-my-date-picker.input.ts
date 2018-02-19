@@ -1,4 +1,20 @@
-import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener } from "@angular/core";
+import {
+    Directive,
+    Input,
+    ComponentRef,
+    ElementRef,
+    ViewContainerRef,
+    Renderer,
+    ChangeDetectorRef,
+    ComponentFactoryResolver,
+    forwardRef,
+    EventEmitter,
+    Output,
+    SimpleChanges,
+    OnChanges,
+    HostListener,
+    OnDestroy
+} from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMySelectorPosition } from "./interfaces/index";
@@ -20,7 +36,7 @@ const NGX_DP_VALUE_ACCESSOR = {
     exportAs: "ngx-mydatepicker",
     providers: [UtilService, NGX_DP_VALUE_ACCESSOR]
 })
-export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor {
+export class NgxMyDatePickerDirective implements OnChanges, OnDestroy, ControlValueAccessor {
     @Input() options: IMyOptions;
     @Input() defaultMonth: string;
 
@@ -107,6 +123,10 @@ export class NgxMyDatePickerDirective implements OnChanges, ControlValueAccessor
             }
             this.defaultMonth = dm;
         }
+    }
+
+    public ngOnDestroy(): void {
+        this.closeCalendar();
     }
 
     public parseOptions(opts: IMyOptions): void {
