@@ -5,9 +5,10 @@
 [![Build Status](https://travis-ci.org/kekeh/ngx-mydatepicker.svg?branch=master)](https://travis-ci.org/kekeh/ngx-mydatepicker)
 [![codecov](https://codecov.io/gh/kekeh/ngx-mydatepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/kekeh/ngx-mydatepicker)
 [![npm](https://img.shields.io/npm/v/ngx-mydatepicker.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/ngx-mydatepicker)
+[![npm](https://img.shields.io/npm/dm/ngx-mydatepicker.svg)](https://www.npmjs.com/package/ngx-mydatepicker)
 
 ## Description
-Angular attribute directive date picker. Compatible with __Angular2__ and __Angular4__ versions.
+Angular attribute directive date picker. Compatible __Angular2+__.
 
 ## Installation
 
@@ -36,5 +37,5 @@ Online demo is [here](http://kekeh.github.io/ngx-mydatepicker)
 
 ## Keywords
 * Date picker
-* Angular2
-* Angular4
+* Angular2+
+* typescript

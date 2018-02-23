@@ -5,9 +5,10 @@
 [![Build Status](https://travis-ci.org/kekeh/ngx-mydatepicker.svg?branch=master)](https://travis-ci.org/kekeh/ngx-mydatepicker)
 [![codecov](https://codecov.io/gh/kekeh/ngx-mydatepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/kekeh/ngx-mydatepicker)
 [![npm](https://img.shields.io/npm/v/ngx-mydatepicker.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/ngx-mydatepicker)
+[![npm](https://img.shields.io/npm/dm/ngx-mydatepicker.svg)](https://www.npmjs.com/package/ngx-mydatepicker)
 
 ## Description
-Angular attribute directive date picker. Compatible with __Angular2__ and __Angular4__ versions.
+Angular attribute directive date picker. Compatible __Angular2+__.
 
 There is similar date picker [here](https://github.com/kekeh/mydatepicker), but difference between these
 two is that with the ngx-mydatepicker you can define the style of input box, calendar and clear buttons.
@@ -108,6 +109,20 @@ Add the following snippet inside your template:
 </form>
 ```
 
+There are two ways to set an initial date to the model.
+
+  * Initialize with the __IMyDate__ object:
+  ```ts
+  // Initialized to specific date (09.10.2018)
+  model: any = { date: { year: 2018, month: 10, day: 9 } };
+  ```
+
+  * Initialize with the __JS date__ object:
+  ```ts
+  // Initialized to today
+  model: any = { jsdate: new Date() };
+  ```
+
 ### 2. Reactive forms
 
 In this option the value accessor of reactive forms is used. [Here](https://github.com/kekeh/ngx-mydatepicker/tree/master/examples/sample-date-picker-reactive-forms)
@@ -142,9 +157,9 @@ export class MyTestApp implements OnInit {
     }
 
     setDate(): void {
-        // Set today date using the setValue function
+        // Set today date using the patchValue function
         let date = new Date();
-        this.myForm.setValue({myDate: {
+        this.myForm.patchValue({myDate: {
         date: {
             year: date.getFullYear(),
             month: date.getMonth() + 1,
@@ -153,8 +168,8 @@ export class MyTestApp implements OnInit {
     }
 
     clearDate(): void {
-        // Clear the date using the setValue function
-        this.myForm.setValue({myDate: null});
+        // Clear the date using the patchValue function
+        this.myForm.patchValue({myDate: null});
     }
 }
 ```
@@ -195,7 +210,7 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | :------------- | :------------- | :----| :---------- |
 | __dayLabels__     | {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'} | [IMyDayLabels](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-day-labels.interface.ts) | Day labels visible on the selector. |
 | __monthLabels__   | { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' } | [IMyMonthLabels](https://github.com/kekeh/ngx-mydatepicker/blob/master/src/ngx-my-date-picker/interfaces/my-month-labels.interface.ts) | Month labels visible on the selector. |
-| __dateFormat__    | yyyy-mm-dd | string |  Date format on the selection area and the callback. For example: dd.mm.yyyy, yyyy-mm-dd, dd mmm yyyy (mmm = Month as a text) |
+| __dateFormat__    | yyyy-mm-dd | string |  Date format on the selection area and the callback. For example: d.m.yyyy, dd.mm.yyyy, yyyy-m-d, yyyy-mm-dd, d mmm yyyy, dd mmm yyyy (d = Day not leading zero, dd = Day with leading zero, m = Month not leading zero, mm = Month with leading zero, mmm = Month as a text, yyyy = Year four digit) |
 | __showTodayBtn__   | true | boolean | Show 'Today' button on calendar. |
 | __todayBtnTxt__   | Today | string | Today button text. Can be used if __showTodayBtn = true__. |
 | __firstDayOfWeek__   | mo | string | First day of week on calendar. One of the following: mo, tu, we, th, fr, sa, su |
@@ -225,6 +240,9 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __openSelectorTopOfInput__   | false | boolean | Open selector top of input field. The selector arrow cannot be shown if this option is true. |
 | __closeSelectorOnDateSelect__ | true | boolean | Is selector closed or not on a date select. |
 | __closeSelectorOnDocumentClick__ | true | boolean | Is selector closed or not on document click. |
+| __allowSelectionOnlyInCurrentMonth__ | true | boolean | Is a date selection allowed or not other than current month. |
+| __showSelectorArrow__   | true | boolean | Is selector (calendar) arrow shown or not. |
+| __appendSelectorToBody__   | false | boolean | Is selector (calendar) appended to body element or not. |
 | __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |
@@ -287,6 +305,22 @@ Closes the calendar if it is open and opens the calendar if it is closed. For ex
 Clears the date from the input box and model. For example:
 ```html
 <button type="button" (click)="dp.clearDate()">Clear</button>
+```
+
+### isDateValid function
+
+Returns true if the date in the input box is valid. Otherwise it returns false. This function also calls the __inputFieldChanged__ callback.
+```html
+<input ngx-mydatepicker [(ngModel)]="model" [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
+```
+
+```ts
+@ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
+
+checkDateValidity(): void {
+    let valid: boolean = this.ngxdp.isDateValid();
+    console.log('Valid date in the input box: ', valid);
+}
 ```
 
 ## Callbacks
@@ -401,5 +435,5 @@ Online demo is [here](http://kekeh.github.io/ngx-mydatepicker)
 
 ## Keywords
 * Date picker
-* Angular2
-* Angular4
+* Angular2+
+* typescript

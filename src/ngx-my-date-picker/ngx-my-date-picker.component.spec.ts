@@ -344,7 +344,7 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         let selection = getElement('.myDateInput');
 
-        selection.value = '12 feb 2017';
+        selection.value = '12 Feb 2017';
         selection.dispatchEvent(new Event('keyup'));
 
         fixture.detectChanges();
@@ -1415,7 +1415,8 @@ describe('ngx-mydatepicker', () => {
     it('options - openSelectorTopOfInput', () => {
         comp.setDefaultMonth('2017/02');
         let opts: IMyOptions = {
-            openSelectorTopOfInput: true
+            openSelectorTopOfInput: true,
+            appendSelectorToBody: true
         };
 
         comp.parseOptions(opts);
@@ -1467,6 +1468,49 @@ describe('ngx-mydatepicker', () => {
         fixture.detectChanges();
         selector = getElement('.selector');
         expect(selector).toBe(null);
+
+        comp.closeCalendar();
+    });
+
+    it('options - allowSelectionOnlyInCurrentMonth', () => {
+        comp.setDefaultMonth('2017/10');
+        let opts: IMyOptions = {
+            allowSelectionOnlyInCurrentMonth: true,
+            dateFormat: 'dd.mm.yyyy'
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let currmonth = getElements('.daycell');
+        expect(currmonth).not.toBe(null);
+        expect(currmonth.length).toBe(42);
+
+        currmonth[0].click();
+
+        fixture.detectChanges();
+        let selection = getElement('.myDateInput');
+        expect(selection.value).toBe('');
+
+        comp.closeCalendar();
+
+
+        opts.allowSelectionOnlyInCurrentMonth = false;
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        currmonth = getElements('.daycell');
+        expect(currmonth).not.toBe(null);
+        expect(currmonth.length).toBe(42);
+
+        currmonth[0].click();
+
+        fixture.detectChanges();
+        selection = getElement('.myDateInput');
+        expect(selection.value).toBe('25.09.2017');
 
         comp.closeCalendar();
     });

@@ -48,6 +48,8 @@ export class NgxMyDatePickerConfig implements IMyOptions {
     minYear = <number> Year.min;
     maxYear = <number> Year.max;
     showSelectorArrow = true;
+    allowSelectionOnlyInCurrentMonth = true;
+    appendSelectorToBody = false;
     ariaLabelPrevMonth = "Previous Month";
     ariaLabelNextMonth = "Next Month";
     ariaLabelPrevYear = "Previous Year";

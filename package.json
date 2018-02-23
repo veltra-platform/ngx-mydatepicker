@@ -1,10 +1,10 @@
 {
   "name": "ngx-mydatepicker",
-  "version": "2.1.3",
+  "version": "2.4.3",
   "description": "Angular date picker",
   "keywords": [
-    "Angular2",
-    "Angular4",
+    "Angular",
+    "typescript",
     "date picker"
   ],
   "author": "kekeh",
