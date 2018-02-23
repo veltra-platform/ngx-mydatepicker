@@ -1,20 +1,4 @@
-import {
-    Directive,
-    Input,
-    ComponentRef,
-    ElementRef,
-    ViewContainerRef,
-    Renderer,
-    ChangeDetectorRef,
-    ComponentFactoryResolver,
-    forwardRef,
-    EventEmitter,
-    Output,
-    SimpleChanges,
-    OnChanges,
-    HostListener,
-    OnDestroy
-} from "@angular/core";
+import { Directive, Input, ComponentRef, ElementRef, ViewContainerRef, Renderer, ChangeDetectorRef, ComponentFactoryResolver, forwardRef, EventEmitter, Output, SimpleChanges, OnChanges, HostListener, OnDestroy } from "@angular/core";
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from "@angular/forms";
 
 import { IMyDate, IMyOptions, IMyDateModel, IMyCalendarViewChanged, IMyInputFieldChanged, IMySelectorPosition } from "./interfaces/index";

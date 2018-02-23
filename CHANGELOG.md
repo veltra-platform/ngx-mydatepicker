@@ -1,3 +1,14 @@
+# 2.4.4 (2018-02-23)
+
+### Bug Fixes
+
+* Merged #128. It implements the OnDestroy method and it closes the calendar of date picker if it is open.
+
+### Features
+
+* -
+
+
 # 2.4.3 (2018-02-03)
 
 ### Bug Fixes
