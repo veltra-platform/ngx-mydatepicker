@@ -239,11 +239,11 @@ export class NgxMyDatePickerDirective implements OnChanges, OnDestroy, ControlVa
         if (this.disabled) {
             return;
         }
-        this.emitDateChanged({date: {year: 0, month: 0, day: 0}, jsdate: null, formatted: "", epoc: 0});
+        this.setInputValue("");
         this.emitInputFieldChanged("", false);
+        this.emitDateChanged({date: {year: 0, month: 0, day: 0}, jsdate: null, formatted: "", epoc: 0});
         this.onChangeCb(null);
         this.onTouchedCb();
-        this.setInputValue("");
         this.closeSelector(CalToggle.CloseByCalBtn);
     }
 
