@@ -41,6 +41,7 @@ export class NgxMyDatePickerConfig implements IMyOptions {
     markWeekends = <IMyMarkedDate> {};
     disableDateRanges = <Array<IMyDateRange>> [];
     disableWeekends = false;
+    disableWeekdays = <Array<string>> [];
     alignSelectorRight = false;
     openSelectorTopOfInput = false;
     closeSelectorOnDateSelect = true;

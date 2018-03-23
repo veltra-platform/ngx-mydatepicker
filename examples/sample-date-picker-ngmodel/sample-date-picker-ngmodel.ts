@@ -33,6 +33,7 @@ export class SampleDatePickerNgModel implements OnInit {
             {begin: {year: 2016, month: 10, day: 5}, end: {year: 2016, month: 10, day: 7}},
             {begin: {year: 2016, month: 10, day: 10}, end: {year: 2016, month: 10, day: 12}}
         ],
+        disableWeekdays: [],
         markDates: [],
         markWeekends: <IMyMarkedDate>{},
         selectorHeight: '232px',
@@ -189,6 +190,12 @@ export class SampleDatePickerNgModel implements OnInit {
     onAppendSelectorToBody(checked: boolean): void {
         let copy = this.getCopyOfOptions();
         copy.appendSelectorToBody = checked;
+        this.myDatePickerOptions = copy;
+    }
+
+    onDisableWednesday(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.disableWeekdays = checked ? ['we'] : [];
         this.myDatePickerOptions = copy;
     }
 

@@ -17,7 +17,9 @@ const YYYY = "yyyy";
 
 @Injectable()
 export class UtilService {
-    isDateValid(dateStr: string, dateFormat: string, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, monthLabels: IMyMonthLabels, enableDates: Array<IMyDate>): IMyDate {
+    weekDays: Array<string> = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+
+    isDateValid(dateStr: string, dateFormat: string, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, disableWeekdays: Array<string>, monthLabels: IMyMonthLabels, enableDates: Array<IMyDate>): IMyDate {
         let returnDate: IMyDate = {day: 0, month: 0, year: 0};
         let daysInMonth: Array<number> = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         let isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1;
@@ -35,7 +37,7 @@ export class UtilService {
 
             let date: IMyDate = {year: year, month: month, day: day};
 
-            if (this.isDisabledDate(date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, enableDates)) {
+            if (this.isDisabledDate(date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableDates, disableDateRanges, disableWeekdays, enableDates)) {
                 return returnDate;
             }
 
@@ -114,7 +116,7 @@ export class UtilService {
         return month;
     }
 
-    isDisabledDate(date: IMyDate, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, enableDates: Array<IMyDate>): boolean {
+    isDisabledDate(date: IMyDate, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, disableWeekdays: Array<string>, enableDates: Array<IMyDate>): boolean {
         for (let d of enableDates) {
             if (d.year === date.year && d.month === date.month && d.day === date.day) {
                 return false;
@@ -138,6 +140,15 @@ export class UtilService {
             let dayNbr = this.getDayNumber(date);
             if (dayNbr === 0 || dayNbr === 6) {
                 return true;
+            }
+        }
+
+        let dn = this.getDayNumber(date);
+        if (disableWeekdays.length > 0) {
+            for (let wd of disableWeekdays) {
+                if (dn === this.getWeekdayIndex(wd)) {
+                    return true;
+                }
             }
         }
 
@@ -243,5 +254,9 @@ export class UtilService {
 
     getDayNumber(date: IMyDate): number {
         return new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0).getDay();
+    }
+
+    getWeekdayIndex(wd: string) {
+        return this.weekDays.indexOf(wd);
     }
 }

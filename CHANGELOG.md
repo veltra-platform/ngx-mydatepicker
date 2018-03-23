@@ -1,3 +1,14 @@
+# 2.4.5 (2018-03-23)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* - Added option disableWeekdays.
+
+
 # 2.4.4 (2018-02-23)
 
 ### Bug Fixes

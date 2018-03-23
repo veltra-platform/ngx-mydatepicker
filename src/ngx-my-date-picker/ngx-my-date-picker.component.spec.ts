@@ -1388,6 +1388,41 @@ describe('ngx-mydatepicker', () => {
         comp.closeCalendar();
     });
 
+    it('options - disableWeekdays', () => {
+        comp.setDefaultMonth('2018/3');
+        let opts: IMyOptions = {
+            firstDayOfWeek: 'su',
+            disableWeekdays: ['mo']
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        let disabled = getElements('.disabled');
+        expect(disabled).not.toBe(null);
+        expect(disabled.length).toBe(6);
+
+        let firstDisabled = disabled[0];
+        expect(firstDisabled.textContent.trim()).toBe('26');
+
+        let secondDisabled = disabled[1];
+        expect(secondDisabled.textContent.trim()).toBe('5');
+
+
+        let thirdDisabled = disabled[2];
+        expect(thirdDisabled.textContent.trim()).toBe('12');
+
+        let fourthDisabled = disabled[3];
+        expect(fourthDisabled.textContent.trim()).toBe('19');
+
+
+        let lastDisabled = disabled[4];
+        expect(lastDisabled.textContent.trim()).toBe('26');
+
+        comp.closeCalendar();
+    });
+
     it('options - alignSelectorRight', () => {
         comp.setDefaultMonth('2017/02');
         let opts: IMyOptions = {

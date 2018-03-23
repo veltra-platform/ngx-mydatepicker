@@ -185,6 +185,12 @@
         <tr>
             <td>
                 <label>
+                    <span>Disable Wednesday:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisableWednesday($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
                     <span style="margin-right: 10px">Selector size:</span>
                     <span>
                         <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
@@ -192,9 +198,6 @@
                         </select>
                     </span>
                 </label>
-            </td>
-            <td>
-
             </td>
         </tr>
     </table>

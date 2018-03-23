@@ -80,7 +80,7 @@ export class NgxMyDatePicker implements OnDestroy {
             }
         }
 
-        let date: IMyDate = this.utilService.isDateValid(inputValue, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDates);
+        let date: IMyDate = this.utilService.isDateValid(inputValue, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.disableWeekdays, this.opts.monthLabels, this.opts.enableDates);
         if (date.day !== 0 && date.month !== 0 && date.year !== 0) {
             this.selectedDate = date;
         }
@@ -195,7 +195,7 @@ export class NgxMyDatePicker implements OnDestroy {
     }
 
     isTodayDisabled(): void {
-        this.disableTodayBtn = this.utilService.isDisabledDate(this.getToday(), this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates);
+        this.disableTodayBtn = this.utilService.isDisabledDate(this.getToday(), this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.disableWeekdays, this.opts.enableDates);
     }
 
     setVisibleMonth(): void {
@@ -382,7 +382,7 @@ export class NgxMyDatePicker implements OnDestroy {
                     week.push({dateObj: date,
                         cmo: cmo,
                         currDay: this.isCurrDay(j, m, y, cmo, today),
-                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.disableWeekdays, this.opts.enableDates),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                         highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                 }
@@ -395,7 +395,7 @@ export class NgxMyDatePicker implements OnDestroy {
                     week.push({dateObj: date,
                         cmo: cmo,
                         currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
-                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.disableWeekdays, this.opts.enableDates),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                         highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                     dayNbr++;
@@ -413,7 +413,7 @@ export class NgxMyDatePicker implements OnDestroy {
                     week.push({dateObj: date,
                         cmo: cmo,
                         currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
-                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.enableDates),
+                        disabled: this.utilService.isDisabledDate(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableDates, this.opts.disableDateRanges, this.opts.disableWeekdays, this.opts.enableDates),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
                         highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
                     dayNbr++;
