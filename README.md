@@ -2,4 +2,4 @@
 
 ### build
 
-* npm run build-dist
+* ng build --output-hashing none
