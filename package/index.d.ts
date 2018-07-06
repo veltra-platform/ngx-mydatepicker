@@ -1,6 +1,7 @@
 export * from "./dist/ngx-my-date-picker.module";
 export * from "./dist/ngx-my-date-picker.input";
 export * from "./dist/ngx-my-date-picker.component";
+export * from "./dist/services/ngx-my-date-picker.config";
 export * from "./dist/interfaces/my-date.interface";
 export * from "./dist/interfaces/my-date-model.interface";
 export * from "./dist/interfaces/my-input-field-changed.interface";

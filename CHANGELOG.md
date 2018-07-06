@@ -1,3 +1,14 @@
+# 2.4.6 (2018-07-06)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* - Added export to NgxMyDatePickerConfig.
+
+
 # 2.4.5 (2018-03-23)
 
 ### Bug Fixes
