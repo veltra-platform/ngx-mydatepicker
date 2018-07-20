@@ -199,6 +199,13 @@ export class SampleDatePickerNgModel implements OnInit {
         this.myDatePickerOptions = copy;
     }
 
+    onDisable24Day(checked: boolean): void {
+        let d: Date = new Date();
+        let copy = this.getCopyOfOptions();
+        copy.disableDates = checked ? [{year: 0, month: 0, day: 24}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
     onDisableInput(checked: boolean) {
         this.disabled = checked;
     }

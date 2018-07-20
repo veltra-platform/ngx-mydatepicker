@@ -1,3 +1,14 @@
+# 2.4.7 (2018-07-20)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* - disbleDates option works now so that year and month can be zero. If value of year/month is zero it affects all years/months. For example disable first day of every year and month: [{year: 0, month: 0, day: 1}].
+
+
 # 2.4.6 (2018-07-06)
 
 ### Bug Fixes

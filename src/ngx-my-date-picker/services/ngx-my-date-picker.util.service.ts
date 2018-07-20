@@ -153,7 +153,7 @@ export class UtilService {
         }
 
         for (let d of disableDates) {
-            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+            if ((d.year === 0 || d.year === date.year) && (d.month === 0 || d.month === date.month) && d.day === date.day) {
                 return true;
             }
         }

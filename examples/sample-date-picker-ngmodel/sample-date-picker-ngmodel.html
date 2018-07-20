@@ -191,6 +191,14 @@
             </td>
             <td>
                 <label>
+                    <span>Disable 24th day of every month:</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDisable24Day($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
                     <span style="margin-right: 10px">Selector size:</span>
                     <span>
                         <select style="padding: 2px;cursor: pointer;font-size: 11px;min-width: 60px;" (change)="onSelectorSize($event.target.value)">
@@ -198,6 +206,9 @@
                         </select>
                     </span>
                 </label>
+            </td>
+            <td>
+
             </td>
         </tr>
     </table>
