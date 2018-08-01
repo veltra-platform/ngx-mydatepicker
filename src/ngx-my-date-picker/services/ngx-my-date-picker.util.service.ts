@@ -118,7 +118,7 @@ export class UtilService {
 
     isDisabledDate(date: IMyDate, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableDates: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, disableWeekdays: Array<string>, enableDates: Array<IMyDate>): boolean {
         for (let d of enableDates) {
-            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+            if ((d.year === 0 || d.year === date.year) && (d.month === 0 || d.month === date.month) && d.day === date.day) {
                 return false;
             }
         }
