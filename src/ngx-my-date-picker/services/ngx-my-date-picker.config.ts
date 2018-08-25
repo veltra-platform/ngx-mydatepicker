@@ -51,6 +51,7 @@ export class NgxMyDatePickerConfig implements IMyOptions {
     showSelectorArrow = true;
     allowSelectionOnlyInCurrentMonth = true;
     appendSelectorToBody = false;
+    focusInputOnDateSelect = true;
     ariaLabelPrevMonth = "Previous Month";
     ariaLabelNextMonth = "Next Month";
     ariaLabelPrevYear = "Previous Year";

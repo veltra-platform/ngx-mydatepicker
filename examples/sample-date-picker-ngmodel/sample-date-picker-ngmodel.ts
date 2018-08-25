@@ -41,7 +41,8 @@ export class SampleDatePickerNgModel implements OnInit {
         closeSelectorOnDateSelect: true,
         closeSelectorOnDocumentClick: true,
         allowSelectionOnlyInCurrentMonth: true,
-        appendSelectorToBody: false
+        appendSelectorToBody: false,
+        focusInputOnDateSelect: true
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -203,6 +204,12 @@ export class SampleDatePickerNgModel implements OnInit {
         let d: Date = new Date();
         let copy = this.getCopyOfOptions();
         copy.disableDates = checked ? [{year: 0, month: 0, day: 24}] : [];
+        this.myDatePickerOptions = copy;
+    }
+
+    onFocusInputOnDateSelect(checked: boolean): void {
+        let copy = this.getCopyOfOptions();
+        copy.focusInputOnDateSelect = checked;
         this.myDatePickerOptions = copy;
     }
 

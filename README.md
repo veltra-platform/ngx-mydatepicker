@@ -244,6 +244,7 @@ Value of the __options__ attribute is a type of [INgxMyDpOptions](https://github
 | __allowSelectionOnlyInCurrentMonth__ | true | boolean | Is a date selection allowed or not other than current month. |
 | __showSelectorArrow__   | true | boolean | Is selector (calendar) arrow shown or not. |
 | __appendSelectorToBody__   | false | boolean | Is selector (calendar) appended to body element or not. |
+| __focusInputOnDateSelect__   | true | boolean | Is the input box focused after a date select. |
 | __ariaLabelPrevMonth__   | Previous Month | string | Aria label text of previous month button. |
 | __ariaLabelNextMonth__   | Next Month | string | Aria label text of next month button. |
 | __ariaLabelPrevYear__   | Previous Year | string | Aria label text of previous year button. |

@@ -1,3 +1,14 @@
+# 2.4.9 (2018-08-21)
+
+### Bug Fixes
+
+* -
+
+### Features
+
+* - Added the focusInputOnDateSelect option.
+
+
 # 2.4.8 (2018-08-01)
 
 ### Bug Fixes
@@ -7,7 +18,6 @@
 ### Features
 
 * - enableDates option works now so that year and month can be zero. If value of year/month is zero it affects all years/months. For example enable first day of every year and month: [{year: 0, month: 0, day: 1}]. It is possible enable recurring dates if they are disabled.
-
 
 
 # 2.4.7 (2018-07-20)

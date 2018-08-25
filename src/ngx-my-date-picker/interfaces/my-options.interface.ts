@@ -42,6 +42,7 @@ export interface IMyOptions {
     showSelectorArrow?: boolean;
     allowSelectionOnlyInCurrentMonth?: boolean;
     appendSelectorToBody?: boolean;
+    focusInputOnDateSelect?: boolean;
     ariaLabelPrevMonth?: string;
     ariaLabelNextMonth?: string;
     ariaLabelPrevYear?: string;

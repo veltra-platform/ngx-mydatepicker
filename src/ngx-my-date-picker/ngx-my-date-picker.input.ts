@@ -283,9 +283,11 @@ export class NgxMyDatePickerDirective implements OnChanges, OnDestroy, ControlVa
     }
 
     private focusToInput(): void {
-        setTimeout(() => {
-            this.elem.nativeElement.focus();
-        });
+        if (this.opts.focusInputOnDateSelect) {
+            setTimeout(() => {
+                this.elem.nativeElement.focus();
+            });
+        }
     }
 
     private emitDateChanged(dateModel: IMyDateModel): void {
