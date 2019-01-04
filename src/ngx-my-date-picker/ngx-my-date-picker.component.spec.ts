@@ -8,6 +8,7 @@ import {NgxMyDatePickerModule} from './ngx-my-date-picker.module';
 import {NgxMyDatePickerDirective} from './ngx-my-date-picker.input';
 import {IMyOptions} from "./interfaces/my-options.interface";
 import {NgxMyDatePickerConfig} from './services/ngx-my-date-picker.config';
+import { IMyDate } from "./interfaces";
 
 let comp: NgxMyDatepickerTestComponent;
 let fixture: ComponentFixture<NgxMyDatepickerTestComponent>;
@@ -1617,6 +1618,21 @@ describe('ngx-mydatepicker', () => {
         expect(nextyear.attributes['aria-label'].textContent).toBe(opts.ariaLabelNextYear);
 
         comp.closeCalendar();
+    });
+
+    it('options - dateStrings', () => {
+        let date: IMyDate = { year: 2019, month: 1, day: 1 };
+        let opts: IMyOptions = {
+            dateStrings: [
+                { date: date, string: '1,000'}
+            ]
+        };
+
+        comp.parseOptions(opts);
+        comp.openCalendar();
+
+        fixture.detectChanges();
+        // expect(comp.isDateStringAvailable()).toBeTruthy();
     });
 
     it('defaultMonth attribute', () => {
