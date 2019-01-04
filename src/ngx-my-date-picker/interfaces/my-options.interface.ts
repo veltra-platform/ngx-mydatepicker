@@ -4,6 +4,7 @@ import { IMyDate } from "./my-date.interface";
 import { IMyDateRange } from "./my-date-range.interface";
 import { IMyMarkedDates } from "./my-marked-dates.interface";
 import { IMyMarkedDate } from "./my-marked-date.interface";
+import { IMyDateString } from "./my-date-string.interface";
 
 export interface IMyOptions {
     dayLabels?: IMyDayLabels;
@@ -39,6 +40,7 @@ export interface IMyOptions {
     closeSelectorOnDocumentClick?: boolean;
     minYear?: number;
     maxYear?: number;
+    dateStrings?: Array<IMyDateString>;
     showSelectorArrow?: boolean;
     allowSelectionOnlyInCurrentMonth?: boolean;
     appendSelectorToBody?: boolean;
