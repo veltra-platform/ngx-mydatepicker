@@ -142,8 +142,11 @@
 
 .ngxmdp .caltable.caltable.hasDateStrings .daynumtext {
     display: block;
-    vertical-align: top;
     float: left;
+}
+
+.ngxmdp .price {
+    display: block;
 }
 
 .ngxmdp .caltable tbody tr:nth-child(6) td:first-child,
@@ -186,11 +189,6 @@
 .ngxmdp .yearcell {
     padding: 4px;
     text-align: center;
-}
-
-.ngxmdp .price {
-    display: block;
-    vertical-align: bottom;
 }
 
 .ngxmdp .weekdaytitle {
