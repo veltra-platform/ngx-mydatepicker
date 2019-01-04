@@ -7,14 +7,15 @@
     "typescript",
     "date picker"
   ],
-  "author": "kekeh",
+  "author": "vt-aldo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kekeh/ngx-mydatepicker.git"
+    "url": "https://github.com/veltra-platform/ngx-mydatepicker.git"
   },
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js --progress",
+    "postinstall": "gulp all && mv npmdist dist",
     "build.dist": "gulp all",
     "test": "karma start config/karma.conf.js",
     "tslint": "gulp tslint",
