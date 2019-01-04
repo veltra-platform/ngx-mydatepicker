@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate, IMyDefaultMonth} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
-import { IMyDateString } from '../../src/ngx-my-date-picker/interfaces/my-date-string.interface';
 
 declare var require:any;
 const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
@@ -37,13 +36,13 @@ export class SampleDatePickerNgModel implements OnInit {
         disableWeekdays: [],
         markDates: [],
         markWeekends: <IMyMarkedDate>{},
-        selectorHeight: '500px',
-        selectorWidth: '500px',
+        selectorHeight: '232px',
+        selectorWidth: '252px',
         closeSelectorOnDateSelect: true,
         closeSelectorOnDocumentClick: true,
         allowSelectionOnlyInCurrentMonth: true,
         appendSelectorToBody: false,
-        focusInputOnDateSelect: true,
+        focusInputOnDateSelect: true
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -234,32 +233,6 @@ export class SampleDatePickerNgModel implements OnInit {
             copy.selectorHeight = '260px';
             copy.selectorWidth = '290px';
             this.myDatePickerOptions = copy;
-        }
-    }
-
-    onDateStringsToggle(checked: boolean) {
-        console.log('onDateStringsToggle:');
-        let copy = this.getCopyOfOptions();
-        if (checked) {
-            let today = new Date();
-            let tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            let dateStrings: Array<IMyDateString> = [{
-                date: { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() },
-                string: '12,800',
-            }, {
-                date: { year: tomorrow.getFullYear(), month: tomorrow.getMonth() + 1, day: tomorrow.getDate() },
-                string: '1,337',
-            }];
-            copy.dateStrings = dateStrings;
-            this.myDatePickerOptions = copy;
-            console.log('options:');
-            console.log(this.myDatePickerOptions);
-        } else {
-            if (copy.dateStrings) {
-                delete copy.dateStrings;
-                this.myDatePickerOptions = copy;
-            }
         }
     }
 

@@ -85,7 +85,7 @@ module.exports = {
     devServer: {
         contentBase: ['./src', './examples'],
         historyApiFallback: true,
-        port: 9001,
+        port: 5000,
         publicPath: '/',
         stats: {
             cached: true,
