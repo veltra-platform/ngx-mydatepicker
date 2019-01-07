@@ -1,0 +1,32 @@
+{
+  "name": "ngx-mydatepicker",
+  "version": "2.4.9",
+  "description": "Angular date picker",
+  "keywords": [
+    "Angular",
+    "typescript",
+    "date picker"
+  ],
+  "author": "vt-aldo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/veltra-platform/ngx-mydatepicker.git"
+  },
+  "scripts": {},
+  "main": "bundles/ngx-mydatepicker.umd.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "LICENSE",
+    "FONT-LICENSE",
+    "package.json",
+    "README.md",
+    "dist",
+    "bundles"
+  ]
+}

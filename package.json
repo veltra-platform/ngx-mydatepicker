@@ -15,7 +15,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js --progress",
-    "preinstall": "npm install && gulp all && mv npmdist/dist ./dist",
     "build.dist": "gulp all",
     "test": "karma start config/karma.conf.js",
     "tslint": "gulp tslint",
