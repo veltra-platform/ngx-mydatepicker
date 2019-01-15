@@ -153,6 +153,12 @@ export class SampleDatePickerNgModel implements OnInit {
         this.myDatePickerOptions = copy;
     }
 
+    onHideNonCurrentMonthToggle(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.hideNonCurrentMonth = checked;
+        this.myDatePickerOptions = copy;
+    }
+
     onDisableWeekends(checked: boolean): void {
         let copy = this.getCopyOfOptions();
         copy.disableWeekends = checked;
@@ -249,6 +255,9 @@ export class SampleDatePickerNgModel implements OnInit {
                 string: '12,800',
             }, {
                 date: { year: tomorrow.getFullYear(), month: tomorrow.getMonth() + 1, day: tomorrow.getDate() },
+                string: '1,337',
+            }, {
+                date: { year: tomorrow.getFullYear(), month: 2, day: 1 },
                 string: '1,337',
             }];
             copy.dateStrings = dateStrings;

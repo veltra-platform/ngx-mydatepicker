@@ -25,6 +25,7 @@ export interface IMyOptions {
     showWeekNumbers?: boolean;
     selectorHeight?: string;
     selectorWidth?: string;
+    hideNonCurrentMonth?: boolean;
     disableUntil?: IMyDate;
     disableSince?: IMyDate;
     disableDates?: Array<IMyDate>;
