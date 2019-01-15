@@ -272,7 +272,8 @@
 
 .ngxmdp .selectedday .datevalue,
 .ngxmdp .selectedmonth .monthvalue,
-.ngxmdp .selectedyear .yearvalue {
+.ngxmdp .selectedyear .yearvalue,
+.ngxmdp .selectedday .pricevalue {
     border: none;
     background-color: #8EBFFF;
     border-radius: 2px;
