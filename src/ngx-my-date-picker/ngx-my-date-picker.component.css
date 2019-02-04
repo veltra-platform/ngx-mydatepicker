@@ -129,6 +129,10 @@
     border-radius: 0 0 4px 4px;
 }
 
+.ngxmdp .caltable.hasDateStrings .daycell {
+    height: 40px;
+}
+
 .ngxmdp .caltable.hasDateStrings .datevalue {
     height: 50%;
     text-align: left;
@@ -241,17 +245,27 @@
 
 .ngxmdp .hidenoncurrent {
     background-color: #f9f9f9;
+    color: #f9f9f9;
+}
+
+.ngxmdp .hidenoncurrent .datevalue,
+.ngxmdp .hidenoncurrent .pricevalue {
+    color: #f9f9f9;
 }
 
 .ngxmdp .hidenoncurrent .prevmonth,
 .ngxmdp .hidenoncurrent .nextmonth {
-    display: none;
 }
 
 .ngxmdp .disabled {
     cursor: default !important;
-    color: #CCC !important;
-    background: #FBEFEF !important;
+    color: #CCC;
+    background: #FBEFEF;
+}
+
+.ngxmdp .hidenoncurrent.disabled {
+    background-color: #f9f9f9 !important;
+    color: #f9f9f9;
 }
 
 .ngxmdp .highlight {

@@ -340,9 +340,9 @@ export class NgxMyDatePicker implements OnDestroy {
         if (this.opts.dateStrings) {
             let hasDateString = false;
             this.opts.dateStrings.forEach(dateString => {
-                if (dateString.date.day == date.day &&
-                    dateString.date.month == date.month &&
-                    dateString.date.year == date.year) {
+                if (dateString.date.day === date.day &&
+                    dateString.date.month === date.month &&
+                    dateString.date.year === date.year) {
                         hasDateString = true;
                 }
             });
@@ -354,13 +354,13 @@ export class NgxMyDatePicker implements OnDestroy {
 
     getDateString(date: IMyDate): string {
         if (!this.opts.dateStrings) {
-            return '';
+            return "";
         }
-        let dateString = '';
+        let dateString = "";
         this.opts.dateStrings.forEach(currDateString => {
-                if (currDateString.date.day == date.day &&
-                    currDateString.date.month == date.month &&
-                    currDateString.date.year == date.year) {
+                if (currDateString.date.day === date.day &&
+                    currDateString.date.month === date.month &&
+                    currDateString.date.year === date.year) {
                         dateString = currDateString.string;
                 }
         });

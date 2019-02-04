@@ -37,8 +37,8 @@ export class SampleDatePickerNgModel implements OnInit {
         disableWeekdays: [],
         markDates: [],
         markWeekends: <IMyMarkedDate>{},
-        selectorHeight: '500px',
-        selectorWidth: '500px',
+        selectorHeight: '400px',
+        selectorWidth: '400px',
         closeSelectorOnDateSelect: true,
         closeSelectorOnDocumentClick: true,
         allowSelectionOnlyInCurrentMonth: true,
@@ -243,8 +243,20 @@ export class SampleDatePickerNgModel implements OnInit {
         }
     }
 
+    onAddDisabledDates(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        if (checked) {
+            copy.disableDates = [
+                { year: 2019, month: 3, day: 1 },
+            ];
+            this.myDatePickerOptions = copy;
+        } else {
+            copy.disableDates = [];
+            this.myDatePickerOptions = copy;
+        }
+    }
+
     onDateStringsToggle(checked: boolean) {
-        console.log('onDateStringsToggle:');
         let copy = this.getCopyOfOptions();
         if (checked) {
             let today = new Date();
@@ -262,8 +274,6 @@ export class SampleDatePickerNgModel implements OnInit {
             }];
             copy.dateStrings = dateStrings;
             this.myDatePickerOptions = copy;
-            console.log('options:');
-            console.log(this.myDatePickerOptions);
         } else {
             if (copy.dateStrings) {
                 delete copy.dateStrings;
