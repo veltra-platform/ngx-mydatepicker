@@ -356,7 +356,7 @@ export class NgxMyDatePicker implements OnDestroy {
         if (!this.opts.dateStrings) {
             return "";
         }
-        let dateString = "";
+        let dateString = "-";
         this.opts.dateStrings.forEach(currDateString => {
                 if (currDateString.date.day === date.day &&
                     currDateString.date.month === date.month &&

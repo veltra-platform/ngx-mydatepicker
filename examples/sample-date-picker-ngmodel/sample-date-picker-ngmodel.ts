@@ -37,13 +37,14 @@ export class SampleDatePickerNgModel implements OnInit {
         disableWeekdays: [],
         markDates: [],
         markWeekends: <IMyMarkedDate>{},
-        selectorHeight: '400px',
-        selectorWidth: '400px',
+        selectorHeight: '320px',
+        selectorWidth: '320px',
         closeSelectorOnDateSelect: true,
         closeSelectorOnDocumentClick: true,
         allowSelectionOnlyInCurrentMonth: true,
         appendSelectorToBody: false,
         focusInputOnDateSelect: true,
+        disableUntil: { year: 2019, month: 2, day: 14 },
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
