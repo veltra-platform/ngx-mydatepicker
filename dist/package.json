@@ -14,9 +14,9 @@
     "url": "https://github.com/veltra-platform/ngx-mydatepicker.git"
   },
   "scripts": {},
-  "main": "bundles/ngx-mydatepicker.umd.js",
-  "typings": "index.d.ts",
-  "module": "index.js",
+  "main": "dist/bundles/ngx-mydatepicker.umd.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/index.js",
   "dependencies": {},
   "devDependencies": {},
   "files": [

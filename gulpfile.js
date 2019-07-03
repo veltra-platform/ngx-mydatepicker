@@ -25,7 +25,7 @@ var str4 = '*/';
 */
 
 gulp.task('clean', function () {
-    return gulp.src(['./build-example', './tmp', './test-output', './.tmpbuild', './npmdist', './dist'], {read: false}).pipe(clean());
+    return gulp.src(['./build-example', './tmp', './test-output', './.tmpbuild', './npmdist'], {read: false}).pipe(clean());
 });
 
 gulp.task('backup.component.tmp', function() {
@@ -133,6 +133,10 @@ gulp.task('tslint', function () {
         }));
 });
 
+gulp.task('copy.npmdist.to.dist', function() {
+    return gulp.src(['./npmdist/**/*']).pipe(gulp.dest('./dist'));
+});
+
 gulp.task('all', function(cb) {
     sequence(
         'clean',
@@ -148,6 +152,7 @@ gulp.task('all', function(cb) {
         'edit.package.json.and.copy.to.npmdist.root.dir',
         'delete.modified.component',
         'restore.original.component',
+        'copy.npmdist.to.dist',
         'delete.tmp',
         'tslint',
         cb);

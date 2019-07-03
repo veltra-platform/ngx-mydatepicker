@@ -21,9 +21,9 @@
     "ngc": "ngc -p tsconfig.publish.json",
     "bundle": "rollup -c rollup.config.js && uglifyjs npmdist/bundles/ngx-mydatepicker.umd.js --compress --mangle --screw-ie8 -o npmdist/bundles/ngx-mydatepicker.umd.min.js"
   },
-  "main": "npmdist/bundles/ngx-mydatepicker.umd.js",
-  "typings": "npmdist/index.d.ts",
-  "module": "npmdist/index.js",
+  "main": "dist/bundles/ngx-mydatepicker.umd.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/index.js",
   "dependencies": {},
   "devDependencies": {
     "@angular/common": "2.2.4",
