@@ -25,7 +25,7 @@ var str4 = '*/';
 */
 
 gulp.task('clean', function () {
-    return gulp.src(['./build-example', './tmp', './test-output', './.tmpbuild', './npmdist'], {read: false}).pipe(clean());
+    return gulp.src(['./build-example', './tmp', './test-output', './.tmpbuild', './npmdist', './dist'], {read: false}).pipe(clean());
 });
 
 gulp.task('backup.component.tmp', function() {
