@@ -129,24 +129,33 @@
     border-radius: 0 0 4px 4px;
 }
 
+.ngxmdp .caltable.hasDateStrings .daycell {
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+}
+
+.ngxmdp .caltable.hasDateStrings .daycell .daycell-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .ngxmdp .caltable.hasDateStrings .datevalue {
-    height: 50%;
+    display: inline-block;
     text-align: left;
 }
 
 .ngxmdp .caltable.hasDateStrings .pricevalue {
+    display: inline-block;
     text-align: right;
-    vertical-align: bottom;
-    height: 50%;
-}
-
-.ngxmdp .caltable.caltable.hasDateStrings .daynumtext {
-    display: block;
-    float: left;
+    background-color: inherit;
 }
 
 .ngxmdp .price {
-    display: block;
+    display: inline;
+    font-size: 11px;
 }
 
 .ngxmdp .caltable tbody tr:nth-child(6) td:first-child,
@@ -238,10 +247,29 @@
     color: #999;
 }
 
+.ngxmdp .hidenoncurrent {
+    background-color: #f9f9f9;
+    color: #f9f9f9;
+}
+
+.ngxmdp .hidenoncurrent .datevalue,
+.ngxmdp .hidenoncurrent .pricevalue {
+    color: #f9f9f9;
+}
+
+.ngxmdp .hidenoncurrent .prevmonth,
+.ngxmdp .hidenoncurrent .nextmonth {
+}
+
 .ngxmdp .disabled {
     cursor: default !important;
-    color: #CCC !important;
-    background: #FBEFEF !important;
+    color: #CCC;
+    background: #FBEFEF;
+}
+
+.ngxmdp .hidenoncurrent.disabled {
+    background-color: #f9f9f9 !important;
+    color: #f9f9f9;
 }
 
 .ngxmdp .highlight {
@@ -270,12 +298,16 @@
     text-decoration: underline;
 }
 
-.ngxmdp .selectedday .datevalue,
+/* .ngxmdp .selectedday .datevalue,
 .ngxmdp .selectedmonth .monthvalue,
-.ngxmdp .selectedyear .yearvalue {
+.ngxmdp .selectedyear .yearvalue,
+.ngxmdp .selectedday .pricevalue {
     border: none;
-    background-color: #8EBFFF;
-    border-radius: 2px;
+    background-color: #8EBFFF !important;;
+} */
+
+.ngxmdp .selectedday {
+    background-color: #8EBFFF !important;;
 }
 
 .ngxmdp .headerbtncell {

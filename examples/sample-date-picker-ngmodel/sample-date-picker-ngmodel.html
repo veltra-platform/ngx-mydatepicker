@@ -214,6 +214,28 @@
                 </label>
             </td>
         </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Add strings to dates</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onDateStringsToggle($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+            <td>
+                <label>
+                    <span>Hide not current month</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onHideNonCurrentMonthToggle($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <span>Add disabled dates</span>
+                    <input style="cursor: pointer" type="checkbox" (change)="onAddDisabledDates($event.currentTarget.checked)" [checked]="false">
+                </label>
+            </td>
+        </tr>
     </table>
 
 

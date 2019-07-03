@@ -169,6 +169,9 @@ export class NgxMyDatePickerDirective implements OnChanges, OnDestroy, ControlVa
         }
     }
 
+    public refreshCalendar(): void {
+    }
+
     public validate(c: AbstractControl): { [p: string]: any } {
         if (this.elem.nativeElement.value === null || this.elem.nativeElement.value === "") {
             return null;

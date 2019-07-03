@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate, IMyDefaultMonth} from '../../src/ngx-my-date-picker/interfaces';
 import {NgxMyDatePickerDirective} from '../../src/ngx-my-date-picker';
+import { IMyDateString } from '../../src/ngx-my-date-picker/interfaces/my-date-string.interface';
 
 declare var require:any;
 const normalSampleTpl: string = require('./sample-date-picker-ngmodel.html');
@@ -36,13 +37,14 @@ export class SampleDatePickerNgModel implements OnInit {
         disableWeekdays: [],
         markDates: [],
         markWeekends: <IMyMarkedDate>{},
-        selectorHeight: '232px',
-        selectorWidth: '252px',
+        selectorHeight: '400px',
+        selectorWidth: '400px',
         closeSelectorOnDateSelect: true,
         closeSelectorOnDocumentClick: true,
         allowSelectionOnlyInCurrentMonth: true,
         appendSelectorToBody: false,
-        focusInputOnDateSelect: true
+        focusInputOnDateSelect: true,
+        disableUntil: { year: 2019, month: 2, day: 14 },
     };
 
     @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
@@ -152,6 +154,12 @@ export class SampleDatePickerNgModel implements OnInit {
         this.myDatePickerOptions = copy;
     }
 
+    onHideNonCurrentMonthToggle(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        copy.hideNonCurrentMonth = checked;
+        this.myDatePickerOptions = copy;
+    }
+
     onDisableWeekends(checked: boolean): void {
         let copy = this.getCopyOfOptions();
         copy.disableWeekends = checked;
@@ -233,6 +241,45 @@ export class SampleDatePickerNgModel implements OnInit {
             copy.selectorHeight = '260px';
             copy.selectorWidth = '290px';
             this.myDatePickerOptions = copy;
+        }
+    }
+
+    onAddDisabledDates(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        if (checked) {
+            copy.disableDates = [
+                { year: 2019, month: 3, day: 1 },
+            ];
+            this.myDatePickerOptions = copy;
+        } else {
+            copy.disableDates = [];
+            this.myDatePickerOptions = copy;
+        }
+    }
+
+    onDateStringsToggle(checked: boolean) {
+        let copy = this.getCopyOfOptions();
+        if (checked) {
+            let today = new Date();
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            let dateStrings: Array<IMyDateString> = [{
+                date: { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() },
+                string: '12,800',
+            }, {
+                date: { year: tomorrow.getFullYear(), month: tomorrow.getMonth() + 1, day: tomorrow.getDate() },
+                string: '1,337',
+            }, {
+                date: { year: tomorrow.getFullYear(), month: 2, day: 1 },
+                string: '1,337',
+            }];
+            copy.dateStrings = dateStrings;
+            this.myDatePickerOptions = copy;
+        } else {
+            if (copy.dateStrings) {
+                delete copy.dateStrings;
+                this.myDatePickerOptions = copy;
+            }
         }
     }
 

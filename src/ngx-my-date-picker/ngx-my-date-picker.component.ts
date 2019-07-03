@@ -336,6 +336,37 @@ export class NgxMyDatePicker implements OnDestroy {
         return d === today.day && m === today.month && y === today.year && cmo === this.currMonthId;
     }
 
+    isDateStringAvailable(date: IMyDate) {
+        if (this.opts.dateStrings) {
+            let hasDateString = false;
+            this.opts.dateStrings.forEach(dateString => {
+                if (dateString.date.day === date.day &&
+                    dateString.date.month === date.month &&
+                    dateString.date.year === date.year) {
+                        hasDateString = true;
+                }
+            });
+            return hasDateString;
+        } else {
+            return false;
+        }
+    }
+
+    getDateString(date: IMyDate): string {
+        if (!this.opts.dateStrings) {
+            return "";
+        }
+        let dateString = "-";
+        this.opts.dateStrings.forEach(currDateString => {
+                if (currDateString.date.day === date.day &&
+                    currDateString.date.month === date.month &&
+                    currDateString.date.year === date.year) {
+                        dateString = currDateString.string;
+                }
+        });
+        return dateString;
+    }
+
     getToday(): IMyDate {
         let date: Date = new Date();
         return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
